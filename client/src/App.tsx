@@ -8,8 +8,10 @@ import VehicleFinance from "@/pages/vehicle-finance";
 import RealEstateFinance from "@/pages/real-estate-finance";
 import PersonalLoan from "@/pages/personal-loan";
 import PayrollLoan from "@/pages/payroll-loan";
+import PrivacyPolicy from "@/pages/privacy-policy";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
+import CookieConsent from "@/components/ui/cookie-consent";
 
 function Router() {
   return (
@@ -19,6 +21,7 @@ function Router() {
       <Route path="/financiamento-imobiliario" component={RealEstateFinance}/>
       <Route path="/emprestimo-pessoal" component={PersonalLoan}/>
       <Route path="/credito-consignado" component={PayrollLoan}/>
+      <Route path="/politica-privacidade" component={PrivacyPolicy}/>
       <Route component={NotFound} />
     </Switch>
   );
@@ -33,6 +36,7 @@ function App() {
           <Router />
         </main>
         <Footer />
+        <CookieConsent />
       </div>
       <Toaster />
     </QueryClientProvider>
