@@ -9,6 +9,7 @@ import RealEstateFinance from "@/pages/real-estate-finance";
 import PersonalLoan from "@/pages/personal-loan";
 import PayrollLoan from "@/pages/payroll-loan";
 import PrivacyPolicy from "@/pages/privacy-policy";
+import TermsOfUse from "@/pages/terms-of-use";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/emprestimo-pessoal" component={PersonalLoan}/>
       <Route path="/credito-consignado" component={PayrollLoan}/>
       <Route path="/politica-privacidade" component={PrivacyPolicy}/>
+      <Route path="/termos-de-uso" component={TermsOfUse}/>
       <Route component={NotFound} />
     </Switch>
   );

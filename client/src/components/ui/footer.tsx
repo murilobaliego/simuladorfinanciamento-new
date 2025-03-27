@@ -24,9 +24,9 @@ export default function Footer() {
             <h3 className="font-heading text-white text-lg font-semibold mb-4">Informações</h3>
             <ul className="space-y-2 text-sm">
               <li><a href="#sobre" className="hover:text-white transition-colors">Sobre</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Termos de Uso</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Política de Privacidade</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contato</a></li>
+              <li><Link href="/termos-de-uso" className="hover:text-white transition-colors">Termos de Uso</Link></li>
+              <li><Link href="/politica-privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link></li>
+              <li><a href="mailto:contato@simuladordefinanciamento.com.br" className="hover:text-white transition-colors">Contato</a></li>
             </ul>
           </div>
         </div>
