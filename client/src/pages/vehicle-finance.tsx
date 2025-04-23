@@ -43,13 +43,13 @@ export default function VehicleFinance() {
           <div className="mb-8">
             <p className="mb-4">O <strong>simulador de financiamento de veículos</strong> é uma ferramenta essencial para quem planeja comprar um carro, moto ou caminhão sem ter o valor total disponível. Com nossa calculadora completa, você pode simular o valor exato das prestações mensais, incluindo o <strong>cálculo de IOF</strong> (Imposto sobre Operações Financeiras) e visualizar toda a evolução do seu saldo devedor através da <strong>Tabela Price</strong>.</p>
             
-            <h2 className="text-xl font-semibold text-primary mt-6 mb-3">Como funciona o financiamento de veículos no Brasil?</h2>
+            <h2 id="como-funciona" className="text-xl font-semibold text-primary mt-6 mb-3">Como funciona o financiamento de veículos no Brasil?</h2>
             
             <p className="mb-4">No Brasil, o financiamento de veículos geralmente utiliza o <strong>sistema de Tabela Price</strong>, também conhecido como Sistema Francês de Amortização. Este método calcula prestações fixas, onde em cada pagamento mensal, uma parte vai para os juros e outra para reduzir o valor principal financiado (amortização).</p>
             
             <p className="mb-4">Quando você financia um veículo, a instituição financeira paga o valor total ao vendedor e você se compromete a pagar este valor em parcelas mensais, acrescidas de juros e impostos como o IOF. O veículo normalmente fica alienado à instituição financeira até que todas as parcelas sejam quitadas.</p>
             
-            <h2 className="text-xl font-semibold text-primary mt-6 mb-3">Entenda o que é o IOF no financiamento de veículos</h2>
+            <h2 id="iof-calculadora" className="text-xl font-semibold text-primary mt-6 mb-3">Entenda o que é o IOF no financiamento de veículos</h2>
             
             <p className="mb-4">O <strong>IOF (Imposto sobre Operações Financeiras)</strong> é um tributo federal que incide sobre operações de crédito, incluindo financiamentos de veículos. Para financiamentos de veículos, o IOF é composto por duas alíquotas:</p>
             
@@ -81,7 +81,7 @@ export default function VehicleFinance() {
               <li>Tabela completa de amortização, mostrando a evolução do saldo devedor mês a mês</li>
             </ul>
             
-            <h2 className="text-xl font-semibold text-primary mt-6 mb-3">Dicas para conseguir o melhor financiamento de veículos</h2>
+            <h2 id="dicas-financiamento" className="text-xl font-semibold text-primary mt-6 mb-3">Dicas para conseguir o melhor financiamento de veículos</h2>
             
             <ul className="list-disc pl-5 mb-4 space-y-2">
               <li><strong>Compare taxas:</strong> Pesquise as taxas de juros em diferentes bancos e financeiras</li>
@@ -98,6 +98,64 @@ export default function VehicleFinance() {
           </div>
           
           <VehicleForm />
+          
+          <div id="melhores-taxas" className="bg-gray-50 p-5 rounded-lg border border-gray-200 my-8">
+            <h2 className="text-xl font-semibold text-primary mb-4">Melhores Taxas de Financiamento de Veículos em 2023/2024</h2>
+            <p className="mb-3">As taxas de juros para financiamento de veículos variam conforme o banco, o perfil do cliente e as condições de mercado. Abaixo comparamos as taxas médias praticadas pelos principais bancos:</p>
+            
+            <div className="overflow-x-auto">
+              <table className="min-w-full border border-gray-300">
+                <thead>
+                  <tr className="bg-primary/10">
+                    <th className="px-4 py-2 border text-left">Banco/Financeira</th>
+                    <th className="px-4 py-2 border text-center">Taxa Mínima (a.m.)</th>
+                    <th className="px-4 py-2 border text-center">Taxa Máxima (a.m.)</th>
+                    <th className="px-4 py-2 border text-center">Entrada Mínima</th>
+                    <th className="px-4 py-2 border text-center">Prazo Máximo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="px-4 py-2 border">Banco do Brasil</td>
+                    <td className="px-4 py-2 border text-center text-green-600 font-medium">0,99%</td>
+                    <td className="px-4 py-2 border text-center">1,89%</td>
+                    <td className="px-4 py-2 border text-center">20%</td>
+                    <td className="px-4 py-2 border text-center">60 meses</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="px-4 py-2 border">Caixa Econômica</td>
+                    <td className="px-4 py-2 border text-center text-green-600 font-medium">1,09%</td>
+                    <td className="px-4 py-2 border text-center">1,99%</td>
+                    <td className="px-4 py-2 border text-center">20%</td>
+                    <td className="px-4 py-2 border text-center">60 meses</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 border">Itaú</td>
+                    <td className="px-4 py-2 border text-center text-green-600 font-medium">1,19%</td>
+                    <td className="px-4 py-2 border text-center">1,99%</td>
+                    <td className="px-4 py-2 border text-center">10%</td>
+                    <td className="px-4 py-2 border text-center">60 meses</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="px-4 py-2 border">Bradesco</td>
+                    <td className="px-4 py-2 border text-center text-green-600 font-medium">1,29%</td>
+                    <td className="px-4 py-2 border text-center">2,19%</td>
+                    <td className="px-4 py-2 border text-center">20%</td>
+                    <td className="px-4 py-2 border text-center">60 meses</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 border">Santander</td>
+                    <td className="px-4 py-2 border text-center text-green-600 font-medium">1,39%</td>
+                    <td className="px-4 py-2 border text-center">2,39%</td>
+                    <td className="px-4 py-2 border text-center">20%</td>
+                    <td className="px-4 py-2 border text-center">60 meses</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <p className="mt-4 text-sm text-neutral-500 italic">* As taxas são referências aproximadas e podem variar conforme o perfil do cliente, valor financiado e condições de mercado.</p>
+          </div>
           
           <div className="mt-12">
             <h2 className="text-xl font-semibold text-primary mt-6 mb-3">Perguntas Frequentes sobre Financiamento de Veículos</h2>

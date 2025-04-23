@@ -63,28 +63,40 @@ export default function Footer() {
             <h3 className="font-heading text-white text-lg font-semibold mb-4">Recursos</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#como-funciona" className="hover:text-white transition-colors flex items-center">
+                <Link 
+                  href="/simulador-financiamento-veiculos#como-funciona" 
+                  className="hover:text-white transition-colors flex items-center"
+                >
                   <Info className="h-4 w-4 mr-1" aria-hidden="true" />
                   <span>Como Funciona a Tabela Price</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#iof-calculadora" className="hover:text-white transition-colors flex items-center">
+                <Link 
+                  href="/simulador-financiamento-veiculos#iof-calculadora" 
+                  className="hover:text-white transition-colors flex items-center"
+                >
                   <Calculator className="h-4 w-4 mr-1" aria-hidden="true" />
                   <span>Cálculo do IOF</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#melhores-taxas" className="hover:text-white transition-colors flex items-center">
+                <Link 
+                  href="/simulador-financiamento-veiculos#melhores-taxas" 
+                  className="hover:text-white transition-colors flex items-center"
+                >
                   <BadgeDollarSign className="h-4 w-4 mr-1" aria-hidden="true" />
                   <span>Melhores Taxas de Financiamento</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#dicas-financiamento" className="hover:text-white transition-colors flex items-center">
+                <Link 
+                  href="/simulador-financiamento-veiculos#dicas-financiamento"
+                  className="hover:text-white transition-colors flex items-center"
+                >
                   <Coffee className="h-4 w-4 mr-1" aria-hidden="true" />
                   <span>Dicas para Financiar Veículos</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -93,10 +105,13 @@ export default function Footer() {
             <h3 className="font-heading text-white text-lg font-semibold mb-4">Informações</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#sobre" className="hover:text-white transition-colors flex items-center">
+                <Link 
+                  href="/" 
+                  className="hover:text-white transition-colors flex items-center"
+                >
                   <Info className="h-4 w-4 mr-1" aria-hidden="true" />
                   <span>Sobre o Simulador</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <Link 
