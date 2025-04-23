@@ -1,47 +1,96 @@
-# Backend PHP - Simulador de Financiamento
+# Backend PHP para Simulador de Financiamento
 
-Este diretório contém o backend em PHP para o Simulador de Financiamento, que foi convertido do original em Node.js/Express.
+Este diretório contém a versão PHP do backend para o Simulador de Financiamento, uma alternativa ao backend Node.js original.
 
-## Estrutura de Arquivos
+## Estrutura do Backend PHP
 
-- `index.php`: Ponto de entrada para as requisições da API
-- `Finance.php`: Classes para cálculos financeiros
-- `Validator.php`: Classes para validação de dados
-- `Storage.php`: Classes para armazenamento em memória
-- `router.php`: Roteador para o servidor de desenvolvimento
-- `server.php`: Script para iniciar o servidor
-- `serve-static.php`: Script para servir arquivos estáticos
-- `.htaccess`: Configuração para servidores Apache
-- `build_frontend.sh`: Script para construir o frontend
-- `start.sh`: Script para iniciar o servidor de desenvolvimento
+- `Finance.php`: Implementa todos os cálculos financeiros (tabela Price, SAC, etc.)
+- `Validator.php`: Realiza validação de dados para as APIs
+- `index.php`: Ponto de entrada da API, contém todas as rotas
+- `router.php`: Roteador para o servidor PHP embutido, serve arquivos estáticos e APIs
+- `test.php`: Script para testar todas as funcionalidades
+- Scripts: `build_frontend.sh` e `start.sh` para construir o frontend e iniciar o servidor
 
-## Como executar
+## Requisitos
 
-### Desenvolvimento
+- PHP 7.4 ou superior
+- Servidor web com suporte a PHP (Apache/Nginx) ou servidor embutido para desenvolvimento
 
-1. Construa o frontend:
-   ```bash
-   ./php_backend/build_frontend.sh
-   ```
+## API Endpoints
 
-2. Inicie o servidor PHP:
-   ```bash
-   ./php_backend/start.sh
-   ```
+O backend PHP implementa os mesmos endpoints que o backend Node.js original:
 
-3. Acesse o site em: http://localhost:5000
+1. **POST /api/simulador/calcular**
+   - Calcula financiamento usando sistema Price
+   - Payload: `{ valorFinanciado, taxaJuros, numParcelas }`
 
-### Produção
+2. **POST /api/simulador/imobiliario**
+   - Calcula financiamento imobiliário (Price ou SAC)
+   - Payload: `{ valorFinanciado, taxaJuros, numParcelas, sistema }`
 
-Para produção, recomenda-se usar um servidor web como Apache ou Nginx. Configurar o servidor web para:
+3. **POST /api/simulador/pessoal**
+   - Calcula empréstimo pessoal
+   - Payload: `{ valorFinanciado, taxaJuros, numParcelas }`
 
-1. Servir os arquivos estáticos de `client/dist/`
-2. Redirecionar as requisições API para `php_backend/index.php`
-3. Redirecionar todas as outras requisições não encontradas para `client/dist/index.html`
+4. **POST /api/simulador/consignado**
+   - Calcula crédito consignado
+   - Payload: `{ valorFinanciado, taxaJuros, numParcelas, tipoConsignado }`
 
-## APIs disponíveis
+## Como Testar o Backend
 
-- `/api/simulador/calcular`: Cálculo de financiamentos (Tabela Price)
-- `/api/simulador/imobiliario`: Cálculo de financiamento imobiliário (Price ou SAC)
-- `/api/simulador/pessoal`: Cálculo de empréstimo pessoal
-- `/api/simulador/consignado`: Cálculo de crédito consignado
+Para verificar se o backend PHP está funcionando corretamente, você pode executar o script de teste:
+
+```bash
+cd php_backend
+php test.php
+```
+
+Para testar apenas partes específicas, você pode passar um argumento:
+- `php test.php calcular`: Testa apenas o cálculo básico
+- `php test.php imobiliario`: Testa apenas o financiamento imobiliário
+- `php test.php consignado`: Testa apenas o crédito consignado
+- `php test.php validacao`: Testa apenas a validação de dados
+
+## Como Executar o Servidor PHP
+
+### Preparando o Frontend
+
+Antes de iniciar o servidor PHP, é necessário compilar o frontend:
+
+```bash
+./build_frontend.sh
+```
+
+Isto irá gerar os arquivos estáticos na pasta `client/dist` que serão servidos pelo PHP.
+
+### Iniciando o Servidor
+
+Para iniciar o servidor PHP, execute:
+
+```bash
+./start.sh
+```
+
+Isto irá iniciar o servidor na porta 5000. Se quiser usar outra porta, passe como argumento:
+
+```bash
+./start.sh 8080
+```
+
+## Usando com o Script de Configuração
+
+Na raiz do projeto, existe um script `config.sh` que facilita a configuração e escolha do backend:
+
+```bash
+./config.sh
+```
+
+Este script permite escolher entre o backend Node.js original e o backend PHP convertido, e automatiza a configuração.
+
+## Considerações de Produção
+
+Para ambiente de produção, recomenda-se:
+
+1. Usar um servidor web dedicado como Apache ou Nginx
+2. Configurar a raiz do site para a pasta `client/dist`
+3. Configurar rewrite rules para direcionar requisições `/api/*` para o arquivo `php_backend/index.php`

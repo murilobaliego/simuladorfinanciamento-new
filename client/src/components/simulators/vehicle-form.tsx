@@ -11,6 +11,7 @@ import { calculatorSchema } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import PriceTable from "@/components/simulators/price-table";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = calculatorSchema.extend({
   valorFinanciado: z.coerce
@@ -23,7 +24,8 @@ const formSchema = calculatorSchema.extend({
   numParcelas: z.coerce
     .number()
     .min(6, "O número mínimo de parcelas é 6")
-    .max(120, "O número máximo de parcelas é 120")
+    .max(120, "O número máximo de parcelas é 120"),
+  incluirIOF: z.boolean().default(false)
 });
 
 export type TableData = {
@@ -53,6 +55,7 @@ export default function VehicleForm() {
       valorFinanciado: 30000,
       taxaJuros: 1.5,
       numParcelas: 48,
+      incluirIOF: false,
     },
   });
 
@@ -159,6 +162,31 @@ export default function VehicleForm() {
                   </Select>
                   <p className="text-xs text-neutral-500">Prazo comum para veículos: 48 a 60 meses</p>
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          
+          <div className="mt-4">
+            <FormField
+              control={form.control}
+              name="incluirIOF"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel className="text-sm font-medium text-neutral-700">
+                      Incluir IOF no cálculo
+                    </FormLabel>
+                    <p className="text-xs text-neutral-500">
+                      IOF para financiamento de veículos: 0,0082% ao dia (até 365 dias) + 0,38% fixo
+                    </p>
+                  </div>
                 </FormItem>
               )}
             />

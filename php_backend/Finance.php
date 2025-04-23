@@ -115,4 +115,24 @@ class Finance {
     public static function calcularTotalJuros($totalPagar, $valorFinanciado) {
         return $totalPagar - $valorFinanciado;
     }
+    
+    /**
+     * Calcula o valor do IOF para financiamento de veículos
+     * @param float $valorFinanciado Valor total a ser financiado
+     * @param int $numParcelas Número total de parcelas (dias de financiamento)
+     * @return float O valor do IOF a ser adicionado ao financiamento
+     */
+    public static function calcularIOF($valorFinanciado, $numParcelas) {
+        // Taxa diária de IOF: 0,0082% ao dia, limitado a 365 dias
+        $diasIOF = min($numParcelas * 30, 365); // Converte meses em dias, limitado a 365
+        $taxaIOFDiaria = 0.0082 / 100; // 0,0082% ao dia
+        $iofDiario = $valorFinanciado * $taxaIOFDiaria * $diasIOF;
+        
+        // Taxa adicional de IOF: 0,38% sobre o valor da operação
+        $taxaIOFAdicional = 0.38 / 100; // 0,38% sobre o valor da operação
+        $iofAdicional = $valorFinanciado * $taxaIOFAdicional;
+        
+        // IOF total
+        return $iofDiario + $iofAdicional;
+    }
 }
