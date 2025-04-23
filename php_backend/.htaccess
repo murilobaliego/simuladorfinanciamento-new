@@ -1,0 +1,10 @@
+# Ativar o motor de reescrita
+RewriteEngine On
+
+# Se a requisição começa com /api/, redireciona para o controlador da API
+RewriteRule ^api/(.*)$ index.php [QSA,L]
+
+# Se o arquivo ou diretório NÃO existe, redireciona para serve-static.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ serve-static.php [QSA,L]
