@@ -219,21 +219,21 @@ export default function VehicleForm() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div className="bg-neutral-100 p-4 rounded-md border border-neutral-200">
               <p className="text-sm text-neutral-600 mb-1">Valor da parcela</p>
-              <p className="text-2xl font-bold text-primary">
+              <p className="text-2xl font-bold text-green-600">
                 {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(result.valorParcela)}
               </p>
             </div>
             
             <div className="bg-neutral-100 p-4 rounded-md border border-neutral-200">
               <p className="text-sm text-neutral-600 mb-1">Total a pagar</p>
-              <p className="text-2xl font-bold text-primary">
+              <p className="text-2xl font-bold text-indigo-600">
                 {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(result.totalPagar)}
               </p>
             </div>
             
             <div className="bg-neutral-100 p-4 rounded-md border border-neutral-200">
               <p className="text-sm text-neutral-600 mb-1">Total de juros</p>
-              <p className="text-2xl font-bold text-accent-dark">
+              <p className="text-2xl font-bold text-red-600">
                 {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(result.totalJuros)}
               </p>
             </div>
@@ -242,7 +242,7 @@ export default function VehicleForm() {
             {result.valorIOF !== undefined && (
               <div className="bg-neutral-100 p-4 rounded-md border border-neutral-200">
                 <p className="text-sm text-neutral-600 mb-1">Valor do IOF</p>
-                <p className="text-2xl font-bold text-accent">
+                <p className="text-2xl font-bold text-blue-600">
                   {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(result.valorIOF))}
                 </p>
                 <p className="text-xs text-neutral-500 mt-1">Imposto sobre Operações Financeiras</p>
