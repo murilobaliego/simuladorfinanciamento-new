@@ -63,7 +63,19 @@ export default function VehicleForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      const response = await apiRequest("POST", "/api/simulador/calcular", values);
+      // Usar a API PHP em vez da API Node.js
+      const response = await fetch("http://localhost:8000/api/simulador/calcular", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Erro na API PHP: ${response.status}`);
+      }
+      
       const data = await response.json();
       setResult(data);
       
@@ -75,12 +87,36 @@ export default function VehicleForm() {
         }
       }, 100);
     } catch (error) {
-      toast({
-        title: "Erro ao calcular",
-        description: "Ocorreu um erro ao processar sua simulação. Tente novamente.",
-        variant: "destructive",
-      });
-      console.error(error);
+      console.error("Erro ao utilizar API PHP:", error);
+      
+      // Tentar usar a API Node.js como fallback apenas para fins de testes
+      // Na produção, remover este código e deixar apenas o erro
+      try {
+        toast({
+          title: "Usando API fallback",
+          description: "A API PHP não está disponível. Usando API Node.js temporariamente.",
+          variant: "warning",
+        });
+        
+        const fallbackResponse = await apiRequest("POST", "/api/simulador/calcular", values);
+        const fallbackData = await fallbackResponse.json();
+        setResult(fallbackData);
+        
+        // Auto scroll to results com fallback
+        setTimeout(() => {
+          const resultElement = document.getElementById("resultado-simulacao");
+          if (resultElement) {
+            resultElement.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      } catch (fallbackError) {
+        toast({
+          title: "Erro ao calcular",
+          description: "Ocorreu um erro ao processar sua simulação. Tente novamente.",
+          variant: "destructive",
+        });
+        console.error("Erro também no fallback:", fallbackError);
+      }
     } finally {
       setIsSubmitting(false);
     }
