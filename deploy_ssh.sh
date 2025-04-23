@@ -129,10 +129,8 @@ mkdir -p deploy_temp
 echo -e "${YELLOW}Preparando arquivos do frontend...${NC}"
 cp -r dist/* deploy_temp/
 
-# 4. Copiar arquivos PHP para a pasta de deploy
-echo -e "${YELLOW}Preparando arquivos do backend PHP...${NC}"
-mkdir -p deploy_temp/api
-cp -r php_backend/* deploy_temp/api/
+# 4. Não precisamos mais de backend PHP
+echo -e "${GREEN}Frontend-only: Backend PHP removido, usando cálculos no cliente...${NC}"
 
 # 5. Criar arquivos de configuração do servidor
 if [ "$SERVER_TYPE" == "apache" ]; then
@@ -144,9 +142,6 @@ RewriteEngine On
 # Redirecionar todas as requisições que não são para arquivos ou diretórios existentes
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
-# Para API PHP (não reescrever)
-RewriteRule ^api/ - [L]
 
 # Para o frontend (SPA), reescrever para index.html
 RewriteRule ^(.*)$ index.html [L]
@@ -175,8 +170,54 @@ RewriteRule ^(.*)$ index.html [L]
 EOF
 fi
 
-# 6. Criar robots.txt e sitemap.xml para SEO
-echo -e "${YELLOW}Criando arquivos para SEO...${NC}"
+# 6. Criar README.md, robots.txt e sitemap.xml para SEO
+echo -e "${YELLOW}Criando arquivos para SEO e documentação...${NC}"
+cat > deploy_temp/README.md << EOF
+# Instruções de Deploy - Simulador de Financiamento
+
+## Requisitos do Servidor
+- Servidor web Apache ou Nginx
+- Permissões adequadas para os diretórios
+
+## Vantagens desta Versão
+- Frontend-only: Todos os cálculos são realizados diretamente no navegador
+- Não necessita de PHP, Node.js ou qualquer outro backend
+- Deploy simplificado e econômico
+- Melhor performance e menor tempo de resposta
+- Funciona até mesmo em ambientes de hospedagem estática
+
+## Passos para Deploy
+
+### 1. Upload dos Arquivos
+Faça upload de todos os arquivos desta pasta para o diretório raiz do seu servidor web.
+
+### 2. Configuração do Servidor Web
+
+#### Para Apache:
+- Certifique-se de que o mod_rewrite está ativado
+- O arquivo .htaccess já está configurado
+- Use o arquivo apache-example.conf como referência para configurar um virtualhost
+
+#### Para Nginx:
+- Use o arquivo nginx-example.conf como referência para configurar o site
+
+### 3. Permissões
+- Certifique-se de que os arquivos e diretórios têm as permissões corretas:
+  \`\`\`
+  chown -R www-data:www-data /caminho/para/deploy
+  chmod -R 755 /caminho/para/deploy
+  \`\`\`
+
+### 4. Teste
+- Acesse o site no navegador para verificar se está funcionando corretamente.
+
+### 5. Configuração HTTPS (Recomendado)
+- Recomendamos fortemente configurar HTTPS usando Let's Encrypt ou outro provedor de certificado SSL.
+
+## Suporte
+Em caso de problemas, entre em contato através de contato@simuladorfinanciamento.com.br
+EOF
+
 cat > deploy_temp/robots.txt << EOF
 User-agent: *
 Allow: /
@@ -275,24 +316,11 @@ if [ "$SERVER_TYPE" == "nginx" ]; then
     listen 80;
     server_name $SSH_HOST;
     root $SERVER_PATH;
-    index index.html index.php;
+    index index.html;
 
     # Configuração para o frontend (SPA)
     location / {
         try_files \$uri \$uri/ /index.html;
-    }
-
-    # Configuração para a API PHP
-    location /api/ {
-        try_files \$uri \$uri/ /api/index.php?\$args;
-        
-        # Configurações PHP
-        location ~ \\.php$ {
-            include fastcgi_params;
-            fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
-            fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-            fastcgi_param PATH_INFO \$fastcgi_path_info;
-        }
     }
 
     # Configurações adicionais para segurança
@@ -356,5 +384,5 @@ echo -e "${GREEN}Deploy concluído com sucesso!${NC}"
 echo -e "${GREEN}Seu site está agora disponível em: http://$SSH_HOST/${NC}"
 echo -e "${YELLOW}Recomendações adicionais:${NC}"
 echo -e "  - Configure HTTPS usando Let's Encrypt: https://certbot.eff.org/"
-echo -e "  - Verifique se o PHP está configurado corretamente no servidor"
-echo -e "  - Monitore os logs de erro do servidor para identificar possíveis problemas"
+echo -e "  - Verifique a velocidade de carregamento usando Google PageSpeed Insights"
+echo -e "  - Monitore os logs de acesso para acompanhar o tráfego do site"
