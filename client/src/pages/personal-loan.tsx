@@ -8,10 +8,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { calculatorSchema } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import PriceTable from "@/components/simulators/price-table";
 import { SimulationResult } from "@/components/simulators/vehicle-form";
+import { gerarTabelaPrice, calcularTotalPagar, calcularTotalJuros } from "@/utils/finance";
 
 const formSchema = calculatorSchema.extend({
   valorFinanciado: z.coerce
@@ -43,11 +43,29 @@ export default function PersonalLoan() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      const response = await apiRequest("POST", "/api/simulador/pessoal", values);
-      const data = await response.json();
+      // Gerar tabela de amortização com Price (padrão para empréstimos pessoais)
+      const tabelaAmortizacao = gerarTabelaPrice(
+        values.valorFinanciado, 
+        values.taxaJuros, 
+        values.numParcelas
+      );
+      
+      // Calcular valor da parcela, total a pagar e total de juros
+      const valorParcela = tabelaAmortizacao[0].valorParcela;
+      const totalPagar = calcularTotalPagar(valorParcela, values.numParcelas);
+      const totalJuros = calcularTotalJuros(totalPagar, values.valorFinanciado);
+      
+      // Criar resultado da simulação
+      const data: SimulationResult = {
+        valorParcela,
+        totalPagar,
+        totalJuros,
+        tabelaAmortizacao
+      };
+      
       setResult(data);
       
       // Auto scroll to results

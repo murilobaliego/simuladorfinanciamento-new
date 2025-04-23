@@ -8,11 +8,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { calculatorSchema } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import PriceTable from "@/components/simulators/price-table";
 import { SimulationResult } from "@/components/simulators/vehicle-form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { gerarTabelaPrice, gerarTabelaSAC, calcularTotalPagar, calcularTotalJuros } from "@/utils/finance";
 
 const formSchema = calculatorSchema.extend({
   valorFinanciado: z.coerce
@@ -45,11 +45,37 @@ export default function RealEstateFinance() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      const response = await apiRequest("POST", "/api/simulador/imobiliario", values);
-      const data = await response.json();
+      // Gerar tabela de amortização com base no sistema escolhido
+      let tabelaAmortizacao;
+      if (values.sistema === "price") {
+        tabelaAmortizacao = gerarTabelaPrice(values.valorFinanciado, values.taxaJuros, values.numParcelas);
+      } else { // SAC
+        tabelaAmortizacao = gerarTabelaSAC(values.valorFinanciado, values.taxaJuros, values.numParcelas);
+      }
+      
+      // Calcular valor da parcela (primeira parcela no caso do SAC)
+      const valorParcela = tabelaAmortizacao[0].valorParcela;
+      
+      // Calcular total a pagar e total de juros
+      const totalPagar = calcularTotalPagar(
+        values.sistema === "sac" 
+          ? tabelaAmortizacao.reduce((sum, item) => sum + item.valorParcela, 0) 
+          : valorParcela, 
+        values.numParcelas
+      );
+      const totalJuros = calcularTotalJuros(totalPagar, values.valorFinanciado);
+      
+      // Criar resultado da simulação
+      const data: SimulationResult = {
+        valorParcela,
+        totalPagar,
+        totalJuros,
+        tabelaAmortizacao
+      };
+      
       setResult(data);
       
       // Auto scroll to results

@@ -9,10 +9,10 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { calculatorSchema } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import PriceTable from "@/components/simulators/price-table";
 import { SimulationResult } from "@/components/simulators/vehicle-form";
+import { gerarTabelaPrice, calcularTotalPagar, calcularTotalJuros } from "@/utils/finance";
 
 const formSchema = calculatorSchema.extend({
   valorFinanciado: z.coerce
