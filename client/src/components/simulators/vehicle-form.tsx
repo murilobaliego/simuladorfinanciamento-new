@@ -63,19 +63,15 @@ export default function VehicleForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      // Usar a API PHP em vez da API Node.js
-      const response = await fetch("http://localhost:8000/api/simulador/calcular", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      // ATENÇÃO: Nesta versão, estamos usando a API Node.js temporariamente
+      // No ambiente de produção, deve-se conectar à API PHP usando:
+      // fetch("https://api.simuladorfinanciamento.com.br/api/simulador/calcular", { ... })
+      // que implementa as mesmas fórmulas do backend PHP, incluindo:
+      // - Cálculo de IOF: 0,0082% ao dia (limitado a 365 dias) + 0,38% fixo
+      // - Tabela Price com valores precisos
+      // - Cálculo correto de amortização e juros
       
-      if (!response.ok) {
-        throw new Error(`Erro na API PHP: ${response.status}`);
-      }
-      
+      const response = await apiRequest("POST", "/api/simulador/calcular", values);
       const data = await response.json();
       setResult(data);
       
@@ -87,36 +83,12 @@ export default function VehicleForm() {
         }
       }, 100);
     } catch (error) {
-      console.error("Erro ao utilizar API PHP:", error);
-      
-      // Tentar usar a API Node.js como fallback apenas para fins de testes
-      // Na produção, remover este código e deixar apenas o erro
-      try {
-        toast({
-          title: "Usando API fallback",
-          description: "A API PHP não está disponível. Usando API Node.js temporariamente.",
-          variant: "warning",
-        });
-        
-        const fallbackResponse = await apiRequest("POST", "/api/simulador/calcular", values);
-        const fallbackData = await fallbackResponse.json();
-        setResult(fallbackData);
-        
-        // Auto scroll to results com fallback
-        setTimeout(() => {
-          const resultElement = document.getElementById("resultado-simulacao");
-          if (resultElement) {
-            resultElement.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 100);
-      } catch (fallbackError) {
-        toast({
-          title: "Erro ao calcular",
-          description: "Ocorreu um erro ao processar sua simulação. Tente novamente.",
-          variant: "destructive",
-        });
-        console.error("Erro também no fallback:", fallbackError);
-      }
+      console.error("Erro ao calcular simulação:", error);
+      toast({
+        title: "Erro ao calcular",
+        description: "Ocorreu um erro ao processar sua simulação. Tente novamente.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
