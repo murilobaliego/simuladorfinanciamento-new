@@ -77,17 +77,25 @@ O projeto foi convertido para utilizar um backend em PHP. Para executar o backen
 
 ## Como Executar o Projeto
 
-### Com Backend Node.js
+### Utilizando o Script de Configuração
+1. Clone o repositório
+2. Instale as dependências: `npm install`
+3. Execute o script de configuração: `./config.sh`
+4. Siga as instruções para escolher o backend (Node.js ou PHP)
+5. Acesse no navegador: `http://localhost:5000`
+
+### Manualmente com Backend Node.js
 1. Clone o repositório
 2. Instale as dependências: `npm install`
 3. Inicie o servidor: `npm run dev`
 4. Acesse no navegador: `http://localhost:5000`
 
-### Com Backend PHP
+### Manualmente com Backend PHP
 1. Clone o repositório
-2. Construa o frontend: `./php_backend/build_frontend.sh`
-3. Inicie o servidor PHP: `./php_backend/start.sh`
-4. Acesse no navegador: `http://localhost:5000`
+2. Instale as dependências: `npm install` (necessário para compilar o frontend)
+3. Construa o frontend: `./php_backend/build_frontend.sh`
+4. Inicie o servidor PHP: `./php_backend/start.sh`
+5. Acesse no navegador: `http://localhost:5000`
 
 ## Aviso Legal
 
