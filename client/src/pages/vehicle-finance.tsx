@@ -1,36 +1,136 @@
 import VehicleForm from "@/components/simulators/vehicle-form";
+import { Helmet } from 'react-helmet-async';
 
 export default function VehicleFinance() {
   return (
-    <div className="container mx-auto px-4 py-6">
-      <section id="simulador-veiculo" className="mb-12 bg-white rounded-lg shadow-md p-6">
-        <h2 className="font-heading text-2xl font-bold text-primary mb-6 pb-2 border-b border-neutral-200">Simulador de Financiamento de Veículo</h2>
-        
-        <div className="mb-8">
-          <p className="mb-4">O financiamento de veículos é uma ótima opção para quem deseja comprar um carro ou moto, mas não possui o valor total disponível. Com o nosso simulador, você poderá calcular o valor das prestações mensais e entender como funciona a amortização do saldo devedor usando o sistema de Tabela Price.</p>
+    <>
+      <Helmet>
+        <title>Simulador de Financiamento de Veículos | Calcule Parcelas com IOF</title>
+        <meta name="description" content="Simule seu financiamento de veículos com nosso simulador gratuito. Calcule parcelas, juros, IOF e veja a tabela de amortização completa. Financie seu carro, moto ou caminhão." />
+        <meta name="keywords" content="simulador de financiamento de veículos, financiamento de carros, tabela price, simulador de parcelas, cálculo IOF, melhor financiamento" />
+        <link rel="canonical" href="https://simuladorfinanciamento.com.br/simulador-financiamento-veiculos" />
+        <meta property="og:title" content="Simulador de Financiamento de Veículos | Calcule Parcelas com IOF" />
+        <meta property="og:description" content="Simule gratuitamente seu financiamento de veículos com taxas atualizadas, inclua IOF e veja a tabela de amortização completa." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://simuladorfinanciamento.com.br/simulador-financiamento-veiculos" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Simulador de Financiamento de Veículos | Cálculo com IOF" />
+        <meta name="twitter:description" content="Simule gratuitamente seu financiamento de veículos com taxas atualizadas, inclua IOF e veja a tabela de amortização completa." />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "Simulador de Financiamento de Veículos",
+              "url": "https://simuladorfinanciamento.com.br/simulador-financiamento-veiculos",
+              "description": "Simule financiamentos de veículos com cálculo de IOF e tabela de amortização completa.",
+              "applicationCategory": "FinanceApplication",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "BRL"
+              },
+              "operatingSystem": "Web"
+            }
+          `}
+        </script>
+      </Helmet>
+      
+      <div className="container mx-auto px-4 py-6">
+        <section id="simulador-veiculo" className="mb-12 bg-white rounded-lg shadow-md p-6">
+          <h1 className="font-heading text-3xl font-bold text-primary mb-6 pb-2 border-b border-neutral-200">Simulador de Financiamento de Veículos</h1>
           
-          <p className="mb-4">A Tabela Price, também conhecida como Sistema Francês de Amortização, é um método para calcular prestações fixas. Em cada pagamento mensal, uma parte vai para os juros e outra para reduzir o valor que você deve (amortização).</p>
+          <div className="mb-8">
+            <p className="mb-4">O <strong>simulador de financiamento de veículos</strong> é uma ferramenta essencial para quem planeja comprar um carro, moto ou caminhão sem ter o valor total disponível. Com nossa calculadora completa, você pode simular o valor exato das prestações mensais, incluindo o <strong>cálculo de IOF</strong> (Imposto sobre Operações Financeiras) e visualizar toda a evolução do seu saldo devedor através da <strong>Tabela Price</strong>.</p>
+            
+            <h2 className="text-xl font-semibold text-primary mt-6 mb-3">Como funciona o financiamento de veículos no Brasil?</h2>
+            
+            <p className="mb-4">No Brasil, o financiamento de veículos geralmente utiliza o <strong>sistema de Tabela Price</strong>, também conhecido como Sistema Francês de Amortização. Este método calcula prestações fixas, onde em cada pagamento mensal, uma parte vai para os juros e outra para reduzir o valor principal financiado (amortização).</p>
+            
+            <p className="mb-4">Quando você financia um veículo, a instituição financeira paga o valor total ao vendedor e você se compromete a pagar este valor em parcelas mensais, acrescidas de juros e impostos como o IOF. O veículo normalmente fica alienado à instituição financeira até que todas as parcelas sejam quitadas.</p>
+            
+            <h2 className="text-xl font-semibold text-primary mt-6 mb-3">Entenda o que é o IOF no financiamento de veículos</h2>
+            
+            <p className="mb-4">O <strong>IOF (Imposto sobre Operações Financeiras)</strong> é um tributo federal que incide sobre operações de crédito, incluindo financiamentos de veículos. Para financiamentos de veículos, o IOF é composto por duas alíquotas:</p>
+            
+            <ul className="list-disc pl-5 mb-4 space-y-2">
+              <li><strong>IOF diário:</strong> 0,0082% ao dia, calculado sobre o valor financiado e limitado a 365 dias</li>
+              <li><strong>IOF adicional:</strong> 0,38% fixo sobre o valor da operação, independente do prazo</li>
+            </ul>
+            
+            <p className="mb-4">Nosso simulador permite incluir ou excluir o IOF do cálculo, mostrando com transparência quanto este imposto representa no valor total do seu financiamento de veículo.</p>
+            
+            <h2 className="text-xl font-semibold text-primary mt-6 mb-3">Como usar nosso simulador de financiamento de veículos</h2>
+            
+            <p className="mb-4">Para simular seu financiamento, preencha o formulário abaixo com:</p>
+            
+            <ol className="list-decimal pl-5 mb-4 space-y-2">
+              <li><strong>Valor a financiar:</strong> O montante que você precisa para adquirir o veículo (descontando a entrada, se houver)</li>
+              <li><strong>Taxa de juros mensal:</strong> A taxa aplicada pela instituição financeira (geralmente entre 0,99% e 2,5% para veículos)</li>
+              <li><strong>Número de parcelas:</strong> O prazo de pagamento (tipicamente de 24 a 72 meses para veículos)</li>
+              <li><strong>Inclusão do IOF:</strong> Marque esta opção para incluir o imposto no cálculo</li>
+            </ol>
+            
+            <p className="mb-4">Após preencher os campos, clique em "Calcular" para visualizar:</p>
+            
+            <ul className="list-disc pl-5 mb-4 space-y-2">
+              <li>Valor da parcela mensal</li>
+              <li>Total a pagar ao final do contrato</li>
+              <li>Total de juros pagos</li>
+              <li>Valor do IOF (quando incluído)</li>
+              <li>Tabela completa de amortização, mostrando a evolução do saldo devedor mês a mês</li>
+            </ul>
+            
+            <h2 className="text-xl font-semibold text-primary mt-6 mb-3">Dicas para conseguir o melhor financiamento de veículos</h2>
+            
+            <ul className="list-disc pl-5 mb-4 space-y-2">
+              <li><strong>Compare taxas:</strong> Pesquise as taxas de juros em diferentes bancos e financeiras</li>
+              <li><strong>Aumente a entrada:</strong> Quanto maior a entrada, menor o valor financiado e os juros totais</li>
+              <li><strong>Negocie o prazo:</strong> Prazos menores geralmente têm taxas mais baixas</li>
+              <li><strong>Verifique o CET:</strong> O Custo Efetivo Total mostra todos os encargos e despesas do financiamento</li>
+              <li><strong>Atenção às tarifas:</strong> Considere custos adicionais como TAC, registro de contrato e seguros</li>
+              <li><strong>Simule diferentes cenários:</strong> Use nosso simulador para comparar diferentes configurações e encontrar a mais vantajosa</li>
+            </ul>
+            
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+              <p className="text-sm italic">Este simulador é uma ferramenta de cálculo para fins educativos e informativos. As condições reais do seu financiamento podem variar conforme a política da instituição financeira, seu perfil de crédito e outros fatores. Consulte sempre um especialista antes de tomar decisões financeiras.</p>
+            </div>
+          </div>
           
-          <p className="mb-4">No Brasil, a maioria dos financiamentos de veículos utiliza o sistema de Tabela Price, onde as parcelas são fixas do início ao fim do contrato. Isso facilita o planejamento financeiro, já que você sabe exatamente quanto pagará todos os meses.</p>
+          <VehicleForm />
           
-          <p className="mb-4">É importante entender que nos primeiros meses do financiamento, a maior parte do valor da parcela vai para o pagamento de juros, e apenas uma pequena parte para amortizar o saldo devedor. Com o passar do tempo, essa proporção se inverte, e você passa a pagar mais de amortização e menos de juros.</p>
-          
-          <p className="mb-4">Ao simular seu financiamento, você poderá comparar diferentes prazos e verificar o impacto no valor da parcela e no total de juros pagos. Em geral, quanto maior o prazo, menor será a parcela, mas maior será o valor total de juros pago no final.</p>
-          
-          <p className="mb-4">Algumas dicas importantes antes de financiar seu veículo:</p>
-          
-          <ul className="list-disc pl-5 mb-4 space-y-2">
-            <li>Compare as taxas de juros entre diferentes instituições financeiras</li>
-            <li>Avalie se consegue dar uma entrada maior para reduzir o valor financiado</li>
-            <li>Considere os custos adicionais como seguro, documentação e tarifas</li>
-            <li>Verifique se existem pacotes de serviços ou seguros obrigatórios embutidos no financiamento</li>
-          </ul>
-          
-          <p>Para simular seu financiamento, preencha o formulário abaixo com o valor do veículo que deseja financiar, a taxa de juros (geralmente entre 1% e 2,5% ao mês para veículos) e o número de prestações (geralmente de 24 a 60 meses).</p>
-        </div>
-        
-        <VehicleForm />
-      </section>
-    </div>
+          <div className="mt-12">
+            <h2 className="text-xl font-semibold text-primary mt-6 mb-3">Perguntas Frequentes sobre Financiamento de Veículos</h2>
+            
+            <div className="space-y-4">
+              <div className="border-b pb-3">
+                <h3 className="font-medium text-lg">Qual é a melhor taxa de juros para financiamento de veículos?</h3>
+                <p className="text-neutral-700">Atualmente, as melhores taxas para financiamento de veículos no Brasil estão entre 0,99% e 1,99% ao mês, mas isso pode variar conforme seu histórico de crédito, relacionamento bancário e as condições de mercado.</p>
+              </div>
+              
+              <div className="border-b pb-3">
+                <h3 className="font-medium text-lg">É possível financiar 100% do valor do veículo?</h3>
+                <p className="text-neutral-700">A maioria das instituições financeiras exige uma entrada mínima de 10% a 20% do valor do veículo, mas algumas podem oferecer financiamento de 100% em condições especiais, geralmente com taxas mais altas.</p>
+              </div>
+              
+              <div className="border-b pb-3">
+                <h3 className="font-medium text-lg">O que acontece se eu atrasar o pagamento das parcelas?</h3>
+                <p className="text-neutral-700">Atrasos geram multa (geralmente 2%), juros de mora diários e podem afetar seu score de crédito. Em caso de atrasos prolongados, o veículo pode ser retomado pela instituição financeira, já que fica alienado durante o período do financiamento.</p>
+              </div>
+              
+              <div className="border-b pb-3">
+                <h3 className="font-medium text-lg">Posso quitar meu financiamento de veículo antecipadamente?</h3>
+                <p className="text-neutral-700">Sim, a quitação antecipada é permitida por lei no Brasil. Você tem direito a um desconto proporcional nos juros, mas algumas instituições podem cobrar uma taxa de até 2% sobre o valor quitado.</p>
+              </div>
+              
+              <div className="border-b pb-3">
+                <h3 className="font-medium text-lg">O simulador de financiamento mostra o valor real que vou pagar?</h3>
+                <p className="text-neutral-700">Nosso simulador calcula valores aproximados baseados nas informações fornecidas. O valor final pode incluir outros custos como seguros, tarifas bancárias e impostos específicos que variam conforme a instituição financeira e suas políticas.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

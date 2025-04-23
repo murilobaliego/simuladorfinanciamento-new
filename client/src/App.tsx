@@ -1,6 +1,7 @@
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
@@ -18,7 +19,10 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home}/>
+      {/* URLs otimizadas para SEO em português brasileiro */}
+      <Route path="/simulador-financiamento-veiculos" component={VehicleFinance}/>
       <Route path="/financiamento-veiculo" component={VehicleFinance}/>
+      <Route path="/vehicle-finance" component={VehicleFinance}/>
       <Route path="/financiamento-imobiliario" component={RealEstateFinance}/>
       <Route path="/emprestimo-pessoal" component={PersonalLoan}/>
       <Route path="/credito-consignado" component={PayrollLoan}/>
@@ -31,17 +35,19 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
-          <Router />
-        </main>
-        <Footer />
-        <CookieConsent />
-      </div>
-      <Toaster />
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow">
+            <Router />
+          </main>
+          <Footer />
+          <CookieConsent />
+        </div>
+        <Toaster />
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 }
 
