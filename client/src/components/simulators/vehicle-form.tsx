@@ -8,10 +8,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { calculatorSchema } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import PriceTable from "@/components/simulators/price-table";
 import { Checkbox } from "@/components/ui/checkbox";
+import { simularFinanciamento } from "@/utils/finance";
 
 const formSchema = calculatorSchema.extend({
   valorFinanciado: z.coerce
@@ -60,20 +60,19 @@ export default function VehicleForm() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      // ATENÇÃO: Nesta versão, estamos usando a API Node.js temporariamente
-      // No ambiente de produção, deve-se conectar à API PHP usando:
-      // fetch("https://api.simuladorfinanciamento.com.br/api/simulador/calcular", { ... })
-      // que implementa as mesmas fórmulas do backend PHP, incluindo:
-      // - Cálculo de IOF: 0,0082% ao dia (limitado a 365 dias) + 0,38% fixo
-      // - Tabela Price com valores precisos
-      // - Cálculo correto de amortização e juros
+      // Realizar os cálculos diretamente no frontend
+      // sem necessidade de backend PHP ou Node.js
+      const resultado = simularFinanciamento(
+        values.valorFinanciado,
+        values.taxaJuros,
+        values.numParcelas,
+        values.incluirIOF
+      );
       
-      const response = await apiRequest("POST", "/api/simulador/calcular", values);
-      const data = await response.json();
-      setResult(data);
+      setResult(resultado);
       
       // Auto scroll to results
       setTimeout(() => {

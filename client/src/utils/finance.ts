@@ -129,3 +129,69 @@ export function calcularTotalPagar(valorParcela: number, numParcelas: number): n
 export function calcularTotalJuros(totalPagar: number, valorFinanciado: number): number {
   return totalPagar - valorFinanciado;
 }
+
+/**
+ * Calcula o valor do IOF para financiamento de veículos
+ * @param valorFinanciado Valor total a ser financiado
+ * @param numParcelas Número total de parcelas (meses)
+ * @returns O valor do IOF a ser adicionado ao financiamento
+ */
+export function calcularIOF(valorFinanciado: number, numParcelas: number): number {
+  // Taxa diária de IOF: 0,0082% ao dia, limitado a 365 dias
+  const diasIOF = Math.min(numParcelas * 30, 365); // Converte meses em dias, limitado a 365
+  const taxaIOFDiaria = 0.0082 / 100; // 0,0082% ao dia
+  const iofDiario = valorFinanciado * taxaIOFDiaria * diasIOF;
+  
+  // Taxa adicional de IOF: 0,38% sobre o valor da operação
+  const taxaIOFAdicional = 0.38 / 100; // 0,38% sobre o valor da operação
+  const iofAdicional = valorFinanciado * taxaIOFAdicional;
+  
+  // IOF total
+  return iofDiario + iofAdicional;
+}
+
+/**
+ * Simula um financiamento completo com base nos parâmetros fornecidos
+ * @param valorFinanciado Valor total a ser financiado
+ * @param taxaJuros Taxa de juros mensal (em percentual)
+ * @param numParcelas Número total de parcelas
+ * @param incluirIOF Se deve incluir o IOF no cálculo
+ * @returns Resultado completo da simulação
+ */
+export function simularFinanciamento(
+  valorFinanciado: number,
+  taxaJuros: number,
+  numParcelas: number,
+  incluirIOF: boolean = false
+): {
+  valorParcela: number;
+  totalPagar: number;
+  totalJuros: number;
+  tabelaAmortizacao: TabelaItem[];
+  valorIOF?: number;
+} {
+  // Calcula IOF se solicitado
+  let valorTotalFinanciado = valorFinanciado;
+  let valorIOF: number | undefined = undefined;
+  
+  if (incluirIOF) {
+    valorIOF = calcularIOF(valorFinanciado, numParcelas);
+    valorTotalFinanciado += valorIOF;
+  }
+  
+  // Calcula prestação e gera tabela
+  const valorParcela = calcularPrestacao(valorTotalFinanciado, taxaJuros, numParcelas);
+  const tabelaAmortizacao = gerarTabelaPrice(valorTotalFinanciado, taxaJuros, numParcelas);
+  
+  // Calcula totais
+  const totalPagar = calcularTotalPagar(valorParcela, numParcelas);
+  const totalJuros = calcularTotalJuros(totalPagar, valorTotalFinanciado);
+  
+  return {
+    valorParcela,
+    totalPagar,
+    totalJuros,
+    tabelaAmortizacao,
+    valorIOF
+  };
+}

@@ -29,10 +29,8 @@ mkdir -p deploy
 echo -e "${YELLOW}Copiando arquivos do frontend...${NC}"
 cp -r dist/* deploy/
 
-# 4. Copiar arquivos PHP para a pasta de deploy
-echo -e "${YELLOW}Copiando arquivos do backend PHP...${NC}"
-mkdir -p deploy/api
-cp -r php_backend/* deploy/api/
+# 4. Não precisamos mais de backend PHP
+echo -e "${GREEN}Frontend-only: Backend PHP removido, usando cálculos no cliente...${NC}"
 
 # 5. Criar arquivo .htaccess para configurar o Apache (se necessário)
 echo -e "${YELLOW}Criando arquivo .htaccess...${NC}"
@@ -43,9 +41,6 @@ RewriteEngine On
 # Redirecionar todas as requisições que não são para arquivos ou diretórios existentes
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
-# Para API PHP (não reescrever)
-RewriteRule ^api/ - [L]
 
 # Para o frontend (SPA), reescrever para index.html
 RewriteRule ^(.*)$ index.html [L]
@@ -58,30 +53,29 @@ server {
     listen 80;
     server_name simuladorfinanciamento.com.br www.simuladorfinanciamento.com.br;
     root /caminho/para/deploy;
-    index index.html index.php;
+    index index.html;
 
     # Configuração para o frontend (SPA)
     location / {
         try_files \$uri \$uri/ /index.html;
     }
 
-    # Configuração para a API PHP
-    location /api/ {
-        try_files \$uri \$uri/ /api/index.php?\$args;
-        
-        # Configurações PHP
-        location ~ \.php$ {
-            include fastcgi_params;
-            fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;  # Ajuste para sua versão do PHP
-            fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-            fastcgi_param PATH_INFO \$fastcgi_path_info;
-        }
+    # Cache para recursos estáticos
+    location ~* \.(jpg|jpeg|png|gif|ico|css|js|svg|woff|woff2)$ {
+        expires 1y;
+        add_header Cache-Control "public, no-transform";
     }
 
     # Configurações adicionais para segurança
     location ~ /\.ht {
         deny all;
     }
+    
+    # Headers de segurança
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
 }
 EOF
 
@@ -110,8 +104,14 @@ cat > deploy/README.md << EOF
 
 ## Requisitos do Servidor
 - Servidor web Apache ou Nginx
-- PHP 8.0 ou superior
 - Permissões adequadas para os diretórios
+
+## Vantagens desta Versão
+- Frontend-only: Todos os cálculos são realizados diretamente no navegador
+- Não necessita de PHP, Node.js ou qualquer outro backend
+- Deploy simplificado e econômico
+- Melhor performance e menor tempo de resposta
+- Funciona até mesmo em ambientes de hospedagem estática
 
 ## Passos para Deploy
 
@@ -127,11 +127,6 @@ Faça upload de todos os arquivos desta pasta para o diretório raiz do seu serv
 
 #### Para Nginx:
 - Use o arquivo nginx-example.conf como referência para configurar o site
-- Ajuste o caminho do socket PHP-FPM conforme sua instalação
-
-### 3. Configuração do PHP
-- Verifique se o PHP está configurado corretamente
-- Ajuste os limites de memória se necessário (memory_limit=128M)
 
 ### 4. Permissões
 - Certifique-se de que os arquivos e diretórios têm as permissões corretas:
