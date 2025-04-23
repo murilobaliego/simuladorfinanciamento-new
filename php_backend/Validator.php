@@ -30,11 +30,15 @@ class Validator {
             throw new Exception(json_encode(['errors' => $errors]));
         }
         
+        // Verifica se incluirIOF está presente e converte para booleano
+        $incluirIOF = isset($data['incluirIOF']) ? (bool)$data['incluirIOF'] : false;
+        
         // Retorna os dados convertidos para tipos numéricos
         return [
             'valorFinanciado' => (float)$data['valorFinanciado'],
             'taxaJuros' => (float)$data['taxaJuros'],
-            'numParcelas' => (int)$data['numParcelas']
+            'numParcelas' => (int)$data['numParcelas'],
+            'incluirIOF' => $incluirIOF
         ];
     }
     

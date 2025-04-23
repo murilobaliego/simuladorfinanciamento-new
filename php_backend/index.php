@@ -48,6 +48,17 @@ try {
         $valorFinanciado = $validatedData['valorFinanciado'];
         $taxaJuros = $validatedData['taxaJuros'];
         $numParcelas = $validatedData['numParcelas'];
+        $incluirIOF = $validatedData['incluirIOF'];
+        
+        // Se incluir IOF, adiciona o valor do IOF ao valor financiado
+        $valorIOF = 0;
+        if ($incluirIOF) {
+            $valorIOF = Finance::calcularIOF($valorFinanciado, $numParcelas);
+            // Adicionar informações de log para debug
+            error_log("Valor IOF calculado: " . $valorIOF);
+            $valorFinanciadoOriginal = $valorFinanciado;
+            $valorFinanciado += $valorIOF;
+        }
         
         // Calcular a prestação
         $valorParcela = Finance::calcularPrestacao($valorFinanciado, $taxaJuros, $numParcelas);
@@ -55,8 +66,9 @@ try {
         // Calcular o total a pagar
         $totalPagar = Finance::calcularTotalPagar($valorParcela, $numParcelas);
         
-        // Calcular o total de juros
-        $totalJuros = Finance::calcularTotalJuros($totalPagar, $valorFinanciado);
+        // Calcular o total de juros (considerando valor financiado original se houver IOF)
+        $valorFinanciadoSemIOF = $incluirIOF ? $valorFinanciadoOriginal : $valorFinanciado;
+        $totalJuros = Finance::calcularTotalJuros($totalPagar, $valorFinanciadoSemIOF);
         
         // Gerar a tabela de amortização
         $tabelaAmortizacao = Finance::gerarTabelaPrice($valorFinanciado, $taxaJuros, $numParcelas);
