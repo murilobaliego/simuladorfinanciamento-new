@@ -48,11 +48,29 @@ export default function PayrollLoan() {
 
   const tipoConsignado = form.watch("tipoConsignado");
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      const response = await apiRequest("POST", "/api/simulador/consignado", values);
-      const data = await response.json();
+      // Gerar tabela de amortização com Price (padrão para consignados)
+      const tabelaAmortizacao = gerarTabelaPrice(
+        values.valorFinanciado, 
+        values.taxaJuros, 
+        values.numParcelas
+      );
+      
+      // Calcular valor da parcela, total a pagar e total de juros
+      const valorParcela = tabelaAmortizacao[0].valorParcela;
+      const totalPagar = calcularTotalPagar(valorParcela, values.numParcelas);
+      const totalJuros = calcularTotalJuros(totalPagar, values.valorFinanciado);
+      
+      // Criar resultado da simulação
+      const data: SimulationResult = {
+        valorParcela,
+        totalPagar,
+        totalJuros,
+        tabelaAmortizacao
+      };
+      
       setResult(data);
       
       // Auto scroll to results
