@@ -41,6 +41,7 @@ export type SimulationResult = {
   totalPagar: number;
   totalJuros: number;
   tabelaAmortizacao: TableData[];
+  valorIOF?: number; // Opcional, só existe quando o IOF é incluído no cálculo
 };
 
 export default function VehicleForm() {
@@ -236,6 +237,17 @@ export default function VehicleForm() {
                 {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(result.totalJuros)}
               </p>
             </div>
+            
+            {/* Exibe valor do IOF se estiver incluído no cálculo */}
+            {result.valorIOF !== undefined && (
+              <div className="bg-neutral-100 p-4 rounded-md border border-neutral-200">
+                <p className="text-sm text-neutral-600 mb-1">Valor do IOF</p>
+                <p className="text-2xl font-bold text-accent">
+                  {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Number(result.valorIOF))}
+                </p>
+                <p className="text-xs text-neutral-500 mt-1">Imposto sobre Operações Financeiras</p>
+              </div>
+            )}
           </div>
           
           <div className="mb-6">

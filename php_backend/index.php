@@ -73,13 +73,21 @@ try {
         // Gerar a tabela de amortização
         $tabelaAmortizacao = Finance::gerarTabelaPrice($valorFinanciado, $taxaJuros, $numParcelas);
         
-        // Retornar os resultados
-        json_response([
+        // Preparar resposta
+        $response = [
             'valorParcela' => $valorParcela,
             'totalPagar' => $totalPagar,
             'totalJuros' => $totalJuros,
             'tabelaAmortizacao' => $tabelaAmortizacao
-        ]);
+        ];
+        
+        // Adicionar valor do IOF se foi calculado
+        if ($incluirIOF) {
+            $response['valorIOF'] = $valorIOF;
+        }
+        
+        // Retornar os resultados
+        json_response($response);
         
         // Registrar log
         log_message("POST $path 200");
