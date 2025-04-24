@@ -11,6 +11,11 @@ import PersonalLoan from "@/pages/personal-loan";
 import PayrollLoan from "@/pages/payroll-loan";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import TermsOfUse from "@/pages/terms-of-use";
+import RefinancingSimulator from "@/pages/refinancing-simulator";
+import PaymentCapacity from "@/pages/payment-capacity";
+import AmortizationComparison from "@/pages/amortization-comparison";
+import IdealDownpayment from "@/pages/ideal-downpayment";
+import LeasingVsFinancing from "@/pages/leasing-vs-financing";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -28,6 +33,14 @@ function Router() {
       <Route path="/credito-consignado" component={PayrollLoan}/>
       <Route path="/politica-privacidade" component={PrivacyPolicy}/>
       <Route path="/termos-de-uso" component={TermsOfUse}/>
+      
+      {/* Novas calculadoras e simuladores */}
+      <Route path="/simulador-refinanciamento" component={RefinancingSimulator}/>
+      <Route path="/capacidade-pagamento" component={PaymentCapacity}/>
+      <Route path="/comparativo-amortizacao" component={AmortizationComparison}/>
+      <Route path="/calculadora-entrada-ideal" component={IdealDownpayment}/>
+      <Route path="/leasing-vs-financiamento" component={LeasingVsFinancing}/>
+      
       <Route component={NotFound} />
     </Switch>
   );
