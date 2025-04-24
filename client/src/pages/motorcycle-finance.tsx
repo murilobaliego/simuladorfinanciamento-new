@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -84,48 +84,66 @@ export default function MotorcycleFinance() {
     return Number(taxa.toFixed(2));
   };
   
-  // Inicializa a taxa ajustada com base nos valores do form
+  // Função para atualizar a taxa com base nos valores atuais
+  const atualizarTaxaAjustada = useCallback(() => {
+    try {
+      const cilindradaSelecionada = form.getValues('cilindrada');
+      const usada = form.getValues('usada');
+      const taxaBase = form.getValues('taxaJuros');
+      
+      // Somente atualiza a cilindrada se ela estiver definida
+      if (cilindradaSelecionada) {
+        setCilindrada(cilindradaSelecionada);
+      }
+      
+      // Calcula a nova taxa ajustada
+      const novaTaxa = calcularTaxaAjustada(
+        cilindradaSelecionada || 'ate-150', 
+        usada || false, 
+        taxaBase || 1.85
+      );
+      
+      // Atualiza o estado da taxa
+      setTaxaAjustada(novaTaxa);
+      
+      console.log('Taxa atualizada:', novaTaxa, 'Cilindrada:', cilindradaSelecionada, 'Usada:', usada);
+      
+      return novaTaxa;
+    } catch (error) {
+      console.error("Erro ao atualizar taxa:", error);
+      return 1.85; // Taxa padrão em caso de erro
+    }
+  }, [form]);
+  
+  // Inicializa a taxa ajustada na montagem do componente
   useEffect(() => {
-    // Calcula a taxa ajustada inicial
-    const cilindradaInicial = form.getValues('cilindrada');
-    const usadaInicial = form.getValues('usada');
-    const taxaBaseInicial = form.getValues('taxaJuros');
+    // Define um timeout curto para garantir que o form esteja totalmente inicializado
+    const timer = setTimeout(() => {
+      const novaTaxa = atualizarTaxaAjustada();
+      console.log('Taxa inicial definida:', novaTaxa);
+    }, 100);
     
-    // Atualiza o estado para cilindrada e taxa
-    setCilindrada(cilindradaInicial);
-    const taxaInicial = calcularTaxaAjustada(cilindradaInicial, usadaInicial, taxaBaseInicial);
-    setTaxaAjustada(taxaInicial);
-    
-    // Atualiza o valor do campo do formulário com a taxa ajustada inicial
-    form.setValue('taxaJuros', taxaInicial);
-    
-    console.log('Taxa inicial:', taxaInicial, 'Cilindrada:', cilindradaInicial, 'Usada:', usadaInicial);
-  }, []); // Executa apenas na inicialização
+    return () => clearTimeout(timer);
+  }, [atualizarTaxaAjustada]);
   
   // Observa mudanças nos campos que afetam a taxa
   useEffect(() => {
     const subscription = form.watch((value, { name }) => {
-      if (name === 'cilindrada' || name === 'usada' || name === 'taxaJuros') {
-        const cilindradaSelecionada = form.getValues('cilindrada');
-        const usada = form.getValues('usada');
-        const taxaBase = form.getValues('taxaJuros');
+      if (name === 'cilindrada' || name === 'usada') {
+        // Para esses campos, atualizamos a taxa ajustada e o campo de taxa
+        const novaTaxa = atualizarTaxaAjustada();
         
-        // Atualiza o estado da cilindrada para destaque na interface
-        setCilindrada(cilindradaSelecionada);
-        
-        // Calcula a nova taxa ajustada
-        const novaTaxa = calcularTaxaAjustada(cilindradaSelecionada, usada, taxaBase);
-        setTaxaAjustada(novaTaxa);
-        
-        // Atualiza o valor do campo do formulário com a taxa ajustada
-        form.setValue('taxaJuros', novaTaxa);
-        
-        console.log('Taxa ajustada atualizada:', novaTaxa, 'Cilindrada:', cilindradaSelecionada, 'Usada:', usada);
+        // Atualizando o campo do formulário com a nova taxa
+        form.setValue('taxaJuros', novaTaxa, { 
+          shouldValidate: true,
+          shouldDirty: true,
+          shouldTouch: true
+        });
       }
     });
     
     return () => subscription.unsubscribe();
-  }, [form.watch]);
+  }, [form, atualizarTaxaAjustada]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);

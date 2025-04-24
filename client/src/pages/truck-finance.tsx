@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -81,45 +81,64 @@ export default function TruckFinance() {
   };
   
   // Observa mudanças no campo de tipo de veículo
-  // Inicializa a taxa ajustada com base nos valores do form
+  // Função para atualizar a taxa com base nos valores atuais
+  const atualizarTaxaAjustada = useCallback(() => {
+    try {
+      const tipoVeiculoSelecionado = form.getValues('tipoVeiculo');
+      const taxaBase = form.getValues('taxaJuros');
+      
+      // Somente atualiza o tipo se ele estiver definido
+      if (tipoVeiculoSelecionado) {
+        setTipoVeiculo(tipoVeiculoSelecionado);
+      }
+      
+      // Calcula a nova taxa ajustada
+      const novaTaxa = calcularTaxaAjustada(
+        tipoVeiculoSelecionado || 'pesado', 
+        taxaBase || 1.58
+      );
+      
+      // Atualiza o estado da taxa
+      setTaxaAjustada(novaTaxa);
+      
+      console.log('Taxa atualizada:', novaTaxa, 'Tipo:', tipoVeiculoSelecionado);
+      
+      return novaTaxa;
+    } catch (error) {
+      console.error("Erro ao atualizar taxa:", error);
+      return 1.58; // Taxa padrão em caso de erro
+    }
+  }, [form]);
+  
+  // Inicializa a taxa ajustada na montagem do componente
   useEffect(() => {
-    // Calcula a taxa ajustada inicial
-    const tipoVeiculoInicial = form.getValues('tipoVeiculo');
-    const taxaBaseInicial = form.getValues('taxaJuros');
+    // Define um timeout curto para garantir que o form esteja totalmente inicializado
+    const timer = setTimeout(() => {
+      const novaTaxa = atualizarTaxaAjustada();
+      console.log('Taxa inicial definida:', novaTaxa);
+    }, 100);
     
-    setTipoVeiculo(tipoVeiculoInicial);
-    const taxaInicial = calcularTaxaAjustada(tipoVeiculoInicial, taxaBaseInicial);
-    setTaxaAjustada(taxaInicial);
-    
-    // Atualiza o valor do campo do formulário com a taxa ajustada inicial
-    form.setValue('taxaJuros', taxaInicial);
-    
-    console.log('Taxa inicial:', taxaInicial, 'Tipo:', tipoVeiculoInicial);
-  }, []); // Executa apenas na inicialização
+    return () => clearTimeout(timer);
+  }, [atualizarTaxaAjustada]);
   
   // Observa mudanças nos campos que afetam a taxa
   useEffect(() => {
     const subscription = form.watch((value, { name }) => {
-      if (name === 'tipoVeiculo' || name === 'taxaJuros') {
-        const tipoVeiculoSelecionado = form.getValues('tipoVeiculo');
-        const taxaBase = form.getValues('taxaJuros');
+      if (name === 'tipoVeiculo') {
+        // Para esse campo, atualizamos a taxa ajustada e o campo de taxa
+        const novaTaxa = atualizarTaxaAjustada();
         
-        // Atualiza o estado do tipo de veículo para destaque na interface
-        setTipoVeiculo(tipoVeiculoSelecionado);
-        
-        // Calcula a nova taxa ajustada
-        const novaTaxa = calcularTaxaAjustada(tipoVeiculoSelecionado, taxaBase);
-        setTaxaAjustada(novaTaxa);
-        
-        // Atualiza o valor do campo do formulário com a taxa ajustada
-        form.setValue('taxaJuros', novaTaxa);
-        
-        console.log('Taxa ajustada atualizada:', novaTaxa, 'Tipo:', tipoVeiculoSelecionado);
+        // Atualizando o campo do formulário com a nova taxa
+        form.setValue('taxaJuros', novaTaxa, { 
+          shouldValidate: true,
+          shouldDirty: true,
+          shouldTouch: true
+        });
       }
     });
     
     return () => subscription.unsubscribe();
-  }, [form.watch]);
+  }, [form, atualizarTaxaAjustada]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
