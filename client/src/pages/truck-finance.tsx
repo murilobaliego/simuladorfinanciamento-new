@@ -49,6 +49,7 @@ export default function TruckFinance() {
   const [isTableExpanded, setIsTableExpanded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [taxaAjustada, setTaxaAjustada] = useState(1.58); // Taxa média inicial
+  const [tipoVeiculo, setTipoVeiculo] = useState("pesado"); // Tipo padrão
   const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -83,10 +84,14 @@ export default function TruckFinance() {
   useEffect(() => {
     const subscription = form.watch((value, { name }) => {
       if (name === 'tipoVeiculo') {
-        const tipoVeiculo = form.getValues('tipoVeiculo');
+        const tipoVeiculoSelecionado = form.getValues('tipoVeiculo');
         const taxaBase = form.getValues('taxaJuros');
         
-        const novaTaxa = calcularTaxaAjustada(tipoVeiculo, taxaBase);
+        // Atualiza o estado do tipo de veículo para destaque na interface
+        setTipoVeiculo(tipoVeiculoSelecionado);
+        
+        // Calcula a nova taxa ajustada
+        const novaTaxa = calcularTaxaAjustada(tipoVeiculoSelecionado, taxaBase);
         setTaxaAjustada(novaTaxa);
       }
     });
@@ -187,7 +192,14 @@ export default function TruckFinance() {
                         <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
                       </div>
                     </FormControl>
-                    <p className="text-xs text-neutral-500">Taxa média para caminhões: 1,58% a.m.</p>
+                    <p className="text-xs text-neutral-500">
+                      Taxa média para caminhões: 1,58% a.m.
+                      {taxaAjustada !== 1.58 && (
+                        <span className="block mt-1 font-medium text-primary">
+                          Taxa ajustada: {taxaAjustada}% a.m.
+                        </span>
+                      )}
+                    </p>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -250,7 +262,16 @@ export default function TruckFinance() {
                         <SelectItem value="implemento">Implemento rodoviário/Semirreboque</SelectItem>
                       </SelectContent>
                     </Select>
-                    <p className="text-xs text-neutral-500">O tipo de veículo pode influenciar na taxa de juros</p>
+                    <div className="text-xs text-neutral-500">
+                      <p>O tipo de veículo influencia na taxa de juros:</p>
+                      <ul className="mt-1 pl-4 list-disc">
+                        <li className={tipoVeiculo === "leve" ? "text-primary font-medium" : ""}>Leves: -0,03% (melhor taxa)</li>
+                        <li className={tipoVeiculo === "medio" ? "text-primary font-medium" : ""}>Médio: -0,01%</li>
+                        <li className={tipoVeiculo === "pesado" ? "text-primary font-medium" : ""}>Pesado: taxa padrão</li>
+                        <li className={tipoVeiculo === "extra-pesado" ? "text-primary font-medium" : ""}>Extra-pesado: +0,05%</li>
+                        <li className={tipoVeiculo === "implemento" ? "text-primary font-medium" : ""}>Implemento: +0,02%</li>
+                      </ul>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}

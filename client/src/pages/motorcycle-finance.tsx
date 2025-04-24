@@ -50,6 +50,7 @@ export default function MotorcycleFinance() {
   const [isTableExpanded, setIsTableExpanded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [taxaAjustada, setTaxaAjustada] = useState(1.85); // Taxa média inicial
+  const [cilindrada, setCilindrada] = useState("150-500"); // Cilindrada padrão
   const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -87,11 +88,15 @@ export default function MotorcycleFinance() {
   useEffect(() => {
     const subscription = form.watch((value, { name }) => {
       if (name === 'cilindrada' || name === 'usada') {
-        const cilindrada = form.getValues('cilindrada');
+        const cilindradaSelecionada = form.getValues('cilindrada');
         const usada = form.getValues('usada');
         const taxaBase = form.getValues('taxaJuros');
         
-        const novaTaxa = calcularTaxaAjustada(cilindrada, usada, taxaBase);
+        // Atualiza o estado da cilindrada para destaque na interface
+        setCilindrada(cilindradaSelecionada);
+        
+        // Calcula a nova taxa ajustada
+        const novaTaxa = calcularTaxaAjustada(cilindradaSelecionada, usada, taxaBase);
         setTaxaAjustada(novaTaxa);
       }
     });
@@ -257,7 +262,14 @@ export default function MotorcycleFinance() {
                         <SelectItem value="acima-500">Acima de 500cc</SelectItem>
                       </SelectContent>
                     </Select>
-                    <p className="text-xs text-neutral-500">A cilindrada pode influenciar na taxa de juros</p>
+                    <div className="text-xs text-neutral-500">
+                      <p>A cilindrada influencia na taxa de juros:</p>
+                      <ul className="mt-1 pl-4 list-disc">
+                        <li className={cilindrada === "ate-150" ? "text-primary font-medium" : ""}>Até 150cc: -0,05%</li>
+                        <li className={cilindrada === "150-500" ? "text-primary font-medium" : ""}>150cc a 500cc: taxa padrão</li>
+                        <li className={cilindrada === "acima-500" ? "text-primary font-medium" : ""}>Acima de 500cc: -0,10% (melhor taxa)</li>
+                      </ul>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -281,7 +293,7 @@ export default function MotorcycleFinance() {
                         Moto usada
                       </FormLabel>
                       <p className="text-xs text-neutral-500">
-                        Motos usadas geralmente têm taxas de juros maiores
+                        Motos usadas têm taxa de juros <span className="text-red-500 font-medium">+0,35%</span> mais alta
                       </p>
                     </div>
                   </FormItem>
