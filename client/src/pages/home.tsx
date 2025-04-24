@@ -10,7 +10,7 @@ export default function Home() {
           <div className="p-6 md:p-8 md:w-3/5">
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-primary mb-4">Simule o financiamento do seu veículo</h2>
             <p className="text-neutral-700 mb-6">Com o nosso simulador, você consegue calcular quanto vai pagar por mês no financiamento do seu carro ou moto. É rápido, fácil e ajuda você a planejar melhor seu orçamento.</p>
-            <Link href="/financiamento-veiculo" className="inline-block bg-secondary hover:bg-secondary-dark text-white font-medium py-2 px-6 rounded-md transition-colors">Fazer simulação agora</Link>
+            <Link href="/financiamento-veiculo" className="inline-block bg-primary hover:bg-primary-dark text-white font-medium py-3 px-8 rounded-md shadow-sm transition-colors">Fazer simulação agora</Link>
           </div>
           <div className="md:w-2/5 bg-neutral-200 h-40 md:h-auto">
             <img 
