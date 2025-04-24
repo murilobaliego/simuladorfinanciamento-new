@@ -82,7 +82,7 @@ export default function Home() {
             title="Simulador de Refinanciamento"
             description="Calcule a economia ao refinanciar seu veículo para condições mais vantajosas."
             path="/simulador-refinanciamento"
-            imageSrc="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageSrc={refinancing}
             imageAlt="Pessoa analisando contrato"
           />
           
@@ -90,7 +90,7 @@ export default function Home() {
             title="Calculadora de Capacidade"
             description="Descubra qual valor de financiamento cabe no seu orçamento mensal."
             path="/capacidade-pagamento"
-            imageSrc="https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageSrc={paymentCapacity}
             imageAlt="Calculadora e orçamento"
           />
           
@@ -98,7 +98,7 @@ export default function Home() {
             title="Comparativo Price vs. SAC"
             description="Compare os dois principais sistemas de amortização e veja qual é mais vantajoso."
             path="/comparativo-amortizacao"
-            imageSrc="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageSrc={amortizationComparison}
             imageAlt="Gráficos comparativos"
           />
           
@@ -106,7 +106,7 @@ export default function Home() {
             title="Calculadora de Entrada Ideal"
             description="Descubra o valor ideal de entrada para equilibrar parcelas e custo total."
             path="/calculadora-entrada-ideal"
-            imageSrc="https://images.unsplash.com/photo-1579621970795-87facc2f976d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageSrc={idealDownpayment}
             imageAlt="Dinheiro e calculadora"
           />
           
@@ -114,7 +114,7 @@ export default function Home() {
             title="Leasing vs. Financiamento"
             description="Compare as duas modalidades para aquisição de veículos e escolha a melhor opção."
             path="/leasing-vs-financiamento"
-            imageSrc="https://images.unsplash.com/photo-1560518883-f9be27097346?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageSrc={leasingVsFinancing}
             imageAlt="Pessoa assinando contrato"
           />
         </div>
