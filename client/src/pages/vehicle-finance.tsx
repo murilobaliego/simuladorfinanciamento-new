@@ -8,11 +8,11 @@ export default function VehicleFinance() {
         <title>Simulador de Financiamento de Veículos | Calcule Parcelas com IOF</title>
         <meta name="description" content="Simule seu financiamento de veículos com nosso simulador gratuito. Calcule parcelas, juros, IOF e veja a tabela de amortização completa. Financie seu carro, moto ou caminhão." />
         <meta name="keywords" content="simulador de financiamento de veículos, financiamento de carros, tabela price, simulador de parcelas, cálculo IOF, melhor financiamento" />
-        <link rel="canonical" href="https://simuladorfinanciamento.com.br/simulador-financiamento-veiculos" />
+        <link rel="canonical" href="https://simulei.site/simulador-financiamento-veiculos" />
         <meta property="og:title" content="Simulador de Financiamento de Veículos | Calcule Parcelas com IOF" />
         <meta property="og:description" content="Simule gratuitamente seu financiamento de veículos com taxas atualizadas, inclua IOF e veja a tabela de amortização completa." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://simuladorfinanciamento.com.br/simulador-financiamento-veiculos" />
+        <meta property="og:url" content="https://simulei.site/simulador-financiamento-veiculos" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Simulador de Financiamento de Veículos | Cálculo com IOF" />
         <meta name="twitter:description" content="Simule gratuitamente seu financiamento de veículos com taxas atualizadas, inclua IOF e veja a tabela de amortização completa." />
@@ -22,7 +22,7 @@ export default function VehicleFinance() {
               "@context": "https://schema.org",
               "@type": "WebApplication",
               "name": "Simulador de Financiamento de Veículos",
-              "url": "https://simuladorfinanciamento.com.br/simulador-financiamento-veiculos",
+              "url": "https://simulei.site/simulador-financiamento-veiculos",
               "description": "Simule financiamentos de veículos com cálculo de IOF e tabela de amortização completa.",
               "applicationCategory": "FinanceApplication",
               "offers": {
