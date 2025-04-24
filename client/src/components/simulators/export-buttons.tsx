@@ -18,6 +18,7 @@ interface ExportButtonsProps {
     totalPagar: number;
     totalJuros: number;
     valorIOF?: number; // Valor do IOF, se aplicável
+    taxaCET?: number; // Taxa do Custo Efetivo Total (% a.m.)
   };
 }
 
@@ -73,13 +74,24 @@ export default function ExportButtons({
         if (summary.valorIOF !== undefined) {
           doc.text(`Valor do IOF: ${formatCurrency(summary.valorIOF)}`, 14, 84);
         }
+        
+        // Adicionar informação do CET se presente
+        if (summary.taxaCET !== undefined) {
+          const linha = summary.valorIOF !== undefined ? 90 : 84;
+          doc.text(`CET (Custo Efetivo Total): ${summary.taxaCET.toFixed(2)}% a.m.`, 14, linha);
+        }
       }
       
       // Definir onde a tabela começará
       let tableY = summary ? 85 : 35;
-      // Ajustar posição se tiver IOF
-      if (summary?.valorIOF !== undefined) {
-        tableY = 90;
+      
+      // Ajustar posição com base nos dados adicionais
+      if (summary?.valorIOF !== undefined && summary?.taxaCET !== undefined) {
+        tableY = 96; // Ambos IOF e CET
+      } else if (summary?.valorIOF !== undefined) {
+        tableY = 90; // Apenas IOF
+      } else if (summary?.taxaCET !== undefined) {
+        tableY = 90; // Apenas CET
       }
       
       // Definir cabeçalhos e dados para a tabela
@@ -153,6 +165,8 @@ export default function ExportButtons({
           ['Total de juros:', summary.totalJuros.toString()],
           // Adicionar IOF se presente
           ...(summary.valorIOF !== undefined ? [['Valor do IOF:', summary.valorIOF.toString()]] : []),
+          // Adicionar CET se presente
+          ...(summary.taxaCET !== undefined ? [['CET (Custo Efetivo Total):', `${summary.taxaCET.toFixed(2)}% a.m.`]] : []),
           ['']
         );
       }
@@ -176,7 +190,14 @@ export default function ExportButtons({
       
       // Formatação para valores monetários (não aplicada automaticamente, apenas indicativo)
       for (let i = 0; i < data.length; i++) {
-        const rowIndex = i + (summary ? 10 : 4); // Ajustar índice com base no resumo
+        // Calcular offset de linhas com base nas informações adicionais
+        let rowOffset = 4; // Sem resumo
+        if (summary) {
+          rowOffset = 10; // Com resumo básico
+          if (summary.valorIOF !== undefined) rowOffset++;
+          if (summary.taxaCET !== undefined) rowOffset++;
+        }
+        const rowIndex = i + rowOffset;
         worksheet[XLSX.utils.encode_cell({ c: 1, r: rowIndex })].z = '"R$"#,##0.00';
         worksheet[XLSX.utils.encode_cell({ c: 2, r: rowIndex })].z = '"R$"#,##0.00';
         worksheet[XLSX.utils.encode_cell({ c: 3, r: rowIndex })].z = '"R$"#,##0.00';
