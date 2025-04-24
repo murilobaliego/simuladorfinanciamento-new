@@ -60,6 +60,53 @@ export default function Home() {
           />
         </div>
       </section>
+
+      {/* Advanced Tools Section */}
+      <section id="ferramentas-avancadas" className="mb-12">
+        <h2 className="font-heading text-2xl font-bold text-primary mb-6">Ferramentas Avançadas</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <SimulatorCard
+            title="Simulador de Refinanciamento"
+            description="Calcule a economia ao refinanciar seu veículo para condições mais vantajosas."
+            path="/simulador-refinanciamento"
+            imageSrc="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageAlt="Pessoa analisando contrato"
+          />
+          
+          <SimulatorCard
+            title="Calculadora de Capacidade"
+            description="Descubra qual valor de financiamento cabe no seu orçamento mensal."
+            path="/capacidade-pagamento"
+            imageSrc="https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageAlt="Calculadora e orçamento"
+          />
+          
+          <SimulatorCard
+            title="Comparativo Price vs. SAC"
+            description="Compare os dois principais sistemas de amortização e veja qual é mais vantajoso."
+            path="/comparativo-amortizacao"
+            imageSrc="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageAlt="Gráficos comparativos"
+          />
+          
+          <SimulatorCard
+            title="Calculadora de Entrada Ideal"
+            description="Descubra o valor ideal de entrada para equilibrar parcelas e custo total."
+            path="/calculadora-entrada-ideal"
+            imageSrc="https://images.unsplash.com/photo-1579621970795-87facc2f976d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageAlt="Dinheiro e calculadora"
+          />
+          
+          <SimulatorCard
+            title="Leasing vs. Financiamento"
+            description="Compare as duas modalidades para aquisição de veículos e escolha a melhor opção."
+            path="/leasing-vs-financiamento"
+            imageSrc="https://images.unsplash.com/photo-1560518883-f9be27097346?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageAlt="Pessoa assinando contrato"
+          />
+        </div>
+      </section>
       
       {/* About Section */}
       <section id="sobre" className="bg-white rounded-lg shadow-md p-6 mb-12">

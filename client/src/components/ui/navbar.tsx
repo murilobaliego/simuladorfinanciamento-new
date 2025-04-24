@@ -1,10 +1,12 @@
 import { Link, useLocation } from "wouter";
-import { useState } from "react";
-import { Menu, X, Calculator, Car, Home, CreditCard, BadgeDollarSign, Info, FileText } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Menu, X, Calculator, Car, Home, CreditCard, BadgeDollarSign, ChevronDown, Settings, RefreshCw, BarChart2, PiggyBank, DollarSign } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isToolsMenuOpen, setIsToolsMenuOpen] = useState(false);
   const [location] = useLocation();
+  const toolsMenuRef = useRef<HTMLLIElement>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -14,10 +16,39 @@ export default function Navbar() {
     setIsMenuOpen(false);
   };
 
+  const toggleToolsMenu = () => {
+    setIsToolsMenuOpen(!isToolsMenuOpen);
+  };
+
+  // Fechar menu de ferramentas ao clicar fora dele
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (toolsMenuRef.current && !toolsMenuRef.current.contains(event.target as Node)) {
+        setIsToolsMenuOpen(false);
+      }
+    }
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Fechar menu de ferramentas ao mudar de página
+  useEffect(() => {
+    setIsToolsMenuOpen(false);
+  }, [location]);
+
   // Verificar a página atual para destacar o item do menu correto
   const isVehiclePage = location === '/simulador-financiamento-veiculos' || 
                         location === '/financiamento-veiculo' || 
                         location === '/vehicle-finance';
+  
+  const isToolPage = location === '/simulador-refinanciamento' || 
+                    location === '/capacidade-pagamento' || 
+                    location === '/comparativo-amortizacao' ||
+                    location === '/calculadora-entrada-ideal' ||
+                    location === '/leasing-vs-financiamento';
 
   return (
     <header className="bg-primary text-white shadow-md">
@@ -89,6 +120,66 @@ export default function Navbar() {
                 <span>Consignado</span>
               </Link>
             </li>
+            {/* Menu dropdown para ferramentas avançadas */}
+            <li ref={toolsMenuRef} className="relative">
+              <button 
+                onClick={toggleToolsMenu}
+                className={`flex items-center px-3 py-2 rounded-md ${isToolPage ? 'bg-primary-dark' : 'hover:bg-primary-dark'} transition-colors`}
+                aria-expanded={isToolsMenuOpen}
+                aria-haspopup="true"
+              >
+                <Settings className="h-4 w-4 mr-1" aria-hidden="true" />
+                <span>Ferramentas</span>
+                <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${isToolsMenuOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {isToolsMenuOpen && (
+                <div className="absolute left-0 mt-2 w-64 rounded-md shadow-lg bg-white text-neutral-800 z-50">
+                  <div className="py-1 rounded-md bg-white shadow-xs">
+                    <Link
+                      href="/simulador-refinanciamento"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <RefreshCw className="h-4 w-4 mr-2 text-primary" />
+                      <span>Simulador de Refinanciamento</span>
+                    </Link>
+                    <Link
+                      href="/capacidade-pagamento"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <PiggyBank className="h-4 w-4 mr-2 text-primary" />
+                      <span>Calculadora de Capacidade</span>
+                    </Link>
+                    <Link
+                      href="/comparativo-amortizacao"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <BarChart2 className="h-4 w-4 mr-2 text-primary" />
+                      <span>Price vs. SAC</span>
+                    </Link>
+                    <Link
+                      href="/calculadora-entrada-ideal"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <DollarSign className="h-4 w-4 mr-2 text-primary" />
+                      <span>Entrada Ideal</span>
+                    </Link>
+                    <Link
+                      href="/leasing-vs-financiamento"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <Car className="h-4 w-4 mr-2 text-primary" />
+                      <span>Leasing vs. Financiamento</span>
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </li>
           </ul>
         </nav>
       </div>
@@ -108,6 +199,11 @@ export default function Navbar() {
                   {location === '/financiamento-imobiliario' && <span className="text-white">Financiamento Imobiliário</span>}
                   {location === '/emprestimo-pessoal' && <span className="text-white">Empréstimo Pessoal</span>}
                   {location === '/credito-consignado' && <span className="text-white">Crédito Consignado</span>}
+                  {location === '/simulador-refinanciamento' && <span className="text-white">Simulador de Refinanciamento</span>}
+                  {location === '/capacidade-pagamento' && <span className="text-white">Calculadora de Capacidade de Pagamento</span>}
+                  {location === '/comparativo-amortizacao' && <span className="text-white">Comparativo de Sistemas de Amortização</span>}
+                  {location === '/calculadora-entrada-ideal' && <span className="text-white">Calculadora de Entrada Ideal</span>}
+                  {location === '/leasing-vs-financiamento' && <span className="text-white">Leasing vs. Financiamento</span>}
                   {location === '/termos-de-uso' && <span className="text-white">Termos de Uso</span>}
                   {location === '/politica-privacidade' && <span className="text-white">Política de Privacidade</span>}
                 </li>
