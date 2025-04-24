@@ -1,11 +1,6 @@
 import { Link } from "wouter";
 import SimulatorCard from "@/components/simulators/simulator-card";
 
-// Imagens otimizadas
-import heroCalculator from "@/assets/img/jpg/hero-calculator.jpg";
-import vehicleFinance from "@/assets/img/jpg/vehicle-finance.jpg";
-import realEstateFinance from "@/assets/img/jpg/real-estate-finance.jpg";
-
 export default function Home() {
   return (
     <div className="container mx-auto px-4 py-6">
@@ -19,7 +14,7 @@ export default function Home() {
           </div>
           <div className="md:w-2/5 bg-neutral-200 h-40 md:h-auto">
             <img 
-              src={heroCalculator} 
+              src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
               alt="Pessoa calculando financiamento" 
               className="w-full h-full object-cover"
             />
@@ -36,7 +31,7 @@ export default function Home() {
             title="Financiamento de Veículos"
             description="Simule o financiamento do seu carro ou moto com prestações fixas pela Tabela Price."
             path="/financiamento-veiculo"
-            imageSrc={vehicleFinance}
+            imageSrc="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
             imageAlt="Carro em exposição"
           />
           
@@ -44,7 +39,7 @@ export default function Home() {
             title="Financiamento Imobiliário"
             description="Calcule o financiamento da sua casa ou apartamento com prazos de até 35 anos."
             path="/financiamento-imobiliario"
-            imageSrc={realEstateFinance}
+            imageSrc="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
             imageAlt="Casa e plantas baixas"
           />
           
@@ -52,7 +47,7 @@ export default function Home() {
             title="Empréstimo Pessoal"
             description="Simule um empréstimo pessoal para quitar dívidas, viajar ou realizar seus sonhos."
             path="/emprestimo-pessoal"
-            imageSrc={personalLoan}
+            imageSrc="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
             imageAlt="Pessoa contando dinheiro"
           />
           
@@ -60,7 +55,7 @@ export default function Home() {
             title="Crédito Consignado"
             description="Taxas mais baixas para aposentados, pensionistas e servidores públicos."
             path="/credito-consignado"
-            imageSrc={payrollLoan}
+            imageSrc="https://images.unsplash.com/photo-1564939558297-fc396f18e5c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
             imageAlt="Aposentado sorrindo"
           />
         </div>
@@ -75,7 +70,7 @@ export default function Home() {
             title="Simulador de Refinanciamento"
             description="Calcule a economia ao refinanciar seu veículo para condições mais vantajosas."
             path="/simulador-refinanciamento"
-            imageSrc={refinancing}
+            imageSrc="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
             imageAlt="Pessoa analisando contrato"
           />
           
@@ -83,7 +78,7 @@ export default function Home() {
             title="Calculadora de Capacidade"
             description="Descubra qual valor de financiamento cabe no seu orçamento mensal."
             path="/capacidade-pagamento"
-            imageSrc={paymentCapacity}
+            imageSrc="https://images.unsplash.com/photo-1554224155-3a58922a22c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
             imageAlt="Calculadora e orçamento"
           />
           
@@ -91,7 +86,7 @@ export default function Home() {
             title="Comparativo Price vs. SAC"
             description="Compare os dois principais sistemas de amortização e veja qual é mais vantajoso."
             path="/comparativo-amortizacao"
-            imageSrc={amortizationComparison}
+            imageSrc="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
             imageAlt="Gráficos comparativos"
           />
           
@@ -99,7 +94,7 @@ export default function Home() {
             title="Calculadora de Entrada Ideal"
             description="Descubra o valor ideal de entrada para equilibrar parcelas e custo total."
             path="/calculadora-entrada-ideal"
-            imageSrc={idealDownpayment}
+            imageSrc="https://images.unsplash.com/photo-1579170053380-58828bd4a230?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
             imageAlt="Dinheiro e calculadora"
           />
           
@@ -107,7 +102,7 @@ export default function Home() {
             title="Leasing vs. Financiamento"
             description="Compare as duas modalidades para aquisição de veículos e escolha a melhor opção."
             path="/leasing-vs-financiamento"
-            imageSrc={leasingVsFinancing}
+            imageSrc="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
             imageAlt="Pessoa assinando contrato"
           />
         </div>
