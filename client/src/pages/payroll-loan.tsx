@@ -13,6 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import PriceTable from "@/components/simulators/price-table";
 import { SimulationResult } from "@/components/simulators/vehicle-form";
 import { simularFinanciamento } from "@/utils/finance";
+import ExportButtons from "@/components/simulators/export-buttons";
 
 const formSchema = calculatorSchema.extend({
   valorFinanciado: z.coerce
@@ -340,8 +341,24 @@ export default function PayrollLoan() {
               />
             </div>
             
-            <div>
-              <p className="text-sm text-neutral-600 italic">* Este é apenas um cálculo aproximado. As condições reais podem variar conforme a instituição financeira.</p>
+            <div className="mt-6 flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-neutral-600 italic">* Este é apenas um cálculo aproximado. As condições reais podem variar conforme a instituição financeira.</p>
+                
+                <ExportButtons 
+                  data={result.tabelaAmortizacao} 
+                  fileName={`simulacao-emprestimo-consignado-${tipoConsignado}`} 
+                  title={`Simulação de Empréstimo Consignado - ${tipoConsignado === "inss" ? "INSS" : tipoConsignado === "servidor" ? "Servidor Público" : "Militar"}`}
+                  summary={{
+                    valorFinanciado: form.getValues().valorFinanciado,
+                    taxaJuros: form.getValues().taxaJuros,
+                    numParcelas: form.getValues().numParcelas,
+                    valorParcela: result.valorParcela,
+                    totalPagar: result.totalPagar,
+                    totalJuros: result.totalJuros
+                  }}
+                />
+              </div>
             </div>
           </div>
         )}
