@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500" height="300" viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="300" fill="#F3F4F6"/>
+  <path d="M250 80L150 160H350L250 80Z" fill="#4F46E5"/>
+  <rect x="170" y="160" width="160" height="100" fill="#E5E7EB"/>
+  <rect x="215" y="210" width="70" height="50" fill="#D1D5DB"/>
+  <rect x="225" y="220" width="20" height="30" fill="#9CA3AF"/>
+  <rect x="255" y="220" width="20" height="30" fill="#9CA3AF"/>
+  <text x="250" y="50" font-family="Arial" font-size="24" text-anchor="middle" fill="#111827">Financiamento Imobiliário</text>
+</svg>
