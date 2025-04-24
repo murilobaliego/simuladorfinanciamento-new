@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -49,6 +49,7 @@ export default function MotorcycleFinance() {
   const [result, setResult] = useState<any | null>(null);
   const [isTableExpanded, setIsTableExpanded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [taxaAjustada, setTaxaAjustada] = useState(1.85); // Taxa média inicial
   const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -62,29 +63,50 @@ export default function MotorcycleFinance() {
       usada: false,
     },
   });
+  
+  // Função para calcular a taxa ajustada com base na cilindrada e se é usada
+  const calcularTaxaAjustada = (cilindrada: string, usada: boolean, taxaBase: number) => {
+    let taxa = taxaBase;
+    
+    // Ajuste por cilindrada
+    if (cilindrada === "ate-150") {
+      taxa = taxaBase - 0.05; // Taxa menor para motos pequenas
+    } else if (cilindrada === "acima-500") {
+      taxa = taxaBase - 0.10; // Taxa menor para motos grandes (geralmente melhor perfil de crédito)
+    }
+    
+    // Ajuste para motos usadas
+    if (usada) {
+      taxa = taxa + 0.35; // Taxa maior para motos usadas
+    }
+    
+    return Number(taxa.toFixed(2));
+  };
+  
+  // Observa mudanças nos campos que afetam a taxa
+  useEffect(() => {
+    const subscription = form.watch((value, { name }) => {
+      if (name === 'cilindrada' || name === 'usada') {
+        const cilindrada = form.getValues('cilindrada');
+        const usada = form.getValues('usada');
+        const taxaBase = form.getValues('taxaJuros');
+        
+        const novaTaxa = calcularTaxaAjustada(cilindrada, usada, taxaBase);
+        setTaxaAjustada(novaTaxa);
+      }
+    });
+    
+    return () => subscription.unsubscribe();
+  }, [form.watch]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      // Ajuste da taxa de juros com base na cilindrada e se é usada ou não
-      let taxaAjustada = values.taxaJuros;
-      
-      // Ajuste por cilindrada
-      if (values.cilindrada === "ate-150") {
-        taxaAjustada = values.taxaJuros - 0.05; // Taxa menor para motos pequenas
-      } else if (values.cilindrada === "acima-500") {
-        taxaAjustada = values.taxaJuros - 0.10; // Taxa menor para motos grandes (geralmente melhor perfil de crédito)
-      }
-      
-      // Ajuste para motos usadas
-      if (values.usada) {
-        taxaAjustada = taxaAjustada + 0.35; // Taxa maior para motos usadas
-      }
-      
+      // Usar a taxa ajustada calculada pelo useEffect
       // Realizar os cálculos diretamente no frontend
       const resultado = simularFinanciamento(
         values.valorFinanciado,
-        taxaAjustada,
+        taxaAjustada, // Usa a taxa ajustada do estado
         parseInt(values.numParcelas),
         values.incluirIOF
       );
@@ -170,7 +192,14 @@ export default function MotorcycleFinance() {
                         <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
                       </div>
                     </FormControl>
-                    <p className="text-xs text-neutral-500">Taxa média para motos: 1,85% a.m.</p>
+                    <p className="text-xs text-neutral-500">
+                      Taxa média para motos: 1,85% a.m.
+                      {taxaAjustada !== 1.85 && (
+                        <span className="block mt-1 font-medium text-primary">
+                          Taxa ajustada: {taxaAjustada}% a.m.
+                        </span>
+                      )}
+                    </p>
                     <FormMessage />
                   </FormItem>
                 )}

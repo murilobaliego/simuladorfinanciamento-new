@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -48,6 +48,7 @@ export default function TruckFinance() {
   const [result, setResult] = useState<any | null>(null);
   const [isTableExpanded, setIsTableExpanded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [taxaAjustada, setTaxaAjustada] = useState(1.58); // Taxa média inicial
   const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,23 +61,47 @@ export default function TruckFinance() {
       tipoVeiculo: "pesado",
     },
   });
+  
+  // Função para calcular a taxa ajustada com base no tipo de caminhão
+  const calcularTaxaAjustada = (tipoVeiculo: string, taxaBase: number) => {
+    let taxa = taxaBase;
+    
+    if (tipoVeiculo === "leve") {
+      taxa = taxaBase - 0.03; // Taxa levemente menor para caminhões leves
+    } else if (tipoVeiculo === "medio") {
+      taxa = taxaBase - 0.01; // Taxa levemente menor para caminhões médios
+    } else if (tipoVeiculo === "extra-pesado") {
+      taxa = taxaBase + 0.05; // Taxa levemente maior para caminhões extra-pesados
+    } else if (tipoVeiculo === "implemento") {
+      taxa = taxaBase + 0.02; // Taxa levemente maior para implementos
+    }
+    
+    return Number(taxa.toFixed(2));
+  };
+  
+  // Observa mudanças no campo de tipo de veículo
+  useEffect(() => {
+    const subscription = form.watch((value, { name }) => {
+      if (name === 'tipoVeiculo') {
+        const tipoVeiculo = form.getValues('tipoVeiculo');
+        const taxaBase = form.getValues('taxaJuros');
+        
+        const novaTaxa = calcularTaxaAjustada(tipoVeiculo, taxaBase);
+        setTaxaAjustada(novaTaxa);
+      }
+    });
+    
+    return () => subscription.unsubscribe();
+  }, [form.watch]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      // Ajuste da taxa de juros com base no tipo de caminhão
-      let taxaAjustada = values.taxaJuros;
-      
-      if (values.tipoVeiculo === "leve") {
-        taxaAjustada = values.taxaJuros - 0.03; // Taxa levemente menor para caminhões leves
-      } else if (values.tipoVeiculo === "extra-pesado") {
-        taxaAjustada = values.taxaJuros + 0.05; // Taxa levemente maior para caminhões extra-pesados
-      }
-      
+      // Usar a taxa ajustada calculada pelo useEffect
       // Realizar os cálculos diretamente no frontend
       const resultado = simularFinanciamento(
         values.valorFinanciado,
-        taxaAjustada,
+        taxaAjustada, // Usa a taxa ajustada do estado
         parseInt(values.numParcelas),
         values.incluirIOF
       );
