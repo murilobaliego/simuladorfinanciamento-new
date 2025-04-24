@@ -65,17 +65,29 @@ export default function TruckFinance() {
   
   // Função para calcular a taxa ajustada com base no tipo de caminhão
   const calcularTaxaAjustada = (tipoVeiculo: string, taxaBase: number) => {
-    let taxa = taxaBase;
+    // Taxa padrão para caminhões
+    const TAXA_PADRAO = 1.58;
+    
+    // Se for o primeiro carregamento e não tiver taxa base definida, usar a padrão
+    if (!taxaBase || isNaN(taxaBase)) {
+      taxaBase = TAXA_PADRAO;
+    }
+    
+    let taxa = TAXA_PADRAO; // Sempre começamos da taxa padrão de referência
     
     if (tipoVeiculo === "leve") {
-      taxa = taxaBase - 0.03; // Taxa levemente menor para caminhões leves
+      taxa = TAXA_PADRAO - 0.03; // Taxa levemente menor para caminhões leves
     } else if (tipoVeiculo === "medio") {
-      taxa = taxaBase - 0.01; // Taxa levemente menor para caminhões médios
+      taxa = TAXA_PADRAO - 0.01; // Taxa levemente menor para caminhões médios
+    } else if (tipoVeiculo === "pesado") {
+      taxa = TAXA_PADRAO; // Taxa padrão
     } else if (tipoVeiculo === "extra-pesado") {
-      taxa = taxaBase + 0.05; // Taxa levemente maior para caminhões extra-pesados
+      taxa = TAXA_PADRAO + 0.05; // Taxa levemente maior para caminhões extra-pesados
     } else if (tipoVeiculo === "implemento") {
-      taxa = taxaBase + 0.02; // Taxa levemente maior para implementos
+      taxa = TAXA_PADRAO + 0.02; // Taxa levemente maior para implementos
     }
+    
+    console.log('Calculando taxa caminhão:', {tipoVeiculo, taxaBase, resultado: Number(taxa.toFixed(2))});
     
     return Number(taxa.toFixed(2));
   };

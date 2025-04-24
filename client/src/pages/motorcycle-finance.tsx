@@ -67,19 +67,31 @@ export default function MotorcycleFinance() {
   
   // Função para calcular a taxa ajustada com base na cilindrada e se é usada
   const calcularTaxaAjustada = (cilindrada: string, usada: boolean, taxaBase: number) => {
+    // Taxa padrão para motos
+    const TAXA_PADRAO = 1.85;
+    
+    // Se for o primeiro carregamento e não tiver taxa base definida, usar a padrão
+    if (!taxaBase || isNaN(taxaBase)) {
+      taxaBase = TAXA_PADRAO;
+    }
+    
     let taxa = taxaBase;
     
     // Ajuste por cilindrada
     if (cilindrada === "ate-150") {
-      taxa = taxaBase - 0.05; // Taxa menor para motos pequenas
+      taxa = TAXA_PADRAO - 0.05; // Taxa menor para motos pequenas
     } else if (cilindrada === "acima-500") {
-      taxa = taxaBase - 0.10; // Taxa menor para motos grandes (geralmente melhor perfil de crédito)
+      taxa = TAXA_PADRAO - 0.10; // Taxa menor para motos grandes (geralmente melhor perfil de crédito)
+    } else if (cilindrada === "150-500") {
+      taxa = TAXA_PADRAO; // Taxa padrão
     }
     
     // Ajuste para motos usadas
     if (usada) {
       taxa = taxa + 0.35; // Taxa maior para motos usadas
     }
+    
+    console.log('Calculando taxa:', {cilindrada, usada, taxaBase, resultado: Number(taxa.toFixed(2))});
     
     return Number(taxa.toFixed(2));
   };
