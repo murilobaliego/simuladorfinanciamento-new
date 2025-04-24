@@ -156,13 +156,15 @@ export function calcularIOF(valorFinanciado: number, numParcelas: number): numbe
  * @param taxaJuros Taxa de juros mensal (em percentual)
  * @param numParcelas Número total de parcelas
  * @param incluirIOF Se deve incluir o IOF no cálculo
+ * @param sistema Sistema de amortização (price ou sac)
  * @returns Resultado completo da simulação
  */
 export function simularFinanciamento(
   valorFinanciado: number,
   taxaJuros: number,
   numParcelas: number,
-  incluirIOF: boolean = false
+  incluirIOF: boolean = false,
+  sistema: "price" | "sac" = "price"
 ): {
   valorParcela: number;
   totalPagar: number;
@@ -179,12 +181,29 @@ export function simularFinanciamento(
     valorTotalFinanciado += valorIOF;
   }
   
-  // Calcula prestação e gera tabela
-  const valorParcela = calcularPrestacao(valorTotalFinanciado, taxaJuros, numParcelas);
-  const tabelaAmortizacao = gerarTabelaPrice(valorTotalFinanciado, taxaJuros, numParcelas);
+  // Gera tabela conforme o sistema selecionado
+  let tabelaAmortizacao: TabelaItem[];
+  let valorParcela: number;
   
-  // Calcula totais
-  const totalPagar = calcularTotalPagar(valorParcela, numParcelas);
+  if (sistema === "sac") {
+    // Para SAC, usamos a função específica e pegamos o valor da primeira parcela
+    tabelaAmortizacao = gerarTabelaSAC(valorTotalFinanciado, taxaJuros, numParcelas);
+    valorParcela = tabelaAmortizacao[1].valorParcela; // A primeira parcela está no índice 1 (índice 0 é o registro inicial)
+  } else {
+    // Para PRICE, calculamos a prestação e geramos a tabela
+    valorParcela = calcularPrestacao(valorTotalFinanciado, taxaJuros, numParcelas);
+    tabelaAmortizacao = gerarTabelaPrice(valorTotalFinanciado, taxaJuros, numParcelas);
+  }
+  
+  // Calcula totais (no SAC, o valor da parcela varia, então calculamos somando todas as parcelas)
+  let totalPagar: number;
+  
+  if (sistema === "sac") {
+    totalPagar = tabelaAmortizacao.reduce((total, item) => total + item.valorParcela, 0);
+  } else {
+    totalPagar = calcularTotalPagar(valorParcela, numParcelas);
+  }
+  
   const totalJuros = calcularTotalJuros(totalPagar, valorTotalFinanciado);
   
   return {

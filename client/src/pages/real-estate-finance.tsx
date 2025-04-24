@@ -211,14 +211,28 @@ export default function RealEstateFinance() {
         
         {result && (
           <div id="resultado-simulacao" className="mb-8">
-            <h3 className="font-heading text-xl font-semibold text-primary mb-4">Resultado da simulação</h3>
+            <h3 className="font-heading text-xl font-semibold text-primary mb-4">
+              Resultado da simulação 
+              <span className="ml-2 text-sm bg-primary/20 text-primary px-2 py-1 rounded-md">
+                {form.getValues("sistema") === "price" ? "Tabela Price" : "Sistema SAC"}
+              </span>
+            </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               <div className="bg-neutral-100 p-4 rounded-md border border-neutral-200">
-                <p className="text-sm text-neutral-600 mb-1">Valor da parcela inicial</p>
+                <p className="text-sm text-neutral-600 mb-1">
+                  {form.getValues("sistema") === "sac" ? 
+                    "Valor da primeira parcela" : 
+                    "Valor da parcela (fixa)"}
+                </p>
                 <p className="text-2xl font-bold text-primary">
                   {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(result.valorParcela)}
                 </p>
+                {form.getValues("sistema") === "sac" && (
+                  <p className="text-xs text-neutral-500 mt-1">
+                    *No SAC, o valor da parcela diminui a cada mês
+                  </p>
+                )}
               </div>
               
               <div className="bg-neutral-100 p-4 rounded-md border border-neutral-200">
@@ -233,6 +247,11 @@ export default function RealEstateFinance() {
                 <p className="text-2xl font-bold text-accent-dark">
                   {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(result.totalJuros)}
                 </p>
+                {form.getValues("sistema") === "sac" && (
+                  <p className="text-xs text-green-600 mt-1">
+                    *Geralmente menor no sistema SAC
+                  </p>
+                )}
               </div>
             </div>
             
