@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, Calculator, Car, Home, CreditCard, BadgeDollarSign, ChevronDown, Settings, RefreshCw, BarChart2, PiggyBank, DollarSign } from "lucide-react";
+import { Menu, X, Calculator, Car, Home, CreditCard, BadgeDollarSign, ChevronDown, Settings, RefreshCw, BarChart2, PiggyBank, DollarSign, Truck, Bike } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,6 +43,12 @@ export default function Navbar() {
   const isVehiclePage = location === '/simulador-financiamento-veiculos' || 
                         location === '/financiamento-veiculo' || 
                         location === '/vehicle-finance';
+  
+  const isTruckPage = location === '/financiamento-caminhao' ||
+                      location === '/financiamento-caminhoes';
+                      
+  const isBikePage = location === '/financiamento-moto' ||
+                     location === '/financiamento-motos';
   
   const isToolPage = location === '/simulador-refinanciamento' || 
                     location === '/capacidade-pagamento' || 
@@ -176,6 +182,26 @@ export default function Navbar() {
                       <Car className="h-4 w-4 mr-2 text-primary" />
                       <span>Leasing vs. Financiamento</span>
                     </Link>
+                    
+                    <div className="border-t border-gray-200 my-2"></div>
+                    
+                    <Link
+                      href="/financiamento-caminhao"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <Truck className="h-4 w-4 mr-2 text-primary" />
+                      <span>Financiamento de Caminhões</span>
+                    </Link>
+                    
+                    <Link
+                      href="/financiamento-moto"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <Bike className="h-4 w-4 mr-2 text-primary" />
+                      <span>Financiamento de Motos</span>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -204,6 +230,8 @@ export default function Navbar() {
                   {location === '/comparativo-amortizacao' && <span className="text-white">Comparativo de Sistemas de Amortização</span>}
                   {location === '/calculadora-entrada-ideal' && <span className="text-white">Calculadora de Entrada Ideal</span>}
                   {location === '/leasing-vs-financiamento' && <span className="text-white">Leasing vs. Financiamento</span>}
+                  {isTruckPage && <span className="text-white">Financiamento de Caminhões</span>}
+                  {isBikePage && <span className="text-white">Financiamento de Motos</span>}
                   {location === '/termos-de-uso' && <span className="text-white">Termos de Uso</span>}
                   {location === '/politica-privacidade' && <span className="text-white">Política de Privacidade</span>}
                 </li>

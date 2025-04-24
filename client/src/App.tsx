@@ -17,6 +17,8 @@ import PaymentCapacity from "@/pages/payment-capacity";
 import AmortizationComparison from "@/pages/amortization-comparison";
 import IdealDownpayment from "@/pages/ideal-downpayment";
 import LeasingVsFinancing from "@/pages/leasing-vs-financing";
+import TruckFinance from "@/pages/truck-finance";
+import MotorcycleFinance from "@/pages/motorcycle-finance";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -54,6 +56,12 @@ function Router() {
         <Route path="/comparativo-amortizacao" component={AmortizationComparison}/>
         <Route path="/calculadora-entrada-ideal" component={IdealDownpayment}/>
         <Route path="/leasing-vs-financiamento" component={LeasingVsFinancing}/>
+        
+        {/* Novos simuladores de veículos específicos */}
+        <Route path="/financiamento-caminhao" component={TruckFinance}/>
+        <Route path="/financiamento-caminhoes" component={TruckFinance}/>
+        <Route path="/financiamento-moto" component={MotorcycleFinance}/>
+        <Route path="/financiamento-motos" component={MotorcycleFinance}/>
         
         <Route component={NotFound} />
       </Switch>
