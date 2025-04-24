@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import PriceTable from "@/components/simulators/price-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { simularFinanciamento } from "@/utils/finance";
+import ExportButtons from "@/components/simulators/export-buttons";
 
 const formSchema = calculatorSchema.extend({
   valorFinanciado: z.coerce
