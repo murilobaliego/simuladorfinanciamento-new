@@ -96,6 +96,9 @@ export default function MotorcycleFinance() {
     const taxaInicial = calcularTaxaAjustada(cilindradaInicial, usadaInicial, taxaBaseInicial);
     setTaxaAjustada(taxaInicial);
     
+    // Atualiza o valor do campo do formulário com a taxa ajustada inicial
+    form.setValue('taxaJuros', taxaInicial);
+    
     console.log('Taxa inicial:', taxaInicial, 'Cilindrada:', cilindradaInicial, 'Usada:', usadaInicial);
   }, []); // Executa apenas na inicialização
   
@@ -113,6 +116,9 @@ export default function MotorcycleFinance() {
         // Calcula a nova taxa ajustada
         const novaTaxa = calcularTaxaAjustada(cilindradaSelecionada, usada, taxaBase);
         setTaxaAjustada(novaTaxa);
+        
+        // Atualiza o valor do campo do formulário com a taxa ajustada
+        form.setValue('taxaJuros', novaTaxa);
         
         console.log('Taxa ajustada atualizada:', novaTaxa, 'Cilindrada:', cilindradaSelecionada, 'Usada:', usada);
       }

@@ -90,6 +90,11 @@ export default function TruckFinance() {
     setTipoVeiculo(tipoVeiculoInicial);
     const taxaInicial = calcularTaxaAjustada(tipoVeiculoInicial, taxaBaseInicial);
     setTaxaAjustada(taxaInicial);
+    
+    // Atualiza o valor do campo do formulário com a taxa ajustada inicial
+    form.setValue('taxaJuros', taxaInicial);
+    
+    console.log('Taxa inicial:', taxaInicial, 'Tipo:', tipoVeiculoInicial);
   }, []); // Executa apenas na inicialização
   
   // Observa mudanças nos campos que afetam a taxa
@@ -105,6 +110,9 @@ export default function TruckFinance() {
         // Calcula a nova taxa ajustada
         const novaTaxa = calcularTaxaAjustada(tipoVeiculoSelecionado, taxaBase);
         setTaxaAjustada(novaTaxa);
+        
+        // Atualiza o valor do campo do formulário com a taxa ajustada
+        form.setValue('taxaJuros', novaTaxa);
         
         console.log('Taxa ajustada atualizada:', novaTaxa, 'Tipo:', tipoVeiculoSelecionado);
       }
