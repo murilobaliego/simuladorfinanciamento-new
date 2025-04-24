@@ -84,10 +84,25 @@ export default function MotorcycleFinance() {
     return Number(taxa.toFixed(2));
   };
   
+  // Inicializa a taxa ajustada com base nos valores do form
+  useEffect(() => {
+    // Calcula a taxa ajustada inicial
+    const cilindradaInicial = form.getValues('cilindrada');
+    const usadaInicial = form.getValues('usada');
+    const taxaBaseInicial = form.getValues('taxaJuros');
+    
+    // Atualiza o estado para cilindrada e taxa
+    setCilindrada(cilindradaInicial);
+    const taxaInicial = calcularTaxaAjustada(cilindradaInicial, usadaInicial, taxaBaseInicial);
+    setTaxaAjustada(taxaInicial);
+    
+    console.log('Taxa inicial:', taxaInicial, 'Cilindrada:', cilindradaInicial, 'Usada:', usadaInicial);
+  }, []); // Executa apenas na inicialização
+  
   // Observa mudanças nos campos que afetam a taxa
   useEffect(() => {
     const subscription = form.watch((value, { name }) => {
-      if (name === 'cilindrada' || name === 'usada') {
+      if (name === 'cilindrada' || name === 'usada' || name === 'taxaJuros') {
         const cilindradaSelecionada = form.getValues('cilindrada');
         const usada = form.getValues('usada');
         const taxaBase = form.getValues('taxaJuros');
@@ -98,6 +113,8 @@ export default function MotorcycleFinance() {
         // Calcula a nova taxa ajustada
         const novaTaxa = calcularTaxaAjustada(cilindradaSelecionada, usada, taxaBase);
         setTaxaAjustada(novaTaxa);
+        
+        console.log('Taxa ajustada atualizada:', novaTaxa, 'Cilindrada:', cilindradaSelecionada, 'Usada:', usada);
       }
     });
     
@@ -199,11 +216,11 @@ export default function MotorcycleFinance() {
                     </FormControl>
                     <p className="text-xs text-neutral-500">
                       Taxa média para motos: 1,85% a.m.
-                      {taxaAjustada !== 1.85 && (
-                        <span className="block mt-1 font-medium text-primary">
-                          Taxa ajustada: {taxaAjustada}% a.m.
-                        </span>
-                      )}
+                      <span className="block mt-1 font-medium text-primary">
+                        Taxa atual: {taxaAjustada}% a.m.
+                        {taxaAjustada < 1.85 && <span className="text-green-500"> (menor)</span>}
+                        {taxaAjustada > 1.85 && <span className="text-red-500"> (maior)</span>}
+                      </span>
                     </p>
                     <FormMessage />
                   </FormItem>

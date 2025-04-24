@@ -81,9 +81,21 @@ export default function TruckFinance() {
   };
   
   // Observa mudanças no campo de tipo de veículo
+  // Inicializa a taxa ajustada com base nos valores do form
+  useEffect(() => {
+    // Calcula a taxa ajustada inicial
+    const tipoVeiculoInicial = form.getValues('tipoVeiculo');
+    const taxaBaseInicial = form.getValues('taxaJuros');
+    
+    setTipoVeiculo(tipoVeiculoInicial);
+    const taxaInicial = calcularTaxaAjustada(tipoVeiculoInicial, taxaBaseInicial);
+    setTaxaAjustada(taxaInicial);
+  }, []); // Executa apenas na inicialização
+  
+  // Observa mudanças nos campos que afetam a taxa
   useEffect(() => {
     const subscription = form.watch((value, { name }) => {
-      if (name === 'tipoVeiculo') {
+      if (name === 'tipoVeiculo' || name === 'taxaJuros') {
         const tipoVeiculoSelecionado = form.getValues('tipoVeiculo');
         const taxaBase = form.getValues('taxaJuros');
         
@@ -93,6 +105,8 @@ export default function TruckFinance() {
         // Calcula a nova taxa ajustada
         const novaTaxa = calcularTaxaAjustada(tipoVeiculoSelecionado, taxaBase);
         setTaxaAjustada(novaTaxa);
+        
+        console.log('Taxa ajustada atualizada:', novaTaxa, 'Tipo:', tipoVeiculoSelecionado);
       }
     });
     
@@ -194,11 +208,11 @@ export default function TruckFinance() {
                     </FormControl>
                     <p className="text-xs text-neutral-500">
                       Taxa média para caminhões: 1,58% a.m.
-                      {taxaAjustada !== 1.58 && (
-                        <span className="block mt-1 font-medium text-primary">
-                          Taxa ajustada: {taxaAjustada}% a.m.
-                        </span>
-                      )}
+                      <span className="block mt-1 font-medium text-primary">
+                        Taxa atual: {taxaAjustada}% a.m.
+                        {taxaAjustada < 1.58 && <span className="text-green-500"> (menor)</span>}
+                        {taxaAjustada > 1.58 && <span className="text-red-500"> (maior)</span>}
+                      </span>
                     </p>
                     <FormMessage />
                   </FormItem>
