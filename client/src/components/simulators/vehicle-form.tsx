@@ -284,8 +284,24 @@ export default function VehicleForm() {
             />
           </div>
           
-          <div>
-            <p className="text-sm text-neutral-600 italic">* Este é apenas um cálculo aproximado. As condições reais podem variar conforme a instituição financeira.</p>
+          <div className="mt-6 flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-neutral-600 italic">* Este é apenas um cálculo aproximado. As condições reais podem variar conforme a instituição financeira.</p>
+              
+              <ExportButtons 
+                data={result.tabelaAmortizacao} 
+                fileName="simulacao-financiamento-veiculo" 
+                title="Simulação de Financiamento de Veículo"
+                summary={{
+                  valorFinanciado: form.getValues().valorFinanciado,
+                  taxaJuros: form.getValues().taxaJuros,
+                  numParcelas: form.getValues().numParcelas,
+                  valorParcela: result.valorParcela,
+                  totalPagar: result.totalPagar,
+                  totalJuros: result.totalJuros
+                }}
+              />
+            </div>
           </div>
         </div>
       )}
