@@ -1,6 +1,18 @@
 import { Link } from "wouter";
 import SimulatorCard from "@/components/simulators/simulator-card";
 
+// Imagens otimizadas
+import heroCalculator from "@/assets/img/hero-calculator.svg";
+import vehicleFinance from "@/assets/img/vehicle-finance.svg";
+import realEstateFinance from "@/assets/img/real-estate-finance.svg";
+import personalLoan from "@/assets/img/personal-loan.svg";
+import payrollLoan from "@/assets/img/payroll-loan.svg";
+import refinancing from "@/assets/img/refinancing.svg";
+import paymentCapacity from "@/assets/img/payment-capacity.svg";
+import amortizationComparison from "@/assets/img/amortization-comparison.svg";
+import idealDownpayment from "@/assets/img/ideal-downpayment.svg";
+import leasingVsFinancing from "@/assets/img/leasing-vs-financing.svg";
+
 export default function Home() {
   return (
     <div className="container mx-auto px-4 py-6">
@@ -14,7 +26,7 @@ export default function Home() {
           </div>
           <div className="md:w-2/5 bg-neutral-200 h-40 md:h-auto">
             <img 
-              src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+              src={heroCalculator} 
               alt="Pessoa calculando financiamento" 
               className="w-full h-full object-cover"
             />
@@ -31,7 +43,7 @@ export default function Home() {
             title="Financiamento de Veículos"
             description="Simule o financiamento do seu carro ou moto com prestações fixas pela Tabela Price."
             path="/financiamento-veiculo"
-            imageSrc="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageSrc={vehicleFinance}
             imageAlt="Carro em exposição"
           />
           
@@ -39,7 +51,7 @@ export default function Home() {
             title="Financiamento Imobiliário"
             description="Calcule o financiamento da sua casa ou apartamento com prazos de até 35 anos."
             path="/financiamento-imobiliario"
-            imageSrc="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageSrc={realEstateFinance}
             imageAlt="Casa e plantas baixas"
           />
           
@@ -47,7 +59,7 @@ export default function Home() {
             title="Empréstimo Pessoal"
             description="Simule um empréstimo pessoal para quitar dívidas, viajar ou realizar seus sonhos."
             path="/emprestimo-pessoal"
-            imageSrc="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageSrc={personalLoan}
             imageAlt="Pessoa contando dinheiro"
           />
           
@@ -55,7 +67,7 @@ export default function Home() {
             title="Crédito Consignado"
             description="Taxas mais baixas para aposentados, pensionistas e servidores públicos."
             path="/credito-consignado"
-            imageSrc="https://images.unsplash.com/photo-1564939558297-fc396f18e5c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageSrc={payrollLoan}
             imageAlt="Aposentado sorrindo"
           />
         </div>

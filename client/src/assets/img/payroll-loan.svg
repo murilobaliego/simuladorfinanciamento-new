@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500" height="300" viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="300" fill="#F3F4F6"/>
+  <rect x="150" y="90" width="200" height="140" rx="10" fill="#E5E7EB"/>
+  <rect x="170" y="120" width="160" height="20" rx="5" fill="#D1D5DB"/>
+  <rect x="170" y="150" width="160" height="20" rx="5" fill="#D1D5DB"/>
+  <rect x="170" y="180" width="160" height="20" rx="5" fill="#D1D5DB"/>
+  <path d="M160 125 L140 140 L160 155" stroke="#4F46E5" stroke-width="4"/>
+  <path d="M340 125 L360 140 L340 155" stroke="#4F46E5" stroke-width="4"/>
+  <text x="250" y="50" font-family="Arial" font-size="24" text-anchor="middle" fill="#111827">Crédito Consignado</text>
+</svg>
