@@ -43,6 +43,7 @@ export type SimulationResult = {
   totalJuros: number;
   tabelaAmortizacao: TableData[];
   valorIOF?: number; // Opcional, só existe quando o IOF é incluído no cálculo
+  taxaCET?: number; // Custo Efetivo Total (taxa mensal em percentual)
 };
 
 export default function VehicleForm() {
@@ -256,6 +257,17 @@ export default function VehicleForm() {
                 <p className="text-xs text-neutral-500 mt-1">Imposto sobre Operações Financeiras</p>
               </div>
             )}
+            
+            {/* Exibe o CET (Custo Efetivo Total) */}
+            {result.taxaCET !== undefined && (
+              <div className="bg-neutral-100 p-4 rounded-md border border-neutral-200">
+                <p className="text-sm text-neutral-600 mb-1">CET (Custo Efetivo Total)</p>
+                <p className="text-2xl font-bold text-purple-600">
+                  {result.taxaCET.toFixed(2)}% a.m.
+                </p>
+                <p className="text-xs text-neutral-500 mt-1">Taxa que representa o custo total da operação</p>
+              </div>
+            )}
           </div>
           
           <div className="mb-6">
@@ -299,7 +311,8 @@ export default function VehicleForm() {
                   valorParcela: result.valorParcela,
                   totalPagar: result.totalPagar,
                   totalJuros: result.totalJuros,
-                  ...(result.valorIOF !== undefined && { valorIOF: result.valorIOF })
+                  ...(result.valorIOF !== undefined && { valorIOF: result.valorIOF }),
+                  ...(result.taxaCET !== undefined && { taxaCET: result.taxaCET })
                 }}
               />
             </div>

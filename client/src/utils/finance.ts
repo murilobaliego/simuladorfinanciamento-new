@@ -159,6 +159,63 @@ export function calcularIOF(valorFinanciado: number, numParcelas: number): numbe
  * @param sistema Sistema de amortização (price ou sac)
  * @returns Resultado completo da simulação
  */
+/**
+ * Calcula o Custo Efetivo Total (CET) de um financiamento
+ * @param valorFinanciado Valor total a ser financiado (sem IOF)
+ * @param valorParcela Valor da parcela mensal
+ * @param numParcelas Número total de parcelas
+ * @param valorIOF Valor do IOF, se aplicável
+ * @param tarifas Valor de tarifas e seguros, se aplicável
+ * @returns Taxa efetiva mensal (em percentual)
+ */
+export function calcularCET(
+  valorFinanciado: number,
+  valorParcela: number, 
+  numParcelas: number,
+  valorIOF: number = 0,
+  tarifas: number = 0
+): number {
+  // Valor total desembolsado pelo cliente (incluindo IOF e tarifas)
+  const valorDesembolsado = valorFinanciado + valorIOF + tarifas;
+  
+  // Função auxiliar para calcular o Valor Presente Líquido (VPL)
+  const calcularVPL = (taxa: number): number => {
+    let vpn = -valorDesembolsado;
+    for (let i = 1; i <= numParcelas; i++) {
+      vpn += valorParcela / Math.pow(1 + taxa, i);
+    }
+    return vpn;
+  };
+  
+  // Encontrar o CET usando o método da bissecção
+  let taxaMin = 0.001; // 0.1% ao mês
+  let taxaMax = 0.20;  // 20% ao mês (limite superior razoável)
+  let taxa = (taxaMin + taxaMax) / 2;
+  let vpn = calcularVPL(taxa);
+  
+  // Precisão desejada
+  const epsilon = 0.0001;
+  
+  // Máximo de iterações para evitar loops infinitos
+  const maxIteracoes = 100;
+  let iteracao = 0;
+  
+  while (Math.abs(vpn) > epsilon && iteracao < maxIteracoes) {
+    if (vpn > 0) {
+      taxaMin = taxa;
+    } else {
+      taxaMax = taxa;
+    }
+    
+    taxa = (taxaMin + taxaMax) / 2;
+    vpn = calcularVPL(taxa);
+    iteracao++;
+  }
+  
+  // Converter a taxa decimal para percentual
+  return taxa * 100;
+}
+
 export function simularFinanciamento(
   valorFinanciado: number,
   taxaJuros: number,
@@ -171,6 +228,7 @@ export function simularFinanciamento(
   totalJuros: number;
   tabelaAmortizacao: TabelaItem[];
   valorIOF?: number;
+  taxaCET?: number;
 } {
   // Calcula IOF se solicitado
   let valorTotalFinanciado = valorFinanciado;
@@ -206,11 +264,20 @@ export function simularFinanciamento(
   
   const totalJuros = calcularTotalJuros(totalPagar, valorTotalFinanciado);
   
+  // Calcula o CET 
+  const taxaCET = calcularCET(
+    valorFinanciado, 
+    valorParcela, 
+    numParcelas, 
+    valorIOF || 0
+  );
+  
   return {
     valorParcela,
     totalPagar,
     totalJuros,
     tabelaAmortizacao,
-    valorIOF
+    valorIOF,
+    taxaCET
   };
 }
