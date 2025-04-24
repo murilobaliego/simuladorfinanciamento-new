@@ -94,7 +94,7 @@ export default function Home() {
             title="Calculadora de Entrada Ideal"
             description="Descubra o valor ideal de entrada para equilibrar parcelas e custo total."
             path="/calculadora-entrada-ideal"
-            imageSrc="https://images.unsplash.com/photo-1579170053380-58828bd4a230?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageSrc="https://images.unsplash.com/photo-1554224155-1696413565d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
             imageAlt="Dinheiro e calculadora"
           />
           
