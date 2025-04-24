@@ -2,16 +2,9 @@ import { Link } from "wouter";
 import SimulatorCard from "@/components/simulators/simulator-card";
 
 // Imagens otimizadas
-import heroCalculator from "@/assets/img/hero-calculator.svg";
-import vehicleFinance from "@/assets/img/vehicle-finance.svg";
-import realEstateFinance from "@/assets/img/real-estate-finance.svg";
-import personalLoan from "@/assets/img/personal-loan.svg";
-import payrollLoan from "@/assets/img/payroll-loan.svg";
-import refinancing from "@/assets/img/refinancing.svg";
-import paymentCapacity from "@/assets/img/payment-capacity.svg";
-import amortizationComparison from "@/assets/img/amortization-comparison.svg";
-import idealDownpayment from "@/assets/img/ideal-downpayment.svg";
-import leasingVsFinancing from "@/assets/img/leasing-vs-financing.svg";
+import heroCalculator from "@/assets/img/jpg/hero-calculator.jpg";
+import vehicleFinance from "@/assets/img/jpg/vehicle-finance.jpg";
+import realEstateFinance from "@/assets/img/jpg/real-estate-finance.jpg";
 
 export default function Home() {
   return (
