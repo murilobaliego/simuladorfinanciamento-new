@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,6 +34,7 @@ export default function PayrollLoan() {
   const [result, setResult] = useState<SimulationResult | null>(null);
   const [isTableExpanded, setIsTableExpanded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [taxaChanged, setTaxaChanged] = useState(false);
   const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -47,6 +48,29 @@ export default function PayrollLoan() {
   });
 
   const tipoConsignado = form.watch("tipoConsignado");
+
+  // Atualiza a taxa de juros automaticamente quando o tipo de consignado muda
+  useEffect(() => {
+    // Define a taxa de juros com base no tipo de consignado
+    const taxasConsignado = {
+      inss: 1.7,
+      servidor: 1.5,
+      militar: 1.3
+    };
+    
+    // Altera o valor do campo taxaJuros
+    form.setValue("taxaJuros", taxasConsignado[tipoConsignado]);
+    
+    // Ativa a animação visual para indicar a mudança
+    setTaxaChanged(true);
+    
+    // Desativa a animação após 1 segundo
+    const timer = setTimeout(() => {
+      setTaxaChanged(false);
+    }, 1000);
+    
+    return () => clearTimeout(timer); // Limpa o timer se o componente for desmontado
+  }, [tipoConsignado, form]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
@@ -182,17 +206,24 @@ export default function PayrollLoan() {
                           type="number"
                           step="0.1"
                           placeholder="1.7"
-                          className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300"
+                          className={`pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300 transition-all duration-300 ${taxaChanged ? 'bg-primary/10 border-primary' : ''}`}
                           {...field}
                         />
                         <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
                       </div>
                     </FormControl>
-                    <p className="text-xs text-neutral-500">
-                      Taxa média para {tipoConsignado === "inss" ? "INSS" : tipoConsignado === "servidor" ? "servidores" : "militares"}: {
-                        tipoConsignado === "inss" ? "1,7%" : tipoConsignado === "servidor" ? "1,5%" : "1,3%"
-                      } a.m.
-                    </p>
+                    <div>
+                      <p className="text-xs text-neutral-500">
+                        Taxa média para {tipoConsignado === "inss" ? "INSS" : tipoConsignado === "servidor" ? "servidores" : "militares"}: {
+                          tipoConsignado === "inss" ? "1,7%" : tipoConsignado === "servidor" ? "1,5%" : "1,3%"
+                        } a.m.
+                      </p>
+                      {taxaChanged && (
+                        <p className="text-xs text-primary animate-pulse mt-1">
+                          * Taxa ajustada automaticamente para este tipo de consignado
+                        </p>
+                      )}
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
