@@ -133,7 +133,7 @@ export default function Footer() {
               </li>
               <li>
                 <a 
-                  href="mailto:contato@simuladorfinanciamento.com.br" 
+                  href="mailto:contato@simulei.site" 
                   className="hover:text-white transition-colors flex items-center"
                 >
                   <Mail className="h-4 w-4 mr-1" aria-hidden="true" />
