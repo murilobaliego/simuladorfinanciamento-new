@@ -17,6 +17,7 @@ interface ExportButtonsProps {
     valorParcela: number;
     totalPagar: number;
     totalJuros: number;
+    valorIOF?: number; // Valor do IOF, se aplicável
   };
 }
 
@@ -67,10 +68,19 @@ export default function ExportButtons({
         doc.text(`Valor da parcela: ${formatCurrency(summary.valorParcela)}`, 14, 66);
         doc.text(`Total a pagar: ${formatCurrency(summary.totalPagar)}`, 14, 72);
         doc.text(`Total de juros: ${formatCurrency(summary.totalJuros)}`, 14, 78);
+        
+        // Adicionar informação do IOF se presente
+        if (summary.valorIOF !== undefined) {
+          doc.text(`Valor do IOF: ${formatCurrency(summary.valorIOF)}`, 14, 84);
+        }
       }
       
       // Definir onde a tabela começará
-      const tableY = summary ? 85 : 35;
+      let tableY = summary ? 85 : 35;
+      // Ajustar posição se tiver IOF
+      if (summary?.valorIOF !== undefined) {
+        tableY = 90;
+      }
       
       // Definir cabeçalhos e dados para a tabela
       const tableHeaders = [['Parcela', 'Valor da Parcela', 'Amortização', 'Juros', 'Saldo Devedor']];
@@ -141,6 +151,8 @@ export default function ExportButtons({
           ['Valor da parcela:', summary.valorParcela.toString()],
           ['Total a pagar:', summary.totalPagar.toString()],
           ['Total de juros:', summary.totalJuros.toString()],
+          // Adicionar IOF se presente
+          ...(summary.valorIOF !== undefined ? [['Valor do IOF:', summary.valorIOF.toString()]] : []),
           ['']
         );
       }

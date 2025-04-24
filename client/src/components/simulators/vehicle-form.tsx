@@ -298,7 +298,8 @@ export default function VehicleForm() {
                   numParcelas: form.getValues().numParcelas,
                   valorParcela: result.valorParcela,
                   totalPagar: result.totalPagar,
-                  totalJuros: result.totalJuros
+                  totalJuros: result.totalJuros,
+                  ...(result.valorIOF !== undefined && { valorIOF: result.valorIOF })
                 }}
               />
             </div>
