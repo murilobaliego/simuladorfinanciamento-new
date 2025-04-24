@@ -1,8 +1,9 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from "@/components/ui/toaster";
+import { useEffect } from "react";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import VehicleFinance from "@/pages/vehicle-finance";
@@ -20,29 +21,43 @@ import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
 
+// Componente que faz a página rolar para o topo quando muda de rota
+function ScrollToTop() {
+  const [location] = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+  
+  return null;
+}
+
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home}/>
-      {/* URLs otimizadas para SEO em português brasileiro */}
-      <Route path="/simulador-financiamento-veiculos" component={VehicleFinance}/>
-      <Route path="/financiamento-veiculo" component={VehicleFinance}/>
-      <Route path="/vehicle-finance" component={VehicleFinance}/>
-      <Route path="/financiamento-imobiliario" component={RealEstateFinance}/>
-      <Route path="/emprestimo-pessoal" component={PersonalLoan}/>
-      <Route path="/credito-consignado" component={PayrollLoan}/>
-      <Route path="/politica-privacidade" component={PrivacyPolicy}/>
-      <Route path="/termos-de-uso" component={TermsOfUse}/>
-      
-      {/* Novas calculadoras e simuladores */}
-      <Route path="/simulador-refinanciamento" component={RefinancingSimulator}/>
-      <Route path="/capacidade-pagamento" component={PaymentCapacity}/>
-      <Route path="/comparativo-amortizacao" component={AmortizationComparison}/>
-      <Route path="/calculadora-entrada-ideal" component={IdealDownpayment}/>
-      <Route path="/leasing-vs-financiamento" component={LeasingVsFinancing}/>
-      
-      <Route component={NotFound} />
-    </Switch>
+    <>
+      <ScrollToTop />
+      <Switch>
+        <Route path="/" component={Home}/>
+        {/* URLs otimizadas para SEO em português brasileiro */}
+        <Route path="/simulador-financiamento-veiculos" component={VehicleFinance}/>
+        <Route path="/financiamento-veiculo" component={VehicleFinance}/>
+        <Route path="/vehicle-finance" component={VehicleFinance}/>
+        <Route path="/financiamento-imobiliario" component={RealEstateFinance}/>
+        <Route path="/emprestimo-pessoal" component={PersonalLoan}/>
+        <Route path="/credito-consignado" component={PayrollLoan}/>
+        <Route path="/politica-privacidade" component={PrivacyPolicy}/>
+        <Route path="/termos-de-uso" component={TermsOfUse}/>
+        
+        {/* Novas calculadoras e simuladores */}
+        <Route path="/simulador-refinanciamento" component={RefinancingSimulator}/>
+        <Route path="/capacidade-pagamento" component={PaymentCapacity}/>
+        <Route path="/comparativo-amortizacao" component={AmortizationComparison}/>
+        <Route path="/calculadora-entrada-ideal" component={IdealDownpayment}/>
+        <Route path="/leasing-vs-financiamento" component={LeasingVsFinancing}/>
+        
+        <Route component={NotFound} />
+      </Switch>
+    </>
   );
 }
 

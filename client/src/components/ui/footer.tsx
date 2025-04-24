@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { ScrollLink } from "./scroll-link";
 import { Calculator, Car, Home, CreditCard, BadgeDollarSign, Info, Mail, FileText, Coffee } from "lucide-react";
 
 export default function Footer() {
@@ -63,40 +64,40 @@ export default function Footer() {
             <h3 className="font-heading text-white text-lg font-semibold mb-4">Recursos</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link 
+                <ScrollLink 
                   href="/simulador-financiamento-veiculos#como-funciona" 
                   className="hover:text-white transition-colors flex items-center"
                 >
                   <Info className="h-4 w-4 mr-1" aria-hidden="true" />
                   <span>Como Funciona a Tabela Price</span>
-                </Link>
+                </ScrollLink>
               </li>
               <li>
-                <Link 
+                <ScrollLink 
                   href="/simulador-financiamento-veiculos#iof-calculadora" 
                   className="hover:text-white transition-colors flex items-center"
                 >
                   <Calculator className="h-4 w-4 mr-1" aria-hidden="true" />
                   <span>Cálculo do IOF</span>
-                </Link>
+                </ScrollLink>
               </li>
               <li>
-                <Link 
+                <ScrollLink 
                   href="/simulador-financiamento-veiculos#melhores-taxas" 
                   className="hover:text-white transition-colors flex items-center"
                 >
                   <BadgeDollarSign className="h-4 w-4 mr-1" aria-hidden="true" />
                   <span>Melhores Taxas de Financiamento</span>
-                </Link>
+                </ScrollLink>
               </li>
               <li>
-                <Link 
+                <ScrollLink 
                   href="/simulador-financiamento-veiculos#dicas-financiamento"
                   className="hover:text-white transition-colors flex items-center"
                 >
                   <Coffee className="h-4 w-4 mr-1" aria-hidden="true" />
                   <span>Dicas para Financiar Veículos</span>
-                </Link>
+                </ScrollLink>
               </li>
             </ul>
           </div>
