@@ -27,18 +27,22 @@ export default function AdSense({
   }, [slot, initAd]);
 
   return (
-    <div className={`ad-container ${className}`}>
-      <ins
-        className="adsbygoogle"
-        style={{
-          display: "block",
-          ...style
-        }}
-        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-        data-ad-slot={slot}
-        data-ad-format={format}
-        data-full-width-responsive={responsive ? "true" : "false"}
-      />
+    <div className={`ad-container min-h-[250px] my-4 ${className}`}>
+      <div className="content-wrapper min-h-[100px]">
+        {/* Ensure there's content around the ad */}
+        <ins
+          className="adsbygoogle"
+          style={{
+            display: "block",
+            minHeight: "250px",
+            ...style
+          }}
+          data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+          data-ad-slot={slot}
+          data-ad-format={format}
+          data-full-width-responsive={responsive ? "true" : "false"}
+        />
+      </div>
     </div>
   );
 }
