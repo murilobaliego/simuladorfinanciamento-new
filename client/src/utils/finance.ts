@@ -173,7 +173,8 @@ export function calcularCET(
   valorParcela: number, 
   numParcelas: number,
   valorIOF: number = 0,
-  tarifas: number = 0
+  tarifas: number = 0,
+  valorParcelaBalao: number = 0
 ): number {
   // Valor total desembolsado pelo cliente (incluindo IOF e tarifas)
   const valorDesembolsado = valorFinanciado + valorIOF + tarifas;
@@ -183,6 +184,10 @@ export function calcularCET(
     let vpn = -valorDesembolsado;
     for (let i = 1; i <= numParcelas; i++) {
       vpn += valorParcela / Math.pow(1 + taxa, i);
+    }
+    // Adicionar a parcela balão no fluxo, se existir
+    if (valorParcelaBalao > 0) {
+      vpn += valorParcelaBalao / Math.pow(1 + taxa, numParcelas + 1);
     }
     return vpn;
   };
@@ -214,6 +219,195 @@ export function calcularCET(
   
   // Converter a taxa decimal para percentual
   return taxa * 100;
+}
+
+/**
+ * Simula um financiamento com parcela balão (parcela final maior)
+ * @param valorFinanciado Valor total a ser financiado
+ * @param taxaJuros Taxa de juros mensal (em percentual)
+ * @param numParcelas Número de parcelas mensais regulares
+ * @param percentualBalao Percentual do valor financiado a ser pago na parcela balão final
+ * @param incluirIOF Se deve incluir o IOF no cálculo
+ * @returns Resultado completo da simulação com parcela balão
+ */
+export function simularFinanciamentoBalao(
+  valorFinanciado: number,
+  taxaJuros: number,
+  numParcelas: number,
+  percentualBalao: number,
+  incluirIOF: boolean = false
+): {
+  valorParcela: number;
+  valorParcelaBalao: number;
+  totalPagar: number;
+  totalJuros: number;
+  percentualBalao: number;
+  tabelaAmortizacao: TabelaItem[];
+  valorIOF?: number;
+  taxaCET: number;
+} {
+  // Converter taxa de percentual para decimal
+  const taxa = taxaJuros / 100;
+  
+  // Calcular valor da parcela balão (percentual do valor financiado)
+  const valorParcelaBalao = valorFinanciado * (percentualBalao / 100);
+  
+  // Valor presente da parcela balão
+  const valorPresenteBalao = valorParcelaBalao / Math.pow(1 + taxa, numParcelas);
+  
+  // Valor a ser financiado nas parcelas mensais regulares
+  const valorFinanciadoSemBalao = valorFinanciado - valorPresenteBalao;
+  
+  let valorComIOF = valorFinanciado;
+  let valorIOF: number | undefined = undefined;
+  
+  // Se deve incluir IOF no financiamento
+  if (incluirIOF) {
+    valorIOF = calcularIOF(valorFinanciado, numParcelas + 1); // +1 para incluir a parcela balão
+    valorComIOF += valorIOF;
+    
+    // Recalcular proporcionalmente com IOF
+    const valorParcelaBalaoComIOF = valorParcelaBalao * (valorComIOF / valorFinanciado);
+    const valorPresenteBalaoComIOF = valorParcelaBalaoComIOF / Math.pow(1 + taxa, numParcelas);
+    const valorFinanciadoSemBalaoComIOF = valorComIOF - valorPresenteBalaoComIOF;
+    
+    // Calcular parcela regular com base no valor ajustado
+    const valorParcela = calcularPrestacao(valorFinanciadoSemBalaoComIOF, taxaJuros, numParcelas);
+    
+    // Gerar tabela de amortização
+    const tabelaAmortizacao: TabelaItem[] = [];
+    let saldoDevedor = valorComIOF;
+    
+    // Linha inicial (parcela 0)
+    tabelaAmortizacao.push({
+      parcela: 0,
+      valorParcela: 0,
+      amortizacao: 0,
+      juros: 0,
+      saldoDevedor: saldoDevedor
+    });
+    
+    // Parcelas regulares
+    for (let i = 1; i <= numParcelas; i++) {
+      const juros = saldoDevedor * taxa;
+      const amortizacao = valorParcela - juros;
+      saldoDevedor -= amortizacao;
+      
+      tabelaAmortizacao.push({
+        parcela: i,
+        valorParcela,
+        amortizacao,
+        juros,
+        saldoDevedor: Math.max(0, saldoDevedor)
+      });
+    }
+    
+    // Parcela balão final
+    const jurosFinal = saldoDevedor * taxa;
+    const amortizacaoFinal = valorParcelaBalaoComIOF - jurosFinal;
+    
+    tabelaAmortizacao.push({
+      parcela: numParcelas + 1,
+      valorParcela: valorParcelaBalaoComIOF,
+      amortizacao: amortizacaoFinal,
+      juros: jurosFinal,
+      saldoDevedor: 0
+    });
+    
+    // Cálculos finais
+    const totalPagarSemBalao = valorParcela * numParcelas;
+    const totalPagar = totalPagarSemBalao + valorParcelaBalaoComIOF;
+    const totalJuros = totalPagar - valorComIOF;
+    
+    // Calcular CET
+    const taxaCET = calcularCET(
+      valorFinanciado,
+      valorParcela,
+      numParcelas,
+      valorIOF,
+      0,
+      valorParcelaBalaoComIOF
+    );
+    
+    return {
+      valorParcela,
+      valorParcelaBalao: valorParcelaBalaoComIOF,
+      totalPagar,
+      totalJuros,
+      percentualBalao,
+      tabelaAmortizacao,
+      valorIOF,
+      taxaCET
+    };
+  } else {
+    // Financiamento sem IOF
+    const valorParcela = calcularPrestacao(valorFinanciadoSemBalao, taxaJuros, numParcelas);
+    
+    // Gerar tabela de amortização
+    const tabelaAmortizacao: TabelaItem[] = [];
+    let saldoDevedor = valorFinanciado;
+    
+    // Linha inicial (parcela 0)
+    tabelaAmortizacao.push({
+      parcela: 0,
+      valorParcela: 0,
+      amortizacao: 0,
+      juros: 0,
+      saldoDevedor: saldoDevedor
+    });
+    
+    // Parcelas regulares
+    for (let i = 1; i <= numParcelas; i++) {
+      const juros = saldoDevedor * taxa;
+      const amortizacao = valorParcela - juros;
+      saldoDevedor -= amortizacao;
+      
+      tabelaAmortizacao.push({
+        parcela: i,
+        valorParcela,
+        amortizacao,
+        juros,
+        saldoDevedor: Math.max(0, saldoDevedor)
+      });
+    }
+    
+    // Parcela balão final
+    const jurosFinal = saldoDevedor * taxa;
+    const amortizacaoFinal = valorParcelaBalao - jurosFinal;
+    
+    tabelaAmortizacao.push({
+      parcela: numParcelas + 1,
+      valorParcela: valorParcelaBalao,
+      amortizacao: amortizacaoFinal,
+      juros: jurosFinal,
+      saldoDevedor: 0
+    });
+    
+    // Cálculos finais
+    const totalPagarSemBalao = valorParcela * numParcelas;
+    const totalPagar = totalPagarSemBalao + valorParcelaBalao;
+    const totalJuros = totalPagar - valorFinanciado;
+    
+    // Calcular CET
+    const taxaCET = calcularCET(
+      valorFinanciado,
+      valorParcela,
+      numParcelas,
+      0,
+      0,
+      valorParcelaBalao
+    );
+    
+    return {
+      valorParcela,
+      valorParcelaBalao,
+      totalPagar,
+      totalJuros,
+      percentualBalao,
+      tabelaAmortizacao,
+      taxaCET
+    };
+  }
 }
 
 export function simularFinanciamento(

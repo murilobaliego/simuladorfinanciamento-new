@@ -20,6 +20,7 @@ import IdealDownpayment from "@/pages/ideal-downpayment";
 import LeasingVsFinancing from "@/pages/leasing-vs-financing";
 import TruckFinance from "@/pages/truck-finance";
 import MotorcycleFinance from "@/pages/motorcycle-finance";
+import BalloonPaymentFinance from "@/pages/balloon-payment-finance";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
