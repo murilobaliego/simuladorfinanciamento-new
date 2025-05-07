@@ -190,15 +190,55 @@ export default function TruckFinance() {
       <HeadSEO 
         title="Simulador de Financiamento de Caminhões | Taxas e Parcelas"
         description="Simule o financiamento de caminhões, carretas e veículos pesados com taxas atualizadas. Calcule parcelas, juros e gere sua tabela Price personalizada."
-        keywords={["financiamento caminhão", "simulador caminhão", "financiar veículo pesado", "tabela price caminhão"]}
+        keywords={["financiamento caminhão", "simulador caminhão", "financiar veículo pesado", "tabela price caminhão", "financiar caminhão", "parcelas caminhão", "simulação financiamento caminhão"]}
       />
     
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-heading font-bold text-primary mb-2">
-          Simulador de Financiamento de Caminhões
+        <h1 className="text-3xl font-heading font-bold text-primary mb-4">
+          Simulador de Financiamento de Caminhões e Veículos Pesados
         </h1>
+        
+        <section className="mb-8">
+          <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-lg border border-gray-200 shadow-sm">
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+              Calcule as parcelas do seu caminhão ou veículo pesado
+            </h2>
+            <p className="text-lg text-neutral-600 mb-4">
+              Simule as condições para financiar seu caminhão, carreta, ônibus, semirreboque ou implemento rodoviário. 
+              Nosso simulador utiliza taxas atualizadas do mercado e considera condições específicas para diferentes tipos de veículos pesados.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div className="bg-white p-4 rounded-lg border border-gray-100">
+                <h3 className="font-bold text-primary mb-2">Taxas Personalizadas</h3>
+                <p className="text-sm text-gray-600">
+                  Ajustamos automaticamente as taxas de juros com base no tipo de caminhão que você está financiando.
+                </p>
+              </div>
+              
+              <div className="bg-white p-4 rounded-lg border border-gray-100">
+                <h3 className="font-bold text-primary mb-2">Tabela Price Completa</h3>
+                <p className="text-sm text-gray-600">
+                  Visualize a evolução do seu saldo devedor e a composição de juros e amortização em cada parcela.
+                </p>
+              </div>
+              
+              <div className="bg-white p-4 rounded-lg border border-gray-100">
+                <h3 className="font-bold text-primary mb-2">Exportação em PDF/Excel</h3>
+                <p className="text-sm text-gray-600">
+                  Exporte os resultados da simulação em PDF ou Excel para análise posterior ou envio a instituições financeiras.
+                </p>
+              </div>
+            </div>
+            
+            <div className="text-sm text-gray-600 mt-4">
+              <p><strong>Tipos de veículos disponíveis para simulação:</strong> Caminhões leves (VUC), médios (toco), pesados (truck), extrapesados (carretas), implementos rodoviários, cavalos mecânicos, semirreboques e outros veículos comerciais pesados.</p>
+            </div>
+          </div>
+        </section>
+        
         <p className="text-lg text-neutral-600 mb-8">
-          Simule as condições para financiar seu caminhão, semirreboque ou implemento rodoviário
+          Preencha os dados abaixo para obter sua simulação personalizada de financiamento para caminhões:
         </p>
         
         <Form {...form}>
@@ -480,6 +520,93 @@ export default function TruckFinance() {
             </div>
           </div>
         )}
+        
+        {/* Seção informativa sobre financiamento de caminhões */}
+        <section className="mt-12 bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-bold text-primary mb-4">
+              Informações sobre Financiamento de Caminhões
+            </h2>
+            
+            <div className="prose prose-neutral max-w-none">
+              <h3>Condições Especiais para Veículos Pesados</h3>
+              <p>
+                O financiamento de caminhões no Brasil possui características específicas que o diferem de outros tipos 
+                de financiamento automotivo. Os prazos são geralmente mais longos (podendo chegar a 10 anos) e as taxas 
+                costumam ser menores devido ao valor mais elevado dos bens e sua utilização para atividades produtivas.
+              </p>
+              
+              <h3>Programas de Incentivo</h3>
+              <p>
+                Existem linhas de crédito específicas através do BNDES e outros bancos de fomento para aquisição de 
+                caminhões e implementos rodoviários, com taxas subsidiadas para renovação de frota, especialmente 
+                para caminhões mais eficientes e menos poluentes.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h4 className="font-bold text-gray-800 mb-2">FINAME para Caminhões</h4>
+                  <ul className="space-y-2">
+                    <li>Taxa: A partir de 0,85% a.m. + TLP</li>
+                    <li>Prazo: Até 120 meses</li>
+                    <li>Entrada: Mínimo de 10%</li>
+                    <li>Carência: Até 6 meses</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h4 className="font-bold text-gray-800 mb-2">CDC de Bancos Comerciais</h4>
+                  <ul className="space-y-2">
+                    <li>Taxa: A partir de 1,58% a.m.</li>
+                    <li>Prazo: Até 60 meses (maiores prazos para alguns modelos)</li>
+                    <li>Entrada: Mínimo de 20%</li>
+                    <li>Melhores condições para caminhões novos</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <h3>Diferenças nas Taxas por Tipo de Veículo</h3>
+              <p>
+                As instituições financeiras costumam oferecer condições diferenciadas com base no tipo e porte do 
+                caminhão. Normalmente, caminhões leves e médios têm taxas mais atrativas por representarem menor 
+                risco e maior liquidez no mercado secundário. Já caminhões extrapesados e implementos especializados 
+                podem ter taxas maiores devido à menor demanda no mercado de usados.
+              </p>
+              
+              <h3>Documentação Necessária</h3>
+              <p>
+                Para financiar um caminhão, além dos documentos pessoais e comprovantes de renda, geralmente são solicitados:
+              </p>
+              <ul>
+                <li>Comprovação de experiência no setor de transportes (para autônomos)</li>
+                <li>Contrato de prestação de serviços ou carta de transportadora (para transportadores autônomos)</li>
+                <li>Documentação completa da empresa (para pessoa jurídica)</li>
+                <li>Comprovantes de faturamento dos últimos 6 a 12 meses</li>
+                <li>Demonstrações financeiras para empresas de maior porte</li>
+              </ul>
+              
+              <h3>Dicas para Obter as Melhores Condições</h3>
+              <p>
+                Para conseguir melhores taxas e condições no financiamento de seu caminhão:
+              </p>
+              <ul>
+                <li><strong>Compare propostas:</strong> Bancos comerciais, financeiras e fabricantes costumam ter condições diferentes</li>
+                <li><strong>Entrada maior:</strong> Quanto maior a entrada, melhores as condições de taxa e prazo</li>
+                <li><strong>Fique atento a programas especiais:</strong> Montadoras frequentemente lançam condições especiais em determinadas épocas do ano</li>
+                <li><strong>Verifique sua pontuação de crédito:</strong> Scores mais altos podem garantir taxas menores</li>
+                <li><strong>Considere o Custo Efetivo Total (CET):</strong> Além da taxa de juros, verifique tarifas, seguros e outras despesas embutidas</li>
+              </ul>
+              
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+                <p className="text-blue-800 font-medium">
+                  Nosso simulador considera as taxas médias praticadas pelo mercado, mas as condições reais podem variar 
+                  conforme seu perfil de crédito, relacionamento com a instituição financeira e negociações específicas. 
+                  Use essa simulação como referência para suas negociações.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );
