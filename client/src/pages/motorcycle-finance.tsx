@@ -195,15 +195,55 @@ export default function MotorcycleFinance() {
       <HeadSEO 
         title="Simulador de Financiamento de Motos | Parcelas e Taxas"
         description="Simule o financiamento da sua moto ou scooter com taxas atualizadas. Calcule o valor das parcelas, juros, e compare as diferentes opções de pagamento."
-        keywords={["financiamento moto", "simulador moto", "financiar motocicleta", "tabela price moto"]}
+        keywords={["financiamento moto", "simulador moto", "financiar motocicleta", "tabela price moto", "parcelas moto", "taxa juros moto", "financiar honda", "financiar yamaha"]}
       />
     
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-heading font-bold text-primary mb-2">
-          Simulador de Financiamento de Motos
+        <h1 className="text-3xl font-heading font-bold text-primary mb-4">
+          Simulador de Financiamento de Motos e Motocicletas
         </h1>
+        
+        <section className="mb-8">
+          <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-lg border border-gray-200 shadow-sm">
+            <h2 className="text-xl font-semibold text-gray-800 mb-3">
+              Calcule as parcelas da sua moto de forma rápida e precisa
+            </h2>
+            <p className="text-lg text-neutral-600 mb-4">
+              Simule as condições para financiar sua motocicleta ou scooter com taxas atualizadas e personalizadas conforme a cilindrada da sua moto. 
+              Nosso simulador considera as particularidades de cada categoria de motocicleta.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div className="bg-white p-4 rounded-lg border border-gray-100">
+                <h3 className="font-bold text-primary mb-2">Taxas por Cilindrada</h3>
+                <p className="text-sm text-gray-600">
+                  Oferecemos taxas diferenciadas de acordo com a cilindrada da sua moto, refletindo o padrão do mercado.
+                </p>
+              </div>
+              
+              <div className="bg-white p-4 rounded-lg border border-gray-100">
+                <h3 className="font-bold text-primary mb-2">IOF Incluso</h3>
+                <p className="text-sm text-gray-600">
+                  Calcule o valor do IOF (Imposto sobre Operações Financeiras) incluído no seu financiamento.
+                </p>
+              </div>
+              
+              <div className="bg-white p-4 rounded-lg border border-gray-100">
+                <h3 className="font-bold text-primary mb-2">Visão Completa</h3>
+                <p className="text-sm text-gray-600">
+                  Visualize todos os detalhes: parcelas, juros, amortização e a evolução do seu saldo devedor mês a mês.
+                </p>
+              </div>
+            </div>
+            
+            <div className="text-sm text-gray-600 mt-4">
+              <p><strong>Categorias de motos suportadas:</strong> Scooters, motos de baixa cilindrada (até 150cc), média cilindrada (150-300cc), alta cilindrada (300-500cc) e motos premium (acima de 500cc).</p>
+            </div>
+          </div>
+        </section>
+        
         <p className="text-lg text-neutral-600 mb-8">
-          Simule as condições para financiar sua motocicleta ou scooter com taxas atualizadas
+          Preencha os dados abaixo para obter sua simulação personalizada de financiamento para motos:
         </p>
         
         <Form {...form}>
@@ -501,6 +541,137 @@ export default function MotorcycleFinance() {
             </div>
           </div>
         )}
+        
+        {/* Seção informativa sobre financiamento de motos */}
+        <section className="mt-12 bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-bold text-primary mb-4">
+              Tudo sobre Financiamento de Motos
+            </h2>
+            
+            <div className="prose prose-neutral max-w-none">
+              <h3>O Mercado de Financiamento de Motocicletas no Brasil</h3>
+              <p>
+                O mercado brasileiro de financiamento de motos possui características específicas que variam conforme 
+                a cilindrada, modelo e finalidade de uso. As instituições financeiras costumam oferecer condições 
+                diferenciadas baseadas nestes fatores, com taxas que podem variar significativamente.
+              </p>
+              
+              <h3>Diferenças por Cilindrada e Modelo</h3>
+              <p>
+                Motos de maior cilindrada geralmente recebem taxas mais competitivas devido ao seu maior valor e menor 
+                risco de inadimplência associado ao perfil do comprador. Em contrapartida, as motos de baixa cilindrada, 
+                mais populares, podem ter taxas ligeiramente superiores, mas prazos menores e parcelas mais acessíveis.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h4 className="font-bold text-gray-800 mb-2">Financiamento CDC (Crédito Direto ao Consumidor)</h4>
+                  <ul className="space-y-2">
+                    <li>Taxa média: A partir de 1,85% a.m.</li>
+                    <li>Entrada mínima: 10-20% do valor</li>
+                    <li>Prazo: Até 60 meses</li>
+                    <li>Documentação simples (RG, CPF, comprovantes de residência e renda)</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h4 className="font-bold text-gray-800 mb-2">Consórcio de Motos</h4>
+                  <ul className="space-y-2">
+                    <li>Taxa de administração: 10-20% total</li>
+                    <li>Sem juros</li>
+                    <li>Prazo: 36 a 60 meses</li>
+                    <li>Contemplação pode ser por lance ou sorteio</li>
+                    <li>Opção para quem não tem pressa na aquisição</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <h3>Motos Novas vs. Usadas</h3>
+              <p>
+                O financiamento de motos novas costuma oferecer condições mais vantajosas, com taxas a partir de 1,5% ao mês 
+                e prazos que podem chegar a 5 anos. Já para motos usadas, as taxas são em média 0,3% a 0,5% mais altas, com 
+                prazos reduzidos (geralmente até 36 meses) e exigência de entrada maior.
+              </p>
+              
+              <div className="overflow-x-auto mt-4">
+                <table className="min-w-full bg-white border">
+                  <thead>
+                    <tr className="bg-gray-100">
+                      <th className="py-2 px-4 border">Categoria</th>
+                      <th className="py-2 px-4 border">Taxa Média</th>
+                      <th className="py-2 px-4 border">Prazo Máximo</th>
+                      <th className="py-2 px-4 border">Entrada Mínima</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2 px-4 border">Scooters e até 150cc (novas)</td>
+                      <td className="py-2 px-4 border">1,80% a.m.</td>
+                      <td className="py-2 px-4 border">48 meses</td>
+                      <td className="py-2 px-4 border">10-15%</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="py-2 px-4 border">150cc a 300cc (novas)</td>
+                      <td className="py-2 px-4 border">1,85% a.m.</td>
+                      <td className="py-2 px-4 border">48-60 meses</td>
+                      <td className="py-2 px-4 border">15-20%</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 px-4 border">300cc a 500cc (novas)</td>
+                      <td className="py-2 px-4 border">1,70-1,85% a.m.</td>
+                      <td className="py-2 px-4 border">60 meses</td>
+                      <td className="py-2 px-4 border">20%</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="py-2 px-4 border">Acima de 500cc (novas)</td>
+                      <td className="py-2 px-4 border">1,60-1,75% a.m.</td>
+                      <td className="py-2 px-4 border">60 meses</td>
+                      <td className="py-2 px-4 border">20-30%</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 px-4 border">Motos usadas (qualquer cilindrada)</td>
+                      <td className="py-2 px-4 border">+0,35-0,45% a.m.</td>
+                      <td className="py-2 px-4 border">36-48 meses</td>
+                      <td className="py-2 px-4 border">20-30%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <h3>Documentação Necessária</h3>
+              <p>
+                Para financiar uma moto, geralmente são solicitados:
+              </p>
+              <ul>
+                <li>Documento de identidade com foto (RG ou CNH)</li>
+                <li>CPF</li>
+                <li>Comprovante de residência atualizado (últimos 90 dias)</li>
+                <li>Comprovante de renda (3x o valor da parcela)</li>
+                <li>Para motos usadas: documentação do veículo</li>
+                <li>Para pessoas jurídicas: documentação adicional da empresa</li>
+              </ul>
+              
+              <h3>Dicas para Obter o Melhor Financiamento</h3>
+              <ul>
+                <li><strong>Compare ofertas:</strong> Bancos, financeiras e concessionárias podem ter condições diferentes</li>
+                <li><strong>Negocie a taxa:</strong> As taxas anunciadas frequentemente são negociáveis</li>
+                <li><strong>Entrada maior:</strong> Aumentar o valor da entrada pode reduzir significativamente os juros</li>
+                <li><strong>Conheça seu score de crédito:</strong> Um bom histórico de crédito garante melhores condições</li>
+                <li><strong>Atenção ao CET:</strong> O Custo Efetivo Total considera todas as despesas incluindo seguros e tarifas</li>
+                <li><strong>Considere o consórcio:</strong> Para quem não tem pressa na aquisição, pode ser uma alternativa interessante</li>
+              </ul>
+              
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+                <p className="text-blue-800 font-medium">
+                  Nosso simulador utiliza taxas médias de mercado como referência. As condições reais podem variar 
+                  conforme sua pontuação de crédito, relacionamento com a instituição financeira, promoções sazonais e 
+                  políticas específicas de cada banco ou financeira. Use essa simulação como base para suas negociações.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );
