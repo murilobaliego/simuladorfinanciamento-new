@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
+import { useAnalytics } from "@/hooks/use-analytics";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import VehicleFinance from "@/pages/vehicle-finance";
@@ -26,10 +27,14 @@ import CookieConsent from "@/components/ui/cookie-consent";
 // Componente que faz a página rolar para o topo quando muda de rota
 function ScrollToTop() {
   const [location] = useLocation();
+  const { sendPageView } = useAnalytics();
   
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location]);
+    
+    // Enviar evento de visualização da página para o Google Analytics
+    sendPageView(location);
+  }, [location, sendPageView]);
   
   return null;
 }
@@ -70,6 +75,9 @@ function Router() {
 }
 
 function App() {
+  // Inicializar o Google Analytics
+  useAnalytics();
+  
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
