@@ -69,6 +69,11 @@ function Router() {
         <Route path="/financiamento-moto" component={MotorcycleFinance}/>
         <Route path="/financiamento-motos" component={MotorcycleFinance}/>
         
+        {/* Simulador de financiamento com parcela balão */}
+        <Route path="/simulador-parcela-balao" component={BalloonPaymentFinance}/>
+        <Route path="/financiamento-parcela-balao" component={BalloonPaymentFinance}/>
+        <Route path="/financiamento-vfg" component={BalloonPaymentFinance}/>
+        
         <Route component={NotFound} />
       </Switch>
     </>
