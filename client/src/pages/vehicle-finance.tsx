@@ -12,7 +12,7 @@ export default function VehicleFinance() {
         <meta property="og:title" content="Simulador de Financiamento de Veículos | Calcule Parcelas com IOF" />
         <meta property="og:description" content="Simule gratuitamente seu financiamento de veículos com taxas atualizadas, inclua IOF e veja a tabela de amortização completa." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://simulei.site/simulador-financiamento-veiculos" />
+        <meta property="og:url" content="https://simuladorfinanciamento.com/simulador-financiamento-veiculos" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Simulador de Financiamento de Veículos | Cálculo com IOF" />
         <meta name="twitter:description" content="Simule gratuitamente seu financiamento de veículos com taxas atualizadas, inclua IOF e veja a tabela de amortização completa." />
@@ -22,7 +22,7 @@ export default function VehicleFinance() {
               "@context": "https://schema.org",
               "@type": "WebApplication",
               "name": "Simulador de Financiamento de Veículos",
-              "url": "https://simulei.site/simulador-financiamento-veiculos",
+              "url": "https://simuladorfinanciamento.com/simulador-financiamento-veiculos",
               "description": "Simule financiamentos de veículos com cálculo de IOF e tabela de amortização completa.",
               "applicationCategory": "FinanceApplication",
               "offers": {
