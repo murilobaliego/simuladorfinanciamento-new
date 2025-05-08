@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, Calculator, Car, Home, CreditCard, BadgeDollarSign, ChevronDown, Settings, RefreshCw, BarChart2, PiggyBank, DollarSign, Truck, Bike } from "lucide-react";
+import { Menu, X, Calculator, Car, Home, CreditCard, BadgeDollarSign, ChevronDown, Settings, RefreshCw, BarChart2, PiggyBank, DollarSign, Truck, Bike, Banknote } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,7 +54,10 @@ export default function Navbar() {
                     location === '/capacidade-pagamento' || 
                     location === '/comparativo-amortizacao' ||
                     location === '/calculadora-entrada-ideal' ||
-                    location === '/leasing-vs-financiamento';
+                    location === '/leasing-vs-financiamento' ||
+                    location === '/simulador-parcela-balao' ||
+                    location === '/financiamento-parcela-balao' ||
+                    location === '/financiamento-vfg';
 
   return (
     <header className="bg-primary text-white shadow-md">
@@ -202,6 +205,15 @@ export default function Navbar() {
                       <Bike className="h-4 w-4 mr-2 text-primary" />
                       <span>Financiamento de Motos</span>
                     </Link>
+                    
+                    <Link
+                      href="/simulador-parcela-balao"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <Banknote className="h-4 w-4 mr-2 text-primary" />
+                      <span>Financiamento com Parcela Balão</span>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -232,6 +244,9 @@ export default function Navbar() {
                   {location === '/leasing-vs-financiamento' && <span className="text-white">Leasing vs. Financiamento</span>}
                   {isTruckPage && <span className="text-white">Financiamento de Caminhões</span>}
                   {isBikePage && <span className="text-white">Financiamento de Motos</span>}
+                  {location === '/simulador-parcela-balao' && <span className="text-white">Financiamento com Parcela Balão</span>}
+                  {location === '/financiamento-parcela-balao' && <span className="text-white">Financiamento com Parcela Balão</span>}
+                  {location === '/financiamento-vfg' && <span className="text-white">Financiamento com Parcela Balão</span>}
                   {location === '/termos-de-uso' && <span className="text-white">Termos de Uso</span>}
                   {location === '/politica-privacidade' && <span className="text-white">Política de Privacidade</span>}
                 </li>
