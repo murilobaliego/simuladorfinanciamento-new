@@ -120,7 +120,7 @@ export default function ExportButtons({
         doc.setPage(i);
         doc.setFontSize(8);
         doc.text(
-          'Simulador de Financiamento | simulei.site',
+          'Simulador de Financiamento | simuladorfinanciamento.com',
           doc.internal.pageSize.getWidth() / 2,
           doc.internal.pageSize.getHeight() - 10,
           { align: 'center' }

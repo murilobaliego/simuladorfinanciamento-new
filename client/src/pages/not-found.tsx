@@ -93,7 +93,7 @@ export default function NotFound() {
         <div className="text-center text-gray-600 max-w-xl mx-auto">
           <p className="mb-4">
             Se você acredita que este é um erro do nosso site, por favor entre em contato com nossa equipe
-            através do email <a href="mailto:contato@simulei.site" className="text-primary hover:underline">contato@simulei.site</a>.
+            através do email <a href="mailto:contato@simuladorfinanciamento.com" className="text-primary hover:underline">contato@simuladorfinanciamento.com</a>.
           </p>
           
           <p>

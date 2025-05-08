@@ -151,7 +151,7 @@ export default function PrivacyPolicy() {
               Se você tiver dúvidas ou sugestões sobre nossa Política de Privacidade, não hesite em nos contatar:
             </p>
             <p>
-              Email: contato@simulei.site
+              Email: contato@simuladorfinanciamento.com
             </p>
           </div>
         </section>

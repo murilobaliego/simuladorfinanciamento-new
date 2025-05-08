@@ -123,7 +123,7 @@ export default function TermsOfUse() {
               Se você tiver dúvidas ou sugestões sobre nossos Termos de Uso, entre em contato conosco:
             </p>
             <p>
-              Email: contato@simulei.site
+              Email: contato@simuladorfinanciamento.com
             </p>
           </div>
         </section>
