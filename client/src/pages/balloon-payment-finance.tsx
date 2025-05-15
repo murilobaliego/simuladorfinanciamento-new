@@ -435,7 +435,8 @@ export default function BalloonPaymentFinance() {
           </form>
         </Form>
         
-        <AdSense slot="3450512625" format="auto" className="my-8" />
+        {/* Componente AdSense temporariamente desabilitado para ambiente de desenvolvimento */}
+        {/* <AdSense slot="3450512625" format="auto" className="my-8" /> */}
         
         {result && (
           <div className="my-8 animate-in fade-in duration-500">
