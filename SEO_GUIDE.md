@@ -57,12 +57,22 @@ Os seguintes arquivos foram implementados para melhorar o SEO técnico:
 
 ## Service Worker
 
-Implementamos um Service Worker para:
+**Nota: Service Worker temporariamente desativado**  
+
+Preparamos um Service Worker (sw.js) para:
 
 1. Melhorar a performance com caching estratégico
 2. Permitir funcionamento offline limitado
 3. Melhorar experiência de usuário móvel
 4. Suporte a PWA
+
+**Problema Conhecido:** No ambiente de desenvolvimento Vite/SPA, o Service Worker não funciona corretamente porque todos os arquivos são servidos como HTML (retornando um token inesperado '<'). Isso ocorre devido à configuração do servidor de desenvolvimento que roteia todas as solicitações para o index.html.
+
+**Solução para Produção:** Quando o site for implantado em produção, os arquivos estáticos serão servidos corretamente pelo servidor web (Netlify), e o Service Worker funcionará conforme esperado.
+
+**Como Habilitar:**
+1. Para habilitar em produção, descomente o código em main.tsx
+2. Descomente a referência no index.html
 
 ## Otimizações Mobile
 
