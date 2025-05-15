@@ -5,9 +5,12 @@ const CACHE_NAME = 'simulador-financiamento-v1';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/offline.html',
   '/manifest.json',
   '/robots.txt',
-  '/sitemap.xml'
+  '/sitemap.xml',
+  '/images/icon-192x192.svg',
+  '/images/icon-512x512.svg'
 ];
 
 // Instalação do service worker
