@@ -106,7 +106,7 @@ export default function SimuladorFinanciamento() {
             
             <h2 id="o-que-e" className="text-xl font-semibold text-primary mt-6 mb-3">O que é um simulador de financiamento?</h2>
             
-            <p className="mb-4">Um <strong>simulador de financiamento</strong> é uma calculadora online que ajuda você a projetar o valor das prestações e o custo total de um financiamento antes de efetivamente contratar o serviço. Esta ferramenta utiliza fórmulas financeiras complexas, como a Tabela Price e o Sistema de Amortização Constante (SAC), para apresentar resultados precisos e transparentes.</p>
+            <p className="mb-4">Um <strong>simulador de financiamento</strong> é uma calculadora online que ajuda você a projetar o valor das prestações e o custo total de um financiamento antes de efetivamente contratar o serviço. Esta ferramenta utiliza fórmulas financeiras complexas, como a <strong>Tabela Price</strong> e o <strong>Sistema de Amortização Constante (SAC)</strong>, para apresentar resultados precisos e transparentes, semelhantes aos oferecidos por instituições como a <strong>Caixa Econômica Federal</strong> e outros bancos.</p>
             
             <p className="mb-4">Ao utilizar nosso simulador, você pode testar diferentes cenários, variando valores como:</p>
             

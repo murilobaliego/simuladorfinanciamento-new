@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/images/icon-192x192.svg" />
     <link rel="apple-touch-icon" href="/images/icon-192x192.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="description" content="Simulador de financiamento online e gratuito. Calcule financiamento de veículos, imóveis e empréstimos pessoais. Compare condições como na Caixa, Banco do Brasil e outros bancos. Inclui cálculo de IOF e tabela price completa." />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#3b82f6" />
@@ -118,5 +120,6 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script src="/support.js" defer></script>
+    <script src="/web-vitals.js" defer></script>
   </body>
 </html>
