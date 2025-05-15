@@ -47,9 +47,18 @@ O projeto foi convertido para utilizar um backend em PHP. Para executar o backen
    - Resultados formatados em português brasileiro
 
 3. **SEO e Acessibilidade**
-   - Otimização para termos de busca relacionados a financiamento
-   - Páginas com meta tags para compartilhamento
-   - Suporte a leitores de tela
+   - Otimização para termos-chave específicos:
+     - "simulador de financiamento"
+     - "simulador de financiamento de veículos"
+     - "simulador caixa de financiamento"
+     - "tabela price"
+   - Implementação completa de dados estruturados (Schema.org)
+   - Suporte a Progressive Web App (PWA)
+   - Otimizações técnicas para SEO:
+     - Redirecionamentos 301 para URLs canônicas
+     - Sitemap.xml e robots.txt
+     - Metadados Open Graph para compartilhamento
+   - Suporte a leitores de tela e navegação por teclado
 
 4. **Conformidade Legal**
    - Política de Privacidade
@@ -100,3 +109,33 @@ O projeto foi convertido para utilizar um backend em PHP. Para executar o backen
 ## Aviso Legal
 
 Este site é apenas uma ferramenta de simulação financeira para fins informativos. Não é uma instituição financeira e não oferece empréstimos ou financiamentos reais. Os cálculos apresentados são aproximações e podem diferir dos valores oferecidos por instituições financeiras reais.
+
+## Documentação de SEO
+
+Foi criado um documento dedicado com detalhes sobre a implementação SEO:
+
+- Arquivo [SEO_GUIDE.md](./SEO_GUIDE.md) contém:
+  - Lista de termos-chave priorizados
+  - Detalhes sobre dados estruturados Schema.org
+  - Estrutura de URLs e redirecionamentos
+  - Otimizações técnicas implementadas
+  - Guia para adicionar novas páginas
+
+Para melhorar a performance em produção, consulte também:
+- Configurações no arquivo `netlify.toml` para otimização de cache
+- Service Worker para caching de recursos estáticos (desativado em ambiente de dev)
+
+## Hospedagem em Produção
+
+O site está configurado para ser hospedado no Netlify com as seguintes configurações:
+
+1. Domínio principal: `simuladorfinanciamento.com`
+2. Redirecionamentos 301 configurados em `_redirects` e `netlify.toml`
+3. Headers HTTP otimizados para segurança e performance
+4. Configurações específicas para otimização de motores de busca
+
+Para fazer deploy:
+```bash
+npm run build
+netlify deploy --prod
+```
