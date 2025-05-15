@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { Loader2 } from "lucide-react";
+import { Loader2, ShieldAlert } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useToast } from "@/hooks/use-toast";
 import { simularFinanciamentoBalao } from "@/utils/finance";
@@ -20,6 +20,8 @@ import DebtChart from "@/components/simulators/debt-chart";
 import ExportButtons from "@/components/simulators/export-buttons";
 import AdSense from "@/components/ads/ad-sense";
 import HeadSEO from "@/components/seo/head-seo";
+import { useSecureForm } from "@/hooks/use-secure-form";
+import { validateNumberRange } from "@/utils/security";
 
 // Schema de validação do formulário
 const formSchema = z.object({
@@ -42,11 +44,24 @@ const formSchema = z.object({
 
 export default function BalloonPaymentFinance() {
   const [result, setResult] = useState<any>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isTableExpanded, setIsTableExpanded] = useState(false);
   const { toast } = useToast();
   const [tipoVeiculo, setTipoVeiculo] = useState<"carro" | "moto" | "caminhao">("carro");
   const [taxaAjustada, setTaxaAjustada] = useState<number>(1.59);
+  
+  // Inicializa o hook de formulário seguro
+  const {
+    secureSubmit,
+    isSubmitting,
+    isLimited,
+    CsrfInput,
+  } = useSecureForm({
+    formId: 'balloon-payment-form',
+    rateLimiterOptions: {
+      maxAttempts: 15, // Permitimos mais submissões para esse formulário
+      timeWindowMs: 60000 // 1 minuto
+    }
+  });
   
   // Inicializar o formulário
   const form = useForm<z.infer<typeof formSchema>>({
@@ -86,33 +101,67 @@ export default function BalloonPaymentFinance() {
   }
   
   // Função de submissão do formulário
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true);
-    
-    try {
-      // Simular financiamento com parcela balão
-      const simulacao = simularFinanciamentoBalao(
-        values.valorFinanciado,
-        values.taxaJuros,
-        parseInt(values.numParcelas),
-        values.percentualBalao,
-        values.incluirIOF
-      );
-      
-      // Atrasar um pouco para mostrar o loading state
-      setTimeout(() => {
-        setResult(simulacao);
-        setIsSubmitting(false);
-      }, 500);
-    } catch (error) {
-      console.error("Erro ao calcular simulação:", error);
-      toast({
-        title: "Erro ao calcular",
-        description: "Ocorreu um erro ao processar sua simulação. Tente novamente.",
-        variant: "destructive",
-      });
-      setIsSubmitting(false);
-    }
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // Usando o wrapper seguro para a submissão
+    secureSubmit((secureValues) => {
+      try {
+        // Sanitizamos e validamos todos os valores
+        const valorFinanciado = validateNumberRange(
+          Number(secureValues.valorFinanciado), 
+          20000, 
+          1000000, 
+          80000
+        );
+        
+        const taxaJuros = validateNumberRange(
+          Number(secureValues.taxaJuros), 
+          0.1, 
+          5.0, 
+          1.59
+        );
+        
+        // Valida a string do número de parcelas para converter para número
+        let numParcelas = 36; // Valor padrão seguro
+        if (typeof secureValues.numParcelas === 'string' && 
+            ['24', '36', '48', '60'].includes(secureValues.numParcelas)) {
+          numParcelas = parseInt(secureValues.numParcelas);
+        }
+        
+        const percentualBalao = validateNumberRange(
+          Number(secureValues.percentualBalao), 
+          10, 
+          50, 
+          30
+        );
+        
+        // Valida o tipo de veículo
+        let tipoVeiculoSeguro: "carro" | "moto" | "caminhao" = "carro";
+        if (secureValues.tipoVeiculo === "moto" || secureValues.tipoVeiculo === "caminhao") {
+          tipoVeiculoSeguro = secureValues.tipoVeiculo;
+        }
+        
+        // Simular financiamento com parcela balão usando valores sanitizados
+        const simulacao = simularFinanciamentoBalao(
+          valorFinanciado,
+          taxaJuros,
+          numParcelas,
+          percentualBalao,
+          Boolean(secureValues.incluirIOF)
+        );
+        
+        // Atrasar um pouco para mostrar o loading state
+        setTimeout(() => {
+          setResult(simulacao);
+        }, 500);
+      } catch (error) {
+        console.error("Erro ao calcular simulação:", error);
+        toast({
+          title: "Erro ao calcular",
+          description: "Ocorreu um erro ao processar sua simulação. Tente novamente.",
+          variant: "destructive",
+        });
+      }
+    }, values);
   }
 
   return (
