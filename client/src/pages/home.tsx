@@ -32,6 +32,33 @@ export default function Home() {
             }
           `}
         </script>
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "url": "https://simuladorfinanciamento.com/",
+              "name": "Simulador de Financiamento 2024",
+              "description": "Simulador de financiamento para veículos, imóveis e empréstimos pessoais com cálculo de IOF e tabela price completa",
+              "potentialAction": [
+                {
+                  "@type": "SearchAction",
+                  "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "https://simuladorfinanciamento.com/simulador-de-financiamento"
+                  },
+                  "query-input": "required name=search_term"
+                },
+                {
+                  "@type": "SearchAction",
+                  "target": "https://simuladorfinanciamento.com/simulador-de-financiamento",
+                  "query-input": "required name=tipo_financiamento"
+                }
+              ]
+            }
+          `}
+        </script>
       </Helmet>
       <div className="container mx-auto px-4 py-6">
       {/* Hero Banner - Otimizado para SEO */}
