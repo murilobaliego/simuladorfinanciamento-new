@@ -218,6 +218,18 @@ export default function BalloonPaymentFinance() {
         
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="mb-8">
+            {/* Adiciona automaticamente o campo CSRF oculto */}
+            <CsrfInput />
+            
+            {/* Aviso de segurança */}
+            {isLimited && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-800 rounded-md flex items-start">
+                <ShieldAlert className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
+                <p className="text-sm">
+                  Detectamos muitas solicitações em um curto período. Por favor, aguarde alguns instantes antes de tentar novamente.
+                </p>
+              </div>
+            )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <FormField
                 control={form.control}
@@ -232,6 +244,12 @@ export default function BalloonPaymentFinance() {
                           type="number"
                           placeholder="80000"
                           className="pl-10 pr-4 py-3 bg-neutral-100 border-neutral-300"
+                          min="20000"
+                          max="1000000"
+                          step="10000"
+                          pattern="[0-9]*"
+                          inputMode="numeric"
+                          aria-describedby="valorFinanciado-description"
                           {...field}
                         />
                       </div>
@@ -253,8 +271,13 @@ export default function BalloonPaymentFinance() {
                         <Input
                           type="number"
                           step="0.01"
+                          min="0.1"
+                          max="5.0"
                           placeholder="1.59"
                           className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300"
+                          pattern="[0-9]*[.]?[0-9]{0,2}"
+                          inputMode="decimal"
+                          aria-describedby="taxaJuros-description"
                           {...field}
                         />
                         <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
@@ -315,6 +338,9 @@ export default function BalloonPaymentFinance() {
                           step="5"
                           placeholder="30"
                           className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300"
+                          pattern="[0-9]*"
+                          inputMode="numeric"
+                          aria-describedby="percentualBalao-description"
                           {...field}
                         />
                         <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
