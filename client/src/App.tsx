@@ -22,6 +22,7 @@ import TruckFinance from "@/pages/truck-finance";
 import MotorcycleFinance from "@/pages/motorcycle-finance";
 import BalloonPaymentFinance from "@/pages/balloon-payment-finance";
 import SimuladorCaixa from "@/pages/simulador-caixa";
+import SimuladorFinanciamento from "@/pages/simulador-de-financiamento";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -79,6 +80,11 @@ function Router() {
         <Route path="/simulador-caixa-financiamento" component={SimuladorCaixa}/>
         <Route path="/simulador-da-caixa" component={SimuladorCaixa}/>
         <Route path="/caixa-simulador-financiamento" component={SimuladorCaixa}/>
+        
+        {/* Simulador de Financiamento - Rota principal para SEO */}
+        <Route path="/simulador-de-financiamento" component={SimuladorFinanciamento}/>
+        <Route path="/simulador-financiamento" component={SimuladorFinanciamento}/>
+        <Route path="/calculadora-financiamento" component={SimuladorFinanciamento}/>
         
         <Route component={NotFound} />
       </Switch>

@@ -42,7 +42,8 @@ export default function Home() {
             <p className="text-neutral-700 mb-4">Com o melhor <strong>simulador de financiamento</strong> online, você calcula quanto vai pagar por mês no financiamento do seu veículo ou imóvel. Compare condições semelhantes às da <Link href="/simulador-caixa-financiamento" className="text-primary hover:underline">Caixa</Link> e outros bancos.</p>
             <p className="text-neutral-700 mb-6">Nosso <strong>simulador de financiamento de veículos</strong> inclui cálculo de IOF, tabela price completa e sistema de amortização detalhado.</p>
             <div className="flex flex-wrap gap-3">
-              <Link href="/simulador-financiamento-veiculos" className="inline-block bg-primary hover:bg-primary-dark text-white font-medium py-3 px-6 rounded-md shadow-sm transition-colors">Simular financiamento de veículos</Link>
+              <Link href="/simulador-de-financiamento" className="inline-block bg-primary hover:bg-primary-dark text-white font-medium py-3 px-6 rounded-md shadow-sm transition-colors">Simulador de Financiamento</Link>
+              <Link href="/simulador-financiamento-veiculos" className="inline-block bg-white border border-primary hover:bg-primary/10 text-primary font-medium py-3 px-6 rounded-md shadow-sm transition-colors">Financiamento de Veículos</Link>
               <Link href="/simulador-caixa-financiamento" className="inline-block bg-white border border-primary hover:bg-primary/10 text-primary font-medium py-3 px-6 rounded-md shadow-sm transition-colors">Simulador Caixa</Link>
             </div>
           </div>

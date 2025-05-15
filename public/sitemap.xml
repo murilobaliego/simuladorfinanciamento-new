@@ -34,7 +34,15 @@
     <priority>0.8</priority>
   </url>
   
-  <!-- Nova Página Específica Simulador Caixa -->
+  <!-- Página de Simulador de Financiamento (Termo Geral) -->
+  <url>
+    <loc>https://simuladorfinanciamento.com/simulador-de-financiamento</loc>
+    <lastmod>2024-05-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Página Específica Simulador Caixa -->
   <url>
     <loc>https://simuladorfinanciamento.com/simulador-caixa-financiamento</loc>
     <lastmod>2024-05-15</lastmod>

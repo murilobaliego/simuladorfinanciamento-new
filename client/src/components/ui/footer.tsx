@@ -23,6 +23,15 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link 
+                  href="/simulador-de-financiamento" 
+                  className="hover:text-white transition-colors flex items-center"
+                >
+                  <Calculator className="h-4 w-4 mr-1" aria-hidden="true" />
+                  <span>Simulador de Financiamento</span>
+                </Link>
+              </li>
+              <li>
+                <Link 
                   href="/simulador-financiamento-veiculos" 
                   className="hover:text-white transition-colors flex items-center"
                 >
