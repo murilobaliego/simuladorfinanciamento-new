@@ -34,18 +34,22 @@ export default function Home() {
         </script>
       </Helmet>
       <div className="container mx-auto px-4 py-6">
-      {/* Hero Banner */}
+      {/* Hero Banner - Otimizado para SEO */}
       <section className="mb-8 bg-white rounded-lg shadow-md overflow-hidden">
         <div className="flex flex-col md:flex-row">
           <div className="p-6 md:p-8 md:w-3/5">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-primary mb-4">Simule o financiamento do seu veículo</h2>
-            <p className="text-neutral-700 mb-6">Com o nosso simulador, você consegue calcular quanto vai pagar por mês no financiamento do seu carro ou moto. É rápido, fácil e ajuda você a planejar melhor seu orçamento.</p>
-            <Link href="/financiamento-veiculo" className="inline-block bg-primary hover:bg-primary-dark text-white font-medium py-3 px-8 rounded-md shadow-sm transition-colors">Fazer simulação agora</Link>
+            <h1 className="font-heading text-2xl md:text-3xl font-bold text-primary mb-4">Simulador de Financiamento 2024</h1>
+            <p className="text-neutral-700 mb-4">Com o melhor <strong>simulador de financiamento</strong> online, você calcula quanto vai pagar por mês no financiamento do seu veículo ou imóvel. Compare condições semelhantes às da <Link href="/simulador-caixa-financiamento" className="text-primary hover:underline">Caixa</Link> e outros bancos.</p>
+            <p className="text-neutral-700 mb-6">Nosso <strong>simulador de financiamento de veículos</strong> inclui cálculo de IOF, tabela price completa e sistema de amortização detalhado.</p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/simulador-financiamento-veiculos" className="inline-block bg-primary hover:bg-primary-dark text-white font-medium py-3 px-6 rounded-md shadow-sm transition-colors">Simular financiamento de veículos</Link>
+              <Link href="/simulador-caixa-financiamento" className="inline-block bg-white border border-primary hover:bg-primary/10 text-primary font-medium py-3 px-6 rounded-md shadow-sm transition-colors">Simulador Caixa</Link>
+            </div>
           </div>
           <div className="md:w-2/5 bg-neutral-200 h-40 md:h-auto">
             <img 
               src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
-              alt="Pessoa calculando financiamento" 
+              alt="Pessoa usando simulador de financiamento" 
               className="w-full h-full object-cover"
             />
           </div>
@@ -138,6 +142,58 @@ export default function Home() {
         </div>
       </section>
       
+      {/* Simulador Caixa Section - Otimizado para SEO */}
+      <section id="simulador-caixa" className="mb-12 bg-primary/5 rounded-lg shadow-md p-6">
+        <h2 className="font-heading text-2xl font-bold text-primary mb-4">Simulador Caixa de Financiamento</h2>
+        
+        <div className="flex flex-col md:flex-row gap-6">
+          <div className="md:w-2/3 space-y-4">
+            <p className="text-neutral-700">Nosso <strong>simulador Caixa de financiamento</strong> permite comparar condições similares às oferecidas pela Caixa Econômica Federal, um dos bancos mais populares para financiamento de imóveis e veículos no Brasil.</p>
+            
+            <p className="text-neutral-700">Com nossa calculadora, você pode simular:</p>
+            
+            <ul className="list-disc pl-5 space-y-2 text-neutral-700">
+              <li>Financiamento de veículos com taxas competitivas (a partir de 1,09% a.m.)</li>
+              <li>Financiamento imobiliário com prazos de até 35 anos</li>
+              <li>Comparativo entre sistemas de amortização SAC e PRICE</li>
+              <li>Cálculo completo com inclusão de IOF e outras taxas</li>
+            </ul>
+            
+            <div className="flex flex-wrap gap-3 mt-6">
+              <Link href="/simulador-caixa-financiamento" className="inline-block bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded-md shadow-sm transition-colors text-sm">
+                Acessar Simulador Caixa
+              </Link>
+              <Link href="/comparativo-amortizacao" className="inline-block bg-white border border-primary hover:bg-primary/10 text-primary font-medium py-2 px-4 rounded-md shadow-sm transition-colors text-sm">
+                Comparar SAC e PRICE
+              </Link>
+            </div>
+          </div>
+          
+          <div className="md:w-1/3 bg-white p-4 rounded-lg shadow-sm">
+            <h3 className="font-medium text-lg text-primary mb-3">Taxas médias de referência - Caixa</h3>
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between py-1 border-b">
+                <span>Veículos novos:</span>
+                <span className="font-medium text-green-600">1,09% a 1,89% a.m.</span>
+              </div>
+              <div className="flex justify-between py-1 border-b">
+                <span>Veículos usados:</span>
+                <span className="font-medium text-green-600">1,29% a 1,99% a.m.</span>
+              </div>
+              <div className="flex justify-between py-1 border-b">
+                <span>Imóveis (SBPE):</span>
+                <span className="font-medium text-green-600">9,99% a 11,5% a.a.</span>
+              </div>
+              <div className="flex justify-between py-1">
+                <span>Imóveis (MCMV):</span>
+                <span className="font-medium text-green-600">7,66% a 8,16% a.a.</span>
+              </div>
+              <p className="text-xs text-neutral-500 italic mt-2">* Taxas aproximadas para referência.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* About Section */}
       <section id="sobre" className="bg-white rounded-lg shadow-md p-6 mb-12">
         <h2 className="font-heading text-2xl font-bold text-primary mb-4">Sobre o Simulador de Financiamento</h2>
@@ -154,11 +210,43 @@ export default function Home() {
             <li>Entender quanto pagará de juros no total</li>
           </ul>
           
-          <p>Os cálculos são baseados em métodos financeiros amplamente utilizados, como a Tabela Price (Sistema Francês de Amortização) e o SAC (Sistema de Amortização Constante).</p>
+          <p>Os cálculos são baseados em métodos financeiros amplamente utilizados, como a <strong>Tabela Price</strong> (Sistema Francês de Amortização) e o <strong>SAC</strong> (Sistema de Amortização Constante).</p>
           
           <div className="bg-neutral-100 border-l-4 border-secondary p-4 mt-6">
             <p className="text-sm font-medium">AVISO IMPORTANTE:</p>
             <p className="text-sm">Não somos uma instituição financeira e não oferecemos empréstimos ou financiamentos. Este site fornece apenas ferramentas de simulação para cálculos e pesquisa. Os resultados são aproximados e podem variar conforme as condições reais oferecidas pelas instituições financeiras. Recomendamos sempre consultar um banco ou financeira para obter condições oficiais antes de tomar qualquer decisão.</p>
+          </div>
+        </div>
+      </section>
+      
+      {/* FAQ Section com termos-chave para SEO */}
+      <section id="perguntas-frequentes" className="bg-white rounded-lg shadow-md p-6 mb-12">
+        <h2 className="font-heading text-2xl font-bold text-primary mb-6">Perguntas Frequentes sobre Simuladores de Financiamento</h2>
+        
+        <div className="space-y-5">
+          <div className="border-b pb-4">
+            <h3 className="font-medium text-lg">O que é um simulador de financiamento?</h3>
+            <p className="text-neutral-700">Um simulador de financiamento é uma ferramenta online que permite calcular antecipadamente o valor das parcelas, juros, amortização e custo total de um financiamento, seja de veículos, imóveis ou empréstimos pessoais. O objetivo é ajudar o consumidor a planejar melhor antes de assumir um compromisso financeiro.</p>
+          </div>
+          
+          <div className="border-b pb-4">
+            <h3 className="font-medium text-lg">O simulador da Caixa é preciso?</h3>
+            <p className="text-neutral-700">O simulador da Caixa Econômica Federal, assim como outros simuladores de bancos, fornece estimativas baseadas em condições padrão. Nossa ferramenta oferece cálculos similares, permitindo comparar diferentes cenários. Para condições exatas, é sempre recomendável consultar diretamente a instituição financeira após a simulação inicial.</p>
+          </div>
+          
+          <div className="border-b pb-4">
+            <h3 className="font-medium text-lg">Como usar o simulador de financiamento de veículos?</h3>
+            <p className="text-neutral-700">Para usar nosso simulador de financiamento de veículos, basta inserir o valor que deseja financiar, a taxa de juros mensal, o número de parcelas e se deseja incluir o IOF no cálculo. Nosso sistema calculará automaticamente o valor das parcelas, o total a pagar, o total de juros e gerará a tabela completa de amortização.</p>
+          </div>
+          
+          <div className="border-b pb-4">
+            <h3 className="font-medium text-lg">Qual a diferença entre os sistemas SAC e PRICE?</h3>
+            <p className="text-neutral-700">No sistema PRICE (Tabela Price), as parcelas são fixas do início ao fim do financiamento. Já no sistema SAC (Sistema de Amortização Constante), a amortização é fixa e os juros decrescentes, fazendo com que o valor das parcelas diminua ao longo do tempo. Nosso simulador permite comparar ambos os sistemas para você escolher o mais vantajoso.</p>
+          </div>
+          
+          <div>
+            <h3 className="font-medium text-lg">O simulador de financiamento inclui o IOF?</h3>
+            <p className="text-neutral-700">Sim, nosso simulador de financiamento de veículos permite incluir o cálculo do IOF (Imposto sobre Operações Financeiras), composto por uma alíquota diária de 0,0082% e uma alíquota adicional de 0,38% sobre o valor total financiado, conforme a legislação brasileira.</p>
           </div>
         </div>
       </section>

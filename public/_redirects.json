@@ -1,0 +1,42 @@
+[
+  {
+    "source": "/vehicle-finance",
+    "destination": "/simulador-financiamento-veiculos",
+    "permanent": true
+  },
+  {
+    "source": "/financiamento-veiculo",
+    "destination": "/simulador-financiamento-veiculos",
+    "permanent": true
+  },
+  {
+    "source": "/simulador-da-caixa",
+    "destination": "/simulador-caixa-financiamento",
+    "permanent": true
+  },
+  {
+    "source": "/caixa-simulador-financiamento",
+    "destination": "/simulador-caixa-financiamento",
+    "permanent": true
+  },
+  {
+    "source": "/financiamento-parcela-balao",
+    "destination": "/simulador-parcela-balao",
+    "permanent": true
+  },
+  {
+    "source": "/financiamento-vfg",
+    "destination": "/simulador-parcela-balao",
+    "permanent": true
+  },
+  {
+    "source": "/financiamento-caminhoes",
+    "destination": "/financiamento-caminhao",
+    "permanent": true
+  },
+  {
+    "source": "/financiamento-motos",
+    "destination": "/financiamento-moto",
+    "permanent": true
+  }
+]

@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { ScrollLink } from "./scroll-link";
-import { Calculator, Car, Home, CreditCard, BadgeDollarSign, Info, Mail, FileText, Coffee } from "lucide-react";
+import { Calculator, Car, Home, CreditCard, BadgeDollarSign, Info, Mail, FileText, Coffee, Building, Bike, Truck, Banknote } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -19,7 +19,7 @@ export default function Footer() {
           </div>
           
           <div>
-            <h3 className="font-heading text-white text-lg font-semibold mb-4">Calculadoras</h3>
+            <h3 className="font-heading text-white text-lg font-semibold mb-4">Simuladores</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link 
@@ -28,6 +28,15 @@ export default function Footer() {
                 >
                   <Car className="h-4 w-4 mr-1" aria-hidden="true" />
                   <span>Simulador de Financiamento de Veículos</span>
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/simulador-caixa-financiamento" 
+                  className="hover:text-white transition-colors flex items-center"
+                >
+                  <Building className="h-4 w-4 mr-1" aria-hidden="true" />
+                  <span>Simulador Caixa de Financiamento</span>
                 </Link>
               </li>
               <li>
@@ -164,13 +173,17 @@ export default function Footer() {
         <div className="mt-6 pt-4 border-t border-neutral-700 text-xs">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             <Link href="/simulador-financiamento-veiculos" className="text-neutral-500 hover:text-neutral-400">Simulador de Financiamento de Carros</Link>
+            <Link href="/simulador-caixa-financiamento" className="text-neutral-500 hover:text-neutral-400">Simulador Caixa de Financiamento</Link>
             <Link href="/simulador-financiamento-veiculos" className="text-neutral-500 hover:text-neutral-400">Calculadora de Financiamento de Veículos</Link>
+            <Link href="/financiamento-moto" className="text-neutral-500 hover:text-neutral-400">Financiamento de Motos</Link>
             <Link href="/simulador-financiamento-veiculos" className="text-neutral-500 hover:text-neutral-400">Tabela Price para Veículos</Link>
+            <Link href="/financiamento-caminhao" className="text-neutral-500 hover:text-neutral-400">Financiamento de Caminhões</Link>
             <Link href="/simulador-financiamento-veiculos" className="text-neutral-500 hover:text-neutral-400">Cálculo de Financiamento com IOF</Link>
+            <Link href="/comparativo-amortizacao" className="text-neutral-500 hover:text-neutral-400">Comparativo SAC e Price</Link>
             <Link href="/simulador-financiamento-veiculos" className="text-neutral-500 hover:text-neutral-400">Simulador de Parcelas para Carros</Link>
-            <Link href="/simulador-financiamento-veiculos" className="text-neutral-500 hover:text-neutral-400">Simulação de Financiamento Automotivo</Link>
-            <Link href="/simulador-financiamento-veiculos" className="text-neutral-500 hover:text-neutral-400">Amortização de Financiamento</Link>
-            <Link href="/simulador-financiamento-veiculos" className="text-neutral-500 hover:text-neutral-400">Comparativo de Financiamento</Link>
+            <Link href="/simulador-parcela-balao" className="text-neutral-500 hover:text-neutral-400">Financiamento com Parcela Balão</Link>
+            <Link href="/simulador-refinanciamento" className="text-neutral-500 hover:text-neutral-400">Simulador de Refinanciamento</Link>
+            <Link href="/comparativo-amortizacao" className="text-neutral-500 hover:text-neutral-400">Amortização de Financiamento</Link>
           </div>
         </div>
       </div>

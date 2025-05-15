@@ -5,17 +5,17 @@ export default function VehicleFinance() {
   return (
     <>
       <Helmet>
-        <title>Simulador de Financiamento de Veículos | Calcule Parcelas com IOF</title>
-        <meta name="description" content="Simule seu financiamento de veículos com nosso simulador gratuito. Calcule parcelas, juros, IOF e veja a tabela de amortização completa. Financie seu carro, moto ou caminhão." />
-        <meta name="keywords" content="simulador de financiamento de veículos, financiamento de carros, tabela price, simulador de parcelas, cálculo IOF, melhor financiamento" />
+        <title>Simulador de Financiamento de Veículos 2024 | Calcule Parcelas com IOF</title>
+        <meta name="description" content="Use o melhor simulador de financiamento de veículos. Calcule prestações, juros, IOF e tabela de amortização completa. Compare como na Caixa e veja quanto vai pagar por mês no financiamento do seu carro, moto ou caminhão." />
+        <meta name="keywords" content="simulador de financiamento de veículos, simulador de financiamento, financiamento de carros, simulador caixa de financiamento, tabela price, simulador de parcelas, cálculo IOF, financiamento de automóveis" />
         <link rel="canonical" href="https://simuladorfinanciamento.com/simulador-financiamento-veiculos" />
-        <meta property="og:title" content="Simulador de Financiamento de Veículos | Calcule Parcelas com IOF" />
-        <meta property="og:description" content="Simule gratuitamente seu financiamento de veículos com taxas atualizadas, inclua IOF e veja a tabela de amortização completa." />
+        <meta property="og:title" content="Simulador de Financiamento de Veículos 2024 | Calcule Parcelas com IOF" />
+        <meta property="og:description" content="Use o melhor simulador de financiamento de veículos. Calcule parcelas, juros, IOF e amortização. Compare condições como na Caixa e veja quanto pagará mensalmente." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://simuladorfinanciamento.com/simulador-financiamento-veiculos" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Simulador de Financiamento de Veículos | Cálculo com IOF" />
-        <meta name="twitter:description" content="Simule gratuitamente seu financiamento de veículos com taxas atualizadas, inclua IOF e veja a tabela de amortização completa." />
+        <meta name="twitter:title" content="Simulador de Financiamento de Veículos 2024 | Cálculo com IOF" />
+        <meta name="twitter:description" content="Use o melhor simulador de financiamento de veículos. Calcule parcelas, juros, IOF e amortização. Compare condições como na Caixa e veja quanto pagará mensalmente." />
         <script type="application/ld+json">
           {`
             {
@@ -30,7 +30,93 @@ export default function VehicleFinance() {
                 "price": "0",
                 "priceCurrency": "BRL"
               },
-              "operatingSystem": "Web"
+              "operatingSystem": "Web",
+              "featureList": [
+                "Cálculo de IOF",
+                "Tabela Price",
+                "Amortização detalhada",
+                "Exportação em PDF e Excel",
+                "Comparação entre bancos",
+                "Simulação com diferentes prazos"
+              ]
+            }
+          `}
+        </script>
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Qual é a melhor taxa de juros para financiamento de veículos?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Atualmente, as melhores taxas para financiamento de veículos no Brasil estão entre 0,99% e 1,99% ao mês, mas isso pode variar conforme seu histórico de crédito, relacionamento bancário e as condições de mercado."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "É possível financiar 100% do valor do veículo?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A maioria das instituições financeiras exige uma entrada mínima de 10% a 20% do valor do veículo, mas algumas podem oferecer financiamento de 100% em condições especiais, geralmente com taxas mais altas."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "O simulador de financiamento mostra o valor real que vou pagar?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Nosso simulador calcula valores aproximados baseados nas informações fornecidas. O valor final pode incluir outros custos como seguros, tarifas bancárias e impostos específicos que variam conforme a instituição financeira e suas políticas."
+                  }
+                }
+              ]
+            }
+          `}
+        </script>
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Início",
+                  "item": "https://simuladorfinanciamento.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Simulador de Financiamento de Veículos",
+                  "item": "https://simuladorfinanciamento.com/simulador-financiamento-veiculos"
+                }
+              ]
+            }
+          `}
+        </script>
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FinancialProduct",
+              "name": "Financiamento de Veículos",
+              "description": "Financiamento para aquisição de carros, motos e caminhões com taxas competitivas",
+              "category": "Financiamento Automotivo",
+              "interestRate": {
+                "@type": "QuantitativeValue",
+                "minValue": 0.99,
+                "maxValue": 2.5,
+                "unitText": "PERCENT_PER_MONTH"
+              },
+              "feesAndCommissionsSpecification": "Inclui IOF de 0,0082% ao dia mais 0,38% fixo sobre o valor da operação",
+              "termsOfService": "https://simuladorfinanciamento.com/termos-de-uso"
             }
           `}
         </script>
