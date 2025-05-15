@@ -1,5 +1,23 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /*.json$
+
+# Otimizações para SEO
+Crawl-delay: 1
+
+# Páginas mais importantes (prioridade de crawling)
+Allow: /simulador-de-financiamento
+Allow: /simulador-financiamento-veiculos
+Allow: /simulador-caixa-financiamento
+Allow: /financiamento-imobiliario
+Allow: /comparativo-amortizacao
+
+# Arquivos especiais
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /humans.txt
+Allow: /.well-known/
 
 # Sitemap
 Sitemap: https://simuladorfinanciamento.com/sitemap.xml

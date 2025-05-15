@@ -1,0 +1,22 @@
+/* EQUIPE */
+Desenvolvedor: Equipe Simulador de Financiamento
+Contato: contato@simuladorfinanciamento.com
+Local: Brasil
+Idioma: Português Brasileiro
+
+/* SITE */
+Última atualização: 2024/05/15
+Linguagens: HTML, CSS, JavaScript, TypeScript
+Frameworks: React, TailwindCSS
+Ferramentas: Vite, Drizzle
+Hospedagem: Netlify
+
+/* AGRADECIMENTOS */
+- A todos os usuários que utilizam nosso site para simulações financeiras
+- Aos parceiros que nos ajudam a melhorar as calculadoras constantemente
+
+/* INFORMAÇÕES */
+- Simuladores financeiros completos para diferentes tipos de crédito
+- Cálculos com tabela price, sistema SAC e custo efetivo total
+- Inclui IOF e outras taxas financeiras aplicáveis no Brasil
+- Exportação de resultados em PDF e Excel

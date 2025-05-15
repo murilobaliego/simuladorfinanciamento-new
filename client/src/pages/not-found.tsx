@@ -36,7 +36,7 @@ export default function NotFound() {
             </Button>
             
             <Button variant="outline" asChild size="lg" className="flex items-center gap-2">
-              <Link href="/simulador-financiamento-veiculos">
+              <Link href="/simulador-de-financiamento">
                 <Calculator className="h-5 w-5" />
                 Acessar Simuladores
               </Link>
@@ -52,6 +52,12 @@ export default function NotFound() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <SimulatorLink 
+                title="Simulador de Financiamento" 
+                description="Calcule parcelas e juros para diversos tipos de financiamento em um só lugar."
+                href="/simulador-de-financiamento"
+              />
+            
+              <SimulatorLink 
                 title="Financiamento de Veículos" 
                 description="Simule parcelas, juros e custo total para financiamento de carros."
                 href="/simulador-financiamento-veiculos"
@@ -60,13 +66,13 @@ export default function NotFound() {
               <SimulatorLink 
                 title="Financiamento de Motos" 
                 description="Calcule as melhores condições para financiar sua motocicleta."
-                href="/financiamento-motos"
+                href="/financiamento-moto"
               />
               
               <SimulatorLink 
                 title="Financiamento de Caminhões" 
                 description="Simulador especializado para veículos pesados e implementos."
-                href="/financiamento-caminhoes"
+                href="/financiamento-caminhao"
               />
               
               <SimulatorLink 
