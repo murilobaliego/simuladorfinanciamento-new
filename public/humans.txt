@@ -5,7 +5,7 @@ Local: Brasil
 Idioma: Português Brasileiro
 
 /* SITE */
-Última atualização: 2024/05/15
+Última atualização: 2025/05/15
 Linguagens: HTML, CSS, JavaScript, TypeScript
 Frameworks: React, TailwindCSS
 Ferramentas: Vite, Drizzle

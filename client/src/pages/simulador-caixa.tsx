@@ -112,7 +112,7 @@ export default function SimuladorCaixa() {
               <li><strong>Simulação online:</strong> Disponibilidade de simulador no site oficial da instituição</li>
             </ul>
             
-            <h2 id="taxas-caixa" className="text-xl font-semibold text-primary mt-6 mb-3">Taxas de Financiamento da Caixa Econômica Federal (2023/2024)</h2>
+            <h2 id="taxas-caixa" className="text-xl font-semibold text-primary mt-6 mb-3">Taxas de Financiamento da Caixa Econômica Federal (2024/2025)</h2>
             
             <p className="mb-4">Nossa ferramenta permite simular financiamentos com taxas próximas às praticadas pela Caixa Econômica Federal. Abaixo, uma tabela comparativa das taxas médias atuais:</p>
             

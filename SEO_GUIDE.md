@@ -117,4 +117,4 @@ Cada página tem metadados personalizados:
 
 ---
 
-Última atualização: 15 de maio de 2024
+Última atualização: 15 de maio de 2025

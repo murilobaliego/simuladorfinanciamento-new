@@ -39,7 +39,7 @@ export default function Home() {
               "@context": "https://schema.org",
               "@type": "WebSite",
               "url": "https://simuladorfinanciamento.com/",
-              "name": "Simulador de Financiamento 2024",
+              "name": "Simulador de Financiamento 2025",
               "description": "Simulador de financiamento para veículos, imóveis e empréstimos pessoais com cálculo de IOF e tabela price completa",
               "potentialAction": [
                 {
@@ -65,7 +65,7 @@ export default function Home() {
       <section className="mb-8 bg-white rounded-lg shadow-md overflow-hidden">
         <div className="flex flex-col md:flex-row">
           <div className="p-6 md:p-8 md:w-3/5">
-            <h1 className="font-heading text-2xl md:text-3xl font-bold text-primary mb-4">Simulador de Financiamento 2024</h1>
+            <h1 className="font-heading text-2xl md:text-3xl font-bold text-primary mb-4">Simulador de Financiamento 2025</h1>
             <p className="text-neutral-700 mb-4">Com o melhor <strong>simulador de financiamento</strong> online, você calcula quanto vai pagar por mês no financiamento do seu veículo ou imóvel. Compare condições semelhantes às da <Link href="/simulador-caixa-financiamento" className="text-primary hover:underline">Caixa</Link> e outros bancos.</p>
             <p className="text-neutral-700 mb-6">Nosso <strong>simulador de financiamento de veículos</strong> inclui cálculo de IOF, tabela price completa e sistema de amortização detalhado.</p>
             <div className="flex flex-wrap gap-3">

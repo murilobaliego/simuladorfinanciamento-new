@@ -5,16 +5,16 @@ export default function VehicleFinance() {
   return (
     <>
       <Helmet>
-        <title>Simulador de Financiamento de Veículos 2024 | Calcule Parcelas com IOF</title>
+        <title>Simulador de Financiamento de Veículos 2025 | Calcule Parcelas com IOF</title>
         <meta name="description" content="Use o melhor simulador de financiamento de veículos. Calcule prestações, juros, IOF e tabela de amortização completa. Compare como na Caixa e veja quanto vai pagar por mês no financiamento do seu carro, moto ou caminhão." />
         <meta name="keywords" content="simulador de financiamento de veículos, simulador de financiamento, financiamento de carros, simulador caixa de financiamento, tabela price, simulador de parcelas, cálculo IOF, financiamento de automóveis" />
         <link rel="canonical" href="https://simuladorfinanciamento.com/simulador-financiamento-veiculos" />
-        <meta property="og:title" content="Simulador de Financiamento de Veículos 2024 | Calcule Parcelas com IOF" />
+        <meta property="og:title" content="Simulador de Financiamento de Veículos 2025 | Calcule Parcelas com IOF" />
         <meta property="og:description" content="Use o melhor simulador de financiamento de veículos. Calcule parcelas, juros, IOF e amortização. Compare condições como na Caixa e veja quanto pagará mensalmente." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://simuladorfinanciamento.com/simulador-financiamento-veiculos" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Simulador de Financiamento de Veículos 2024 | Cálculo com IOF" />
+        <meta name="twitter:title" content="Simulador de Financiamento de Veículos 2025 | Cálculo com IOF" />
         <meta name="twitter:description" content="Use o melhor simulador de financiamento de veículos. Calcule parcelas, juros, IOF e amortização. Compare condições como na Caixa e veja quanto pagará mensalmente." />
         <script type="application/ld+json">
           {`
@@ -186,7 +186,7 @@ export default function VehicleFinance() {
           <VehicleForm />
           
           <div id="melhores-taxas" className="bg-gray-50 p-5 rounded-lg border border-gray-200 my-8">
-            <h2 className="text-xl font-semibold text-primary mb-4">Melhores Taxas de Financiamento de Veículos em 2023/2024</h2>
+            <h2 className="text-xl font-semibold text-primary mb-4">Melhores Taxas de Financiamento de Veículos em 2024/2025</h2>
             <p className="mb-3">As taxas de juros para financiamento de veículos variam conforme o banco, o perfil do cliente e as condições de mercado. Abaixo comparamos as taxas médias praticadas pelos principais bancos:</p>
             
             <div className="overflow-x-auto">
