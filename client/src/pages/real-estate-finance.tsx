@@ -2,7 +2,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
+import { Loader2, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -14,6 +14,8 @@ import { SimulationResult } from "@/components/simulators/vehicle-form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { simularFinanciamento } from "@/utils/finance";
 import ExportButtons from "@/components/simulators/export-buttons";
+import { useSecureForm } from "@/hooks/use-secure-form";
+import { validateNumberRange } from "@/utils/security";
 
 const formSchema = calculatorSchema.extend({
   valorFinanciado: z.coerce
@@ -33,8 +35,21 @@ const formSchema = calculatorSchema.extend({
 export default function RealEstateFinance() {
   const [result, setResult] = useState<SimulationResult | null>(null);
   const [isTableExpanded, setIsTableExpanded] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  
+  // Inicializa o hook de formulário seguro
+  const {
+    secureSubmit,
+    isSubmitting,
+    isLimited,
+    CsrfInput,
+  } = useSecureForm({
+    formId: 'real-estate-finance-form',
+    rateLimiterOptions: {
+      maxAttempts: 15, // Permitimos mais submissões para esse formulário
+      timeWindowMs: 60000 // 1 minuto
+    }
+  });
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,36 +62,63 @@ export default function RealEstateFinance() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true);
-    try {
-      // Usar a função simularFinanciamento que engloba todos os cálculos necessários
-      const data = simularFinanciamento(
-        values.valorFinanciado, 
-        values.taxaJuros, 
-        values.numParcelas, 
-        false, // não incluir IOF para financiamento imobiliário
-        values.sistema // sistema de amortização (price ou sac)
-      );
-      
-      setResult(data);
-      
-      // Auto scroll to results
-      setTimeout(() => {
-        const resultElement = document.getElementById("resultado-simulacao");
-        if (resultElement) {
-          resultElement.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-    } catch (error) {
-      toast({
-        title: "Erro ao calcular",
-        description: "Ocorreu um erro ao processar sua simulação. Tente novamente.",
-        variant: "destructive",
-      });
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Usando o wrapper seguro para a submissão
+    secureSubmit((secureValues) => {
+      try {
+        // Validamos e sanitizamos os valores para proteção adicional
+        const valorFinanciado = validateNumberRange(
+          Number(secureValues.valorFinanciado), 
+          50000, 
+          10000000, 
+          300000
+        );
+        
+        const taxaJuros = validateNumberRange(
+          Number(secureValues.taxaJuros), 
+          0.1, 
+          2, 
+          0.8
+        );
+        
+        const numParcelas = validateNumberRange(
+          Number(secureValues.numParcelas), 
+          60, 
+          420, 
+          360
+        );
+        
+        // Verificamos se o sistema é válido
+        const sistema = (secureValues.sistema === "price" || secureValues.sistema === "sac") 
+          ? secureValues.sistema 
+          : "price";
+        
+        // Usar a função simularFinanciamento com valores sanitizados
+        const data = simularFinanciamento(
+          valorFinanciado, 
+          taxaJuros, 
+          numParcelas, 
+          false, // não incluir IOF para financiamento imobiliário
+          sistema
+        );
+        
+        setResult(data);
+        
+        // Auto scroll to results
+        setTimeout(() => {
+          const resultElement = document.getElementById("resultado-simulacao");
+          if (resultElement) {
+            resultElement.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      } catch (error) {
+        toast({
+          title: "Erro ao calcular",
+          description: "Ocorreu um erro ao processar sua simulação. Tente novamente.",
+          variant: "destructive",
+        });
+        console.error(error);
+      }
+    }, values);
   }
 
   return (
@@ -105,6 +147,19 @@ export default function RealEstateFinance() {
         
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="mb-8">
+            {/* Adiciona automaticamente o campo CSRF oculto */}
+            <CsrfInput />
+            
+            {/* Aviso de segurança */}
+            {isLimited && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-800 rounded-md flex items-start">
+                <ShieldAlert className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
+                <p className="text-sm">
+                  Detectamos muitas solicitações em um curto período. Por favor, aguarde alguns instantes antes de tentar novamente.
+                </p>
+              </div>
+            )}
+          
             <Tabs defaultValue="price" onValueChange={(value) => form.setValue("sistema", value as "price" | "sac")}>
               <TabsList className="mb-6">
                 <TabsTrigger value="price">Tabela Price</TabsTrigger>
@@ -126,6 +181,12 @@ export default function RealEstateFinance() {
                           type="number"
                           placeholder="300000"
                           className="pl-10 pr-4 py-3 bg-neutral-100 border-neutral-300"
+                          min="50000"
+                          max="10000000"
+                          step="10000"
+                          pattern="[0-9]*"
+                          inputMode="numeric"
+                          aria-describedby="valorFinanciado-description"
                           {...field}
                         />
                       </div>
@@ -147,8 +208,13 @@ export default function RealEstateFinance() {
                         <Input
                           type="number"
                           step="0.01"
+                          min="0.1"
+                          max="2.0"
                           placeholder="0.8"
                           className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300"
+                          pattern="[0-9]*\.?[0-9]*"
+                          inputMode="decimal"
+                          aria-describedby="taxaJuros-description"
                           {...field}
                         />
                         <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>

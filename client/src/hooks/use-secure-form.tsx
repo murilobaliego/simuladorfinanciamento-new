@@ -1,7 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useCsrfProtection } from './use-csrf-protection';
 import { RateLimiter } from '../utils/rate-limiter';
 import { sanitizeInput, sanitizeNumber } from '../utils/security';
+import { securityMonitor } from '../utils/security-monitoring';
 import { useToast } from './use-toast';
 
 // Configurações padrão para o rate limiter
@@ -95,6 +96,20 @@ export function useSecureForm(options: UseSecureFormOptions = {}) {
   /**
    * Wrapper para a função de submissão que adiciona proteções
    */
+  // Verifica e monitora atividades suspeitas
+  useEffect(() => {
+    // Detecta tentativas de depuração a cada 10 segundos
+    const intervalId = setInterval(() => {
+      const isDebugging = securityMonitor.detectDebuggingAttempt();
+      if (isDebugging) {
+        // Esta verificação é apenas para registrar, não para bloquear usuários legítimos
+        console.log('Ferramentas de desenvolvedor detectadas - esta é uma verificação informativa');
+      }
+    }, 10000);
+    
+    return () => clearInterval(intervalId);
+  }, []);
+  
   const secureSubmit = useCallback(
     (onSubmit: (values: Record<string, any>) => void | Promise<void>, values: Record<string, any>) => {
       // Verifica rate limiting
@@ -109,6 +124,13 @@ export function useSecureForm(options: UseSecureFormOptions = {}) {
         setIsLimited(true);
         const segundosRestantes = Math.ceil(limitCheck.remainingTime / 1000);
         
+        // Registra o evento de segurança
+        securityMonitor.logEvent('rate_limit_exceeded', {
+          formId,
+          attempts: limitCheck.attempts,
+          maxAttempts: limitCheck.maxAttempts,
+        }, 'medium');
+        
         toast({
           title: "Excesso de solicitações",
           description: `Muitas tentativas em um curto período. Tente novamente em ${segundosRestantes} segundos.`,
@@ -122,14 +144,56 @@ export function useSecureForm(options: UseSecureFormOptions = {}) {
       setIsSubmitting(true);
       
       try {
+        // Verifica padrões suspeitos nos valores de texto
+        let hasSuspiciousPattern = false;
+        
+        Object.keys(values).forEach(key => {
+          if (typeof values[key] === 'string' && values[key].length > 0) {
+            if (securityMonitor.detectSuspiciousPatterns(values[key])) {
+              hasSuspiciousPattern = true;
+            }
+          }
+        });
+        
+        // Se detectou padrões suspeitos, rejeita a submissão
+        if (hasSuspiciousPattern) {
+          setIsSubmitting(false);
+          
+          toast({
+            title: "Entrada inválida detectada",
+            description: "Por favor, verifique os dados inseridos e tente novamente.",
+            variant: "destructive"
+          });
+          
+          return;
+        }
+        
         // Sanitiza os valores para prevenir XSS
         const sanitizedValues = sanitizeValues(values);
+        
+        // Registra evento de sanitização se valores foram alterados
+        if (JSON.stringify(values) !== JSON.stringify(sanitizedValues)) {
+          securityMonitor.logEvent('sanitization_applied', {
+            formId,
+            fields: Object.keys(values).filter(k => 
+              values[k] !== sanitizedValues[k] && 
+              typeof values[k] === 'string'
+            )
+          }, 'low');
+        }
         
         // Adiciona o token CSRF aos valores
         const secureValues = {
           ...sanitizedValues,
           csrfToken
         };
+        
+        // Registra evento de submissão do formulário
+        securityMonitor.logEvent('form_submission', {
+          formId,
+          timestamp: new Date().toISOString(),
+          identifier: formId
+        }, 'low');
         
         // Executa a função de submissão original
         const result = onSubmit(secureValues);
@@ -156,6 +220,11 @@ export function useSecureForm(options: UseSecureFormOptions = {}) {
       } catch (error) {
         console.error("Erro na submissão do formulário:", error);
         setIsSubmitting(false);
+        
+        securityMonitor.logEvent('invalid_input', {
+          formId,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        }, 'medium');
         
         toast({
           title: "Erro ao processar solicitação",
