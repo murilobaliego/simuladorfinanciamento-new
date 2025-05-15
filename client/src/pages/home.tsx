@@ -1,9 +1,39 @@
 import { Link } from "wouter";
 import SimulatorCard from "@/components/simulators/simulator-card";
+import { Helmet } from 'react-helmet-async';
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-6">
+    <>
+      <Helmet>
+        <title>Simulador de Financiamento | Veículos, Imóveis e Empréstimos com Cálculo de IOF</title>
+        <meta name="description" content="Simulador de financiamento online e gratuito. Calcule financiamento de veículos, imóveis e empréstimos pessoais. Compare condições como na Caixa, Banco do Brasil e outros bancos." />
+        <meta name="keywords" content="simulador de financiamento, simulador de financiamento de veículos, simulador caixa de financiamento, tabela price, simulador de parcelas, cálculo IOF" />
+        <link rel="canonical" href="https://simuladorfinanciamento.com/" />
+        <meta property="og:title" content="Simulador de Financiamento | Veículos, Imóveis e Empréstimos com Cálculo de IOF" />
+        <meta property="og:description" content="Simule gratuitamente financiamentos com o melhor simulador online. Compare condições da Caixa e outros bancos. Inclui IOF, tabela de amortização e sistema Price." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://simuladorfinanciamento.com/" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "Simulador de Financiamento",
+              "url": "https://simuladorfinanciamento.com/",
+              "description": "Simule financiamentos de veículos, imóveis e empréstimos com cálculo de IOF e tabela de amortização completa.",
+              "applicationCategory": "FinanceApplication",
+              "operatingSystem": "Web",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "BRL"
+              }
+            }
+          `}
+        </script>
+      </Helmet>
+      <div className="container mx-auto px-4 py-6">
       {/* Hero Banner */}
       <section className="mb-8 bg-white rounded-lg shadow-md overflow-hidden">
         <div className="flex flex-col md:flex-row">
@@ -133,5 +163,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </>
   );
 }

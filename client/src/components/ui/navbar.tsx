@@ -49,6 +49,10 @@ export default function Navbar() {
                       
   const isBikePage = location === '/financiamento-moto' ||
                      location === '/financiamento-motos';
+                     
+  const isCaixaPage = location === '/simulador-caixa-financiamento' ||
+                     location === '/simulador-da-caixa' ||
+                     location === '/caixa-simulador-financiamento';
   
   const isToolPage = location === '/simulador-refinanciamento' || 
                     location === '/capacidade-pagamento' || 
@@ -57,7 +61,8 @@ export default function Navbar() {
                     location === '/leasing-vs-financiamento' ||
                     location === '/simulador-parcela-balao' ||
                     location === '/financiamento-parcela-balao' ||
-                    location === '/financiamento-vfg';
+                    location === '/financiamento-vfg' ||
+                    isCaixaPage;
 
   return (
     <header className="bg-primary text-white shadow-md">
@@ -214,6 +219,17 @@ export default function Navbar() {
                       <Banknote className="h-4 w-4 mr-2 text-primary" />
                       <span>Financiamento com Parcela Balão</span>
                     </Link>
+                    
+                    <div className="border-t border-gray-200 my-2"></div>
+                    
+                    <Link
+                      href="/simulador-caixa-financiamento"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <BadgeDollarSign className="h-4 w-4 mr-2 text-primary" />
+                      <span>Simulador Caixa de Financiamento</span>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -249,6 +265,7 @@ export default function Navbar() {
                   {location === '/financiamento-vfg' && <span className="text-white">Financiamento com Parcela Balão</span>}
                   {location === '/termos-de-uso' && <span className="text-white">Termos de Uso</span>}
                   {location === '/politica-privacidade' && <span className="text-white">Política de Privacidade</span>}
+                  {isCaixaPage && <span className="text-white">Simulador Caixa de Financiamento</span>}
                 </li>
               </ol>
             </nav>
