@@ -3,7 +3,6 @@ import { useCsrfProtection } from './use-csrf-protection';
 import { RateLimiter } from '../utils/rate-limiter';
 import { sanitizeInput, sanitizeNumber } from '../utils/security';
 import { useToast } from './use-toast';
-import { set } from 'date-fns';
 
 // Configurações padrão para o rate limiter
 const DEFAULT_RATE_LIMITER_OPTIONS = {
@@ -52,28 +51,43 @@ export function useSecureForm(options: UseSecureFormOptions = {}) {
   /**
    * Sanitiza todos os valores de um objeto de forma recursiva
    */
-  const sanitizeValues = useCallback(<T extends Record<string, any>>(values: T): T => {
-    const sanitized = { ...values };
+  const sanitizeValues = useCallback((values: Record<string, any>): Record<string, any> => {
+    // Criamos um novo objeto para não modificar o original
+    const sanitized: Record<string, any> = {};
     
-    Object.keys(sanitized).forEach(key => {
-      const value = sanitized[key];
-      
-      if (typeof value === 'string') {
-        sanitized[key] = sanitizeInput(value);
-      } else if (typeof value === 'number') {
-        sanitized[key] = sanitizeNumber(value);
-      } else if (value instanceof Date) {
-        // Mantem datas intactas
-      } else if (Array.isArray(value)) {
-        sanitized[key] = value.map(item => 
-          typeof item === 'object' && item !== null 
-            ? sanitizeValues(item) 
-            : (typeof item === 'string' ? sanitizeInput(item) : item)
-        );
-      } else if (typeof value === 'object' && value !== null) {
-        sanitized[key] = sanitizeValues(value);
+    // Para cada propriedade no objeto original
+    for (const key in values) {
+      if (Object.prototype.hasOwnProperty.call(values, key)) {
+        const value = values[key];
+        
+        // Aplicamos a sanitização adequada com base no tipo
+        if (typeof value === 'string') {
+          sanitized[key] = sanitizeInput(value);
+        } else if (typeof value === 'number') {
+          sanitized[key] = sanitizeNumber(value);
+        } else if (value instanceof Date) {
+          // Mantemos datas intactas
+          sanitized[key] = value;
+        } else if (Array.isArray(value)) {
+          // Processamos cada item do array
+          sanitized[key] = value.map(item => {
+            if (typeof item === 'object' && item !== null) {
+              return sanitizeValues(item);
+            } else if (typeof item === 'string') {
+              return sanitizeInput(item);
+            } else {
+              return item;
+            }
+          });
+        } else if (typeof value === 'object' && value !== null) {
+          // Processamos objetos aninhados recursivamente
+          sanitized[key] = sanitizeValues(value);
+        } else {
+          // Para outros tipos (boolean, undefined, etc), mantemos o valor original
+          sanitized[key] = value;
+        }
       }
-    });
+    }
     
     return sanitized;
   }, []);
@@ -81,77 +95,77 @@ export function useSecureForm(options: UseSecureFormOptions = {}) {
   /**
    * Wrapper para a função de submissão que adiciona proteções
    */
-  const secureSubmit = useCallback(<T extends Record<string, any>>(
-    onSubmit: (values: T) => void | Promise<void>,
-    values: T
-  ) => {
-    // Verifica rate limiting
-    const limitCheck = rateLimiter.checkLimit(formId);
-    setLimitData({
-      attempts: limitCheck.attempts,
-      maxAttempts: limitCheck.maxAttempts,
-      remainingTime: limitCheck.remainingTime
-    });
-    
-    if (limitCheck.limited) {
-      setIsLimited(true);
-      const segundosRestantes = Math.ceil(limitCheck.remainingTime / 1000);
-      
-      toast({
-        title: "Excesso de solicitações",
-        description: `Muitas tentativas em um curto período. Tente novamente em ${segundosRestantes} segundos.`,
-        variant: "destructive"
+  const secureSubmit = useCallback(
+    (onSubmit: (values: Record<string, any>) => void | Promise<void>, values: Record<string, any>) => {
+      // Verifica rate limiting
+      const limitCheck = rateLimiter.checkLimit(formId);
+      setLimitData({
+        attempts: limitCheck.attempts,
+        maxAttempts: limitCheck.maxAttempts,
+        remainingTime: limitCheck.remainingTime
       });
       
-      return;
-    }
-    
-    // Processa o envio do formulário
-    setIsSubmitting(true);
-    
-    try {
-      // Sanitiza os valores para prevenir XSS
-      const sanitizedValues = sanitizeValues(values);
-      
-      // Adiciona o token CSRF aos valores
-      const secureValues = {
-        ...sanitizedValues,
-        csrfToken
-      };
-      
-      // Executa a função de submissão original
-      const result = onSubmit(secureValues as T);
-      
-      // Se for uma promessa, adiciona then/catch
-      if (result instanceof Promise) {
-        result
-          .then(() => {
-            setIsSubmitting(false);
-          })
-          .catch(error => {
-            console.error("Erro na submissão do formulário:", error);
-            setIsSubmitting(false);
-            
-            toast({
-              title: "Erro ao processar solicitação",
-              description: "Ocorreu um erro ao processar sua solicitação. Tente novamente.",
-              variant: "destructive"
-            });
-          });
-      } else {
-        setIsSubmitting(false);
+      if (limitCheck.limited) {
+        setIsLimited(true);
+        const segundosRestantes = Math.ceil(limitCheck.remainingTime / 1000);
+        
+        toast({
+          title: "Excesso de solicitações",
+          description: `Muitas tentativas em um curto período. Tente novamente em ${segundosRestantes} segundos.`,
+          variant: "destructive"
+        });
+        
+        return;
       }
-    } catch (error) {
-      console.error("Erro na submissão do formulário:", error);
-      setIsSubmitting(false);
       
-      toast({
-        title: "Erro ao processar solicitação",
-        description: "Ocorreu um erro ao processar sua solicitação. Tente novamente.",
-        variant: "destructive"
-      });
-    }
-  }, [csrfToken, formId, sanitizeValues, toast]);
+      // Processa o envio do formulário
+      setIsSubmitting(true);
+      
+      try {
+        // Sanitiza os valores para prevenir XSS
+        const sanitizedValues = sanitizeValues(values);
+        
+        // Adiciona o token CSRF aos valores
+        const secureValues = {
+          ...sanitizedValues,
+          csrfToken
+        };
+        
+        // Executa a função de submissão original
+        const result = onSubmit(secureValues);
+        
+        // Se for uma promessa, adiciona then/catch
+        if (result instanceof Promise) {
+          result
+            .then(() => {
+              setIsSubmitting(false);
+            })
+            .catch(error => {
+              console.error("Erro na submissão do formulário:", error);
+              setIsSubmitting(false);
+              
+              toast({
+                title: "Erro ao processar solicitação",
+                description: "Ocorreu um erro ao processar sua solicitação. Tente novamente.",
+                variant: "destructive"
+              });
+            });
+        } else {
+          setIsSubmitting(false);
+        }
+      } catch (error) {
+        console.error("Erro na submissão do formulário:", error);
+        setIsSubmitting(false);
+        
+        toast({
+          title: "Erro ao processar solicitação",
+          description: "Ocorreu um erro ao processar sua solicitação. Tente novamente.",
+          variant: "destructive"
+        });
+      }
+    }, 
+    [csrfToken, formId, sanitizeValues, toast]
+  );
   
   /**
    * Reseta o contador de rate limiting (usar quando o usuário fizer login, por exemplo)
