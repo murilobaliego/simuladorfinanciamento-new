@@ -134,6 +134,11 @@ export default function ExportButtons({
         tableY = 90; // Apenas CET
       }
       
+      // Ajustar posição ainda mais se houver dados de energia solar
+      if (summary?.potenciaInstalada !== undefined && summary?.economiaEnergia !== undefined) {
+        tableY = Math.max(tableY + 40, 130); // Adicionar espaço extra para seção de energia solar
+      }
+      
       // Definir cabeçalhos e dados para a tabela
       const tableHeaders = [['Parcela', 'Valor da Parcela', 'Amortização', 'Juros', 'Saldo Devedor']];
       const tableData = data.map(item => [
@@ -186,10 +191,16 @@ export default function ExportButtons({
   const exportToExcel = async () => {
     setIsExportingExcel(true);
     try {
+      // Determinar título específico do relatório
+      let tituloRelatorio = 'Simulador de Financiamento - Tabela de Amortização';
+      if (summary?.potenciaInstalada !== undefined) {
+        tituloRelatorio = 'Simulador de Painéis Solares - Financiamento e Economia';
+      }
+      
       // Preparar os dados para o Excel
       // Adicionar uma linha vazia no início para cabeçalhos
       const excelData = [
-        ['Simulador de Financiamento - Tabela de Amortização'],
+        [tituloRelatorio],
         [''],
       ];
       
