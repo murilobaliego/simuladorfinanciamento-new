@@ -64,22 +64,61 @@ export default function ExportButtons({
         doc.text("Resumo da simulação:", 14, 40);
         
         doc.setFontSize(10);
-        doc.text(`Valor financiado: ${formatCurrency(summary.valorFinanciado)}`, 14, 48);
+        
+        // Para sistemas solares ou outros tipos de financiamento
+        const valorExibir = summary.valorFinanciado !== undefined ? summary.valorFinanciado : 
+                            summary.valorPainel !== undefined ? summary.valorPainel : 0;
+        
+        const labelExibir = summary.valorFinanciado !== undefined ? "Valor financiado" : "Valor do sistema";
+        
+        doc.text(`${labelExibir}: ${formatCurrency(valorExibir)}`, 14, 48);
+        
         doc.text(`Taxa de juros: ${summary.taxaJuros.toFixed(2)}% a.m.`, 14, 54);
         doc.text(`Número de parcelas: ${summary.numParcelas}`, 14, 60);
         doc.text(`Valor da parcela: ${formatCurrency(summary.valorParcela)}`, 14, 66);
         doc.text(`Total a pagar: ${formatCurrency(summary.totalPagar)}`, 14, 72);
         doc.text(`Total de juros: ${formatCurrency(summary.totalJuros)}`, 14, 78);
         
+        let currentLine = 84;
+        
         // Adicionar informação do IOF se presente
         if (summary.valorIOF !== undefined) {
-          doc.text(`Valor do IOF: ${formatCurrency(summary.valorIOF)}`, 14, 84);
+          doc.text(`Valor do IOF: ${formatCurrency(summary.valorIOF)}`, 14, currentLine);
+          currentLine += 6;
         }
         
         // Adicionar informação do CET se presente
         if (summary.taxaCET !== undefined) {
-          const linha = summary.valorIOF !== undefined ? 90 : 84;
-          doc.text(`CET (Custo Efetivo Total): ${summary.taxaCET.toFixed(2)}% a.m.`, 14, linha);
+          doc.text(`CET (Custo Efetivo Total): ${summary.taxaCET.toFixed(2)}% a.m.`, 14, currentLine);
+          currentLine += 6;
+        }
+        
+        // Adicionar seção de economia e retorno para painéis solares
+        if (summary.potenciaInstalada !== undefined && summary.economiaEnergia !== undefined) {
+          doc.setFontSize(12);
+          doc.text("Economia e Retorno do Investimento:", 14, currentLine);
+          currentLine += 8;
+          
+          doc.setFontSize(10);
+          doc.text(`Potência do sistema: ${summary.potenciaInstalada} kWp`, 14, currentLine);
+          currentLine += 6;
+          
+          doc.text(`Economia mensal estimada: ${formatCurrency(summary.economiaEnergia)}`, 14, currentLine);
+          currentLine += 6;
+          
+          const economiaAnual = summary.economiaEnergia * 12;
+          doc.text(`Economia anual estimada: ${formatCurrency(economiaAnual)}`, 14, currentLine);
+          currentLine += 6;
+          
+          if (summary.payback !== undefined) {
+            doc.text(`Payback (retorno do investimento): ${summary.payback.toFixed(1)} anos`, 14, currentLine);
+            currentLine += 6;
+          }
+          
+          // Cálculo da economia em 25 anos (vida útil média dos painéis)
+          const economia25Anos = economiaAnual * 25;
+          doc.text(`Economia total em 25 anos: ${formatCurrency(economia25Anos)}`, 14, currentLine);
+          currentLine += 6;
         }
       }
       
@@ -156,9 +195,15 @@ export default function ExportButtons({
       
       // Adicionar resumo, se disponível
       if (summary) {
-        excelData.push(
+        // Determinar qual valor e rótulo usar
+        const valorExibir = summary.valorFinanciado !== undefined ? summary.valorFinanciado : 
+                           (summary.valorPainel !== undefined ? summary.valorPainel : 0);
+        const labelExibir = summary.valorFinanciado !== undefined ? 'Valor financiado' : 'Valor do sistema';
+        
+        // Adicionar informações básicas
+        const resumoBasico = [
           ['Resumo da simulação:'],
-          ['Valor financiado:', summary.valorFinanciado.toString()],
+          [labelExibir + ':', valorExibir.toString()],
           ['Taxa de juros (% a.m.):', summary.taxaJuros.toString()],
           ['Número de parcelas:', summary.numParcelas.toString()],
           ['Valor da parcela:', summary.valorParcela.toString()],
@@ -167,9 +212,29 @@ export default function ExportButtons({
           // Adicionar IOF se presente
           ...(summary.valorIOF !== undefined ? [['Valor do IOF:', summary.valorIOF.toString()]] : []),
           // Adicionar CET se presente
-          ...(summary.taxaCET !== undefined ? [['CET (Custo Efetivo Total):', `${summary.taxaCET.toFixed(2)}% a.m.`]] : []),
-          ['']
-        );
+          ...(summary.taxaCET !== undefined ? [['CET (Custo Efetivo Total):', `${summary.taxaCET.toFixed(2)}% a.m.`]] : [])
+        ];
+        
+        excelData.push(...resumoBasico);
+        
+        // Adicionar informações específicas de painéis solares
+        if (summary.potenciaInstalada !== undefined && summary.economiaEnergia !== undefined) {
+          const economiaAnual = summary.economiaEnergia * 12;
+          const economia25Anos = economiaAnual * 25;
+          
+          excelData.push(
+            [''],
+            ['Economia e Retorno do Investimento:'],
+            ['Potência do sistema (kWp):', summary.potenciaInstalada.toString()],
+            ['Economia mensal estimada (R$):', summary.economiaEnergia.toString()],
+            ['Economia anual estimada (R$):', economiaAnual.toString()],
+            ...(summary.payback !== undefined ? [['Tempo de retorno (Payback):', `${summary.payback.toFixed(1)} anos`]] : []),
+            ['Economia total em 25 anos (R$):', economia25Anos.toString()]
+          );
+        }
+        
+        // Linha em branco final
+        excelData.push(['']);
       }
       
       // Adicionar cabeçalhos da tabela
