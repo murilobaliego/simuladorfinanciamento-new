@@ -21,11 +21,12 @@ interface TableData {
 
 interface PriceTableProps {
   data: TableData[];
-  expanded: boolean;
+  expanded?: boolean;
+  showAll?: boolean;
 }
 
-export default function PriceTable({ data, expanded }: PriceTableProps) {
-  const [showAll, setShowAll] = useState(expanded);
+export default function PriceTable({ data, expanded = false, showAll: initialShowAll }: PriceTableProps) {
+  const [showAll, setShowAll] = useState(initialShowAll || expanded);
   
   // Formatar valores monetários
   const formatCurrency = (value: number) => {

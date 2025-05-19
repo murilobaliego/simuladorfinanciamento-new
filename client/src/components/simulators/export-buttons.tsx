@@ -11,7 +11,7 @@ interface ExportButtonsProps {
   fileName: string;
   title: string;
   summary?: {
-    valorFinanciado: number;
+    valorFinanciado?: number;
     taxaJuros: number;
     numParcelas: number;
     valorParcela: number;
@@ -19,6 +19,7 @@ interface ExportButtonsProps {
     totalJuros: number;
     valorIOF?: number; // Valor do IOF, se aplicável
     taxaCET?: number; // Taxa do Custo Efetivo Total (% a.m.)
+    [key: string]: any; // Permite propriedades adicionais para diferentes tipos de simuladores
   };
 }
 
