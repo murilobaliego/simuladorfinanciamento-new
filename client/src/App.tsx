@@ -24,6 +24,7 @@ import BalloonPaymentFinance from "@/pages/balloon-payment-finance";
 import SimuladorCaixa from "@/pages/simulador-caixa";
 import SimuladorFinanciamento from "@/pages/simulador-de-financiamento";
 import PaineisSolares from "@/pages/paineis-solares";
+import FinanciamentoFIES from "@/pages/fies";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -92,6 +93,12 @@ function Router() {
         <Route path="/simulador-energia-solar" component={PaineisSolares}/>
         <Route path="/calculadora-painel-solar" component={PaineisSolares}/>
         <Route path="/energia-solar-financiamento" component={PaineisSolares}/>
+        
+        {/* Simulador de Financiamento Estudantil FIES - Rotas otimizadas para SEO */}
+        <Route path="/simulador-fies" component={FinanciamentoFIES}/>
+        <Route path="/financiamento-estudantil" component={FinanciamentoFIES}/>
+        <Route path="/como-funciona-fies" component={FinanciamentoFIES}/>
+        <Route path="/financiamento-faculdade" component={FinanciamentoFIES}/>
         
         <Route component={NotFound} />
       </Switch>

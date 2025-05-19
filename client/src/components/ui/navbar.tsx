@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, Calculator, Car, Home, CreditCard, BadgeDollarSign, ChevronDown, Settings, RefreshCw, BarChart2, PiggyBank, DollarSign, Truck, Bike, Banknote, Sun } from "lucide-react";
+import { Menu, X, Calculator, Car, Home, CreditCard, BadgeDollarSign, ChevronDown, Settings, RefreshCw, BarChart2, PiggyBank, DollarSign, Truck, Bike, Banknote, Sun, GraduationCap } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -58,6 +58,11 @@ export default function Navbar() {
                      location === '/simulador-energia-solar' ||
                      location === '/calculadora-painel-solar' ||
                      location === '/energia-solar-financiamento';
+                     
+  const isFIESPage = location === '/simulador-fies' ||
+                     location === '/financiamento-estudantil' ||
+                     location === '/como-funciona-fies' ||
+                     location === '/financiamento-faculdade';
   
   const isToolPage = location === '/simulador-refinanciamento' || 
                     location === '/capacidade-pagamento' || 
@@ -68,7 +73,8 @@ export default function Navbar() {
                     location === '/financiamento-parcela-balao' ||
                     location === '/financiamento-vfg' ||
                     isCaixaPage ||
-                    isPaineisSolaresPage;
+                    isPaineisSolaresPage ||
+                    isFIESPage;
 
   return (
     <header className="bg-primary text-white shadow-md">
@@ -238,6 +244,15 @@ export default function Navbar() {
                     </Link>
                     
                     <Link
+                      href="/simulador-fies"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <GraduationCap className="h-4 w-4 mr-2 text-primary" />
+                      <span>Financiamento Estudantil (FIES)</span>
+                    </Link>
+                    
+                    <Link
                       href="/simulador-caixa-financiamento"
                       className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
                       onClick={closeMenu}
@@ -282,6 +297,7 @@ export default function Navbar() {
                   {location === '/politica-privacidade' && <span className="text-white">Política de Privacidade</span>}
                   {isCaixaPage && <span className="text-white">Simulador Caixa de Financiamento</span>}
                   {isPaineisSolaresPage && <span className="text-white">Financiamento de Painéis Solares</span>}
+                  {isFIESPage && <span className="text-white">Financiamento Estudantil (FIES)</span>}
                 </li>
               </ol>
             </nav>
