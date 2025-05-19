@@ -1,10 +1,29 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, ArrowRight, Home, Calculator } from "lucide-react";
-import { Link } from "wouter";
+import { AlertCircle, ArrowRight, Home, Calculator, Clock } from "lucide-react";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import HeadSEO from "@/components/seo/head-seo";
+import { useEffect, useState } from "react";
+import { Progress } from "@/components/ui/progress";
 
 export default function NotFound() {
+  const [, navigate] = useLocation();
+  const [countdown, setCountdown] = useState(5);
+  
+  // Efeito para redirecionar para a página inicial após 5 segundos
+  useEffect(() => {
+    if (countdown <= 0) {
+      navigate('/');
+      return;
+    }
+    
+    const timer = setTimeout(() => {
+      setCountdown(countdown - 1);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, [countdown, navigate]);
+  
   return (
     <>
       <HeadSEO 
@@ -23,9 +42,18 @@ export default function NotFound() {
             Página não encontrada
           </h1>
           
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-xl text-gray-600 mb-4">
             A página que você está procurando não existe ou foi movida para outro endereço.
           </p>
+          
+          <div className="flex items-center justify-center gap-2 text-primary mb-6">
+            <Clock className="h-5 w-5" />
+            <span>Redirecionando para a página inicial em {countdown} segundos...</span>
+          </div>
+          
+          <div className="w-full max-w-md mx-auto mb-6">
+            <Progress value={(5 - countdown) * 20} />
+          </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button asChild size="lg" className="flex items-center gap-2">
