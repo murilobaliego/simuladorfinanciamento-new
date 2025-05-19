@@ -195,6 +195,8 @@ export default function ExportButtons({
       let tituloRelatorio = 'Simulador de Financiamento - Tabela de Amortização';
       if (summary?.potenciaInstalada !== undefined) {
         tituloRelatorio = 'Simulador de Painéis Solares - Financiamento e Economia';
+      } else if (summary?.valorMensalidade !== undefined) {
+        tituloRelatorio = 'Simulador FIES - Financiamento Estudantil';
       }
       
       // Preparar os dados para o Excel

@@ -880,8 +880,8 @@ export default function FinanciamentoFIES() {
                         totalPagar: result.valorTotalPago,
                         totalJuros: result.totalJuros,
                         valorMensalidade: result.valorMensalidade,
-                        duracaoCurso: parseInt(form.getValues().duracaoCurso),
-                        percentualFinanciamento: parseFloat(form.getValues().percentualFinanciamento),
+                        duracaoCurso: Number(form.getValues().duracaoCurso),
+                        percentualFinanciamento: Number(form.getValues().percentualFinanciamento),
                         valorCarencia: result.valorDuranteCarencia
                       }}
                     />
