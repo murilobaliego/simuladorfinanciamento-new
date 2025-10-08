@@ -296,84 +296,94 @@ function PersonalLoanContent() {
         
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <FormField
-                control={form.control}
-                name="valorFinanciado"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Valor do empréstimo (R$)</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <span className="absolute inset-y-0 left-3 flex items-center text-neutral-500">R$</span>
-                        <Input
-                          type="number"
-                          placeholder="5000"
-                          className="pl-10 pr-4 py-3 bg-neutral-100 border-neutral-300"
-                          {...field}
-                        />
-                      </div>
-                    </FormControl>
-                    <p className="text-xs text-neutral-500">De R$ 1.000,00 até R$ 50.000,00</p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            {/* Dados do Empréstimo Pessoal */}
+            <div className="bg-purple-50 p-4 rounded-lg mb-6">
+              <h3 className="font-semibold text-purple-800 mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" />
+                </svg>
+                Dados do Empréstimo Pessoal
+              </h3>
               
-              <FormField
-                control={form.control}
-                name="taxaJuros"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Taxa de juros (% ao mês)</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Input
-                          type="number"
-                          step="0.1"
-                          placeholder="3.5"
-                          className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300"
-                          {...field}
-                        />
-                        <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
-                      </div>
-                    </FormControl>
-                    <p className="text-xs text-neutral-500">Taxa média para empréstimo pessoal: 3,5% a.m.</p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="numParcelas"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Número de parcelas</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value.toString()}
-                    >
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <FormField
+                  control={form.control}
+                  name="valorFinanciado"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-purple-700">Valor do empréstimo (R$)</FormLabel>
                       <FormControl>
-                        <SelectTrigger className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300">
-                          <SelectValue placeholder="Selecione o número de parcelas" />
-                        </SelectTrigger>
+                        <div className="relative">
+                          <span className="absolute inset-y-0 left-3 flex items-center text-neutral-500">R$</span>
+                          <Input
+                            type="number"
+                            placeholder="5000"
+                            className="pl-10 pr-4 py-3 bg-white border-purple-200"
+                            {...field}
+                          />
+                        </div>
                       </FormControl>
-                      <SelectContent>
-                        <SelectItem value="3">3 meses</SelectItem>
-                        <SelectItem value="6">6 meses</SelectItem>
-                        <SelectItem value="12">12 meses (1 ano)</SelectItem>
-                        <SelectItem value="18">18 meses (1 ano e meio)</SelectItem>
-                        <SelectItem value="24">24 meses (2 anos)</SelectItem>
-                        <SelectItem value="36">36 meses (3 anos)</SelectItem>
-                        <SelectItem value="48">48 meses (4 anos)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <p className="text-xs text-neutral-500">Prazo comum: 12 a 24 meses</p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      <p className="text-xs text-purple-600">De R$ 1.000,00 até R$ 50.000,00</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="taxaJuros"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-purple-700">Taxa de juros (% ao mês)</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Input
+                            type="number"
+                            step="0.1"
+                            placeholder="3.5"
+                            className="pl-4 pr-10 py-3 bg-white border-purple-200"
+                            {...field}
+                          />
+                          <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
+                        </div>
+                      </FormControl>
+                      <p className="text-xs text-purple-600">Taxa média para empréstimo pessoal: 3,5% a.m.</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="numParcelas"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-purple-700">Número de parcelas</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value.toString()}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="pl-4 pr-10 py-3 bg-white border-purple-200">
+                            <SelectValue placeholder="Selecione o número de parcelas" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="3">3 meses</SelectItem>
+                          <SelectItem value="6">6 meses</SelectItem>
+                          <SelectItem value="12">12 meses (1 ano)</SelectItem>
+                          <SelectItem value="18">18 meses (1 ano e meio)</SelectItem>
+                          <SelectItem value="24">24 meses (2 anos)</SelectItem>
+                          <SelectItem value="36">36 meses (3 anos)</SelectItem>
+                          <SelectItem value="48">48 meses (4 anos)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <p className="text-xs text-purple-600">Prazo comum: 12 a 24 meses</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
             
             <div className="mt-6">

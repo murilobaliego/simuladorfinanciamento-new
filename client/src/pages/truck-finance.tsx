@@ -399,157 +399,172 @@ function TruckFinanceContent() {
         
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <FormField
-                control={form.control}
-                name="valorFinanciado"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Valor a financiar (R$)</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <span className="absolute inset-y-0 left-3 flex items-center text-neutral-500">R$</span>
-                        <Input
-                          type="number"
-                          placeholder="300000"
-                          className="pl-10 pr-4 py-3 bg-neutral-100 border-neutral-300"
-                          {...field}
-                        />
-                      </div>
-                    </FormControl>
-                    <p className="text-xs text-neutral-500">Valor mínimo: R$ 50.000,00</p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            {/* Dados do Financiamento de Caminhões */}
+            <div className="bg-orange-50 p-4 rounded-lg mb-6">
+              <h3 className="font-semibold text-orange-800 mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                </svg>
+                Dados do Financiamento de Caminhões
+              </h3>
               
-              <FormField
-                control={form.control}
-                name="taxaJuros"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Taxa de juros (% ao mês)</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Input
-                          type="number"
-                          step="0.01"
-                          placeholder="1.58"
-                          className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300"
-                          {...field}
-                        />
-                        <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
-                      </div>
-                    </FormControl>
-                    <p className="text-xs text-neutral-500">
-                      Taxa média para caminhões: 1,58% a.m.
-                      <span className="block mt-1 font-medium text-primary">
-                        Taxa atual: {taxaAjustada}% a.m.
-                        {taxaAjustada < 1.58 && <span className="text-green-500"> (menor)</span>}
-                        {taxaAjustada > 1.58 && <span className="text-red-500"> (maior)</span>}
-                      </span>
-                    </p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="numParcelas"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Número de parcelas</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <FormField
+                  control={form.control}
+                  name="valorFinanciado"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-orange-700">Valor a financiar (R$)</FormLabel>
                       <FormControl>
-                        <SelectTrigger className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300">
-                          <SelectValue placeholder="Selecione o número de parcelas" />
-                        </SelectTrigger>
+                        <div className="relative">
+                          <span className="absolute inset-y-0 left-3 flex items-center text-neutral-500">R$</span>
+                          <Input
+                            type="number"
+                            placeholder="300000"
+                            className="pl-10 pr-4 py-3 bg-white border-orange-200"
+                            {...field}
+                          />
+                        </div>
                       </FormControl>
-                      <SelectContent>
-                        <SelectItem value="24">24 meses (2 anos)</SelectItem>
-                        <SelectItem value="36">36 meses (3 anos)</SelectItem>
-                        <SelectItem value="48">48 meses (4 anos)</SelectItem>
-                        <SelectItem value="60">60 meses (5 anos)</SelectItem>
-                        <SelectItem value="72">72 meses (6 anos)</SelectItem>
-                        <SelectItem value="84">84 meses (7 anos)</SelectItem>
-                        <SelectItem value="96">96 meses (8 anos)</SelectItem>
-                        <SelectItem value="120">120 meses (10 anos)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <p className="text-xs text-neutral-500">Prazo comum para caminhões: 60 a 120 meses</p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            
-            <div className="mt-6">
-              <FormField
-                control={form.control}
-                name="tipoVeiculo"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Tipo de caminhão</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
+                      <p className="text-xs text-orange-600">Valor mínimo: R$ 50.000,00</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="taxaJuros"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-orange-700">Taxa de juros (% ao mês)</FormLabel>
                       <FormControl>
-                        <SelectTrigger className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300">
-                          <SelectValue placeholder="Selecione o tipo de caminhão" />
-                        </SelectTrigger>
+                        <div className="relative">
+                          <Input
+                            type="number"
+                            step="0.01"
+                            placeholder="1.58"
+                            className="pl-4 pr-10 py-3 bg-white border-orange-200"
+                            {...field}
+                          />
+                          <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
+                        </div>
                       </FormControl>
-                      <SelectContent>
-                        <SelectItem value="leve">Leve (até 10 ton.)</SelectItem>
-                        <SelectItem value="medio">Médio (10-15 ton.)</SelectItem>
-                        <SelectItem value="pesado">Pesado (15-40 ton.)</SelectItem>
-                        <SelectItem value="extra-pesado">Extra-pesado (acima de 40 ton.)</SelectItem>
-                        <SelectItem value="implemento">Implemento rodoviário/Semirreboque</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <div className="text-xs text-neutral-500">
-                      <p>O tipo de veículo influencia na taxa de juros:</p>
-                      <ul className="mt-1 pl-4 list-disc">
-                        <li className={tipoVeiculo === "leve" ? "text-primary font-medium" : ""}>Leves: -0,03% (melhor taxa)</li>
-                        <li className={tipoVeiculo === "medio" ? "text-primary font-medium" : ""}>Médio: -0,01%</li>
-                        <li className={tipoVeiculo === "pesado" ? "text-primary font-medium" : ""}>Pesado: taxa padrão</li>
-                        <li className={tipoVeiculo === "extra-pesado" ? "text-primary font-medium" : ""}>Extra-pesado: +0,05%</li>
-                        <li className={tipoVeiculo === "implemento" ? "text-primary font-medium" : ""}>Implemento: +0,02%</li>
-                      </ul>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            
-            <div className="mt-4">
-              <FormField
-                control={form.control}
-                name="incluirIOF"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                    <div className="space-y-1 leading-none">
-                      <FormLabel className="text-sm font-medium text-neutral-700">
-                        Incluir IOF no cálculo
-                      </FormLabel>
-                      <p className="text-xs text-neutral-500">
-                        IOF para financiamento de veículos: 0,0082% ao dia (até 365 dias) + 0,38% fixo
+                      <p className="text-xs text-orange-600">
+                        Taxa média para caminhões: 1,58% a.m.
+                        <span className="block mt-1 font-medium text-primary">
+                          Taxa atual: {taxaAjustada}% a.m.
+                          {taxaAjustada < 1.58 && <span className="text-green-500"> (menor)</span>}
+                          {taxaAjustada > 1.58 && <span className="text-red-500"> (maior)</span>}
+                        </span>
                       </p>
-                    </div>
-                  </FormItem>
-                )}
-              />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="numParcelas"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-orange-700">Número de parcelas</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="pl-4 pr-10 py-3 bg-white border-orange-200">
+                            <SelectValue placeholder="Selecione o número de parcelas" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="24">24 meses (2 anos)</SelectItem>
+                          <SelectItem value="36">36 meses (3 anos)</SelectItem>
+                          <SelectItem value="48">48 meses (4 anos)</SelectItem>
+                          <SelectItem value="60">60 meses (5 anos)</SelectItem>
+                          <SelectItem value="72">72 meses (6 anos)</SelectItem>
+                          <SelectItem value="84">84 meses (7 anos)</SelectItem>
+                          <SelectItem value="96">96 meses (8 anos)</SelectItem>
+                          <SelectItem value="120">120 meses (10 anos)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <p className="text-xs text-orange-600">Prazo comum para caminhões: 60 a 120 meses</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              
+              <h4 className="font-semibold text-orange-800 mb-3 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+                </svg>
+                Configurações Adicionais
+              </h4>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="tipoVeiculo"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-orange-700">Tipo de caminhão</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="pl-4 pr-10 py-3 bg-white border-orange-200">
+                            <SelectValue placeholder="Selecione o tipo de caminhão" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="leve">Leve (até 10 ton.)</SelectItem>
+                          <SelectItem value="medio">Médio (10-15 ton.)</SelectItem>
+                          <SelectItem value="pesado">Pesado (15-40 ton.)</SelectItem>
+                          <SelectItem value="extra-pesado">Extra-pesado (acima de 40 ton.)</SelectItem>
+                          <SelectItem value="implemento">Implemento rodoviário/Semirreboque</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <div className="text-xs text-orange-600">
+                        <p>O tipo de veículo influencia na taxa de juros:</p>
+                        <ul className="mt-1 pl-4 list-disc">
+                          <li className={tipoVeiculo === "leve" ? "text-primary font-medium" : ""}>Leves: -0,03% (melhor taxa)</li>
+                          <li className={tipoVeiculo === "medio" ? "text-primary font-medium" : ""}>Médio: -0,01%</li>
+                          <li className={tipoVeiculo === "pesado" ? "text-primary font-medium" : ""}>Pesado: taxa padrão</li>
+                          <li className={tipoVeiculo === "extra-pesado" ? "text-primary font-medium" : ""}>Extra-pesado: +0,05%</li>
+                          <li className={tipoVeiculo === "implemento" ? "text-primary font-medium" : ""}>Implemento: +0,02%</li>
+                        </ul>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="incluirIOF"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-white rounded-md border border-orange-200 p-4">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel className="text-sm font-medium text-orange-700">
+                          Incluir IOF no cálculo
+                        </FormLabel>
+                        <p className="text-xs text-orange-600">
+                          IOF para financiamento de veículos: 0,0082% ao dia (até 365 dias) + 0,38% fixo
+                        </p>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
             
             <div className="mt-6">

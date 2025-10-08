@@ -352,94 +352,104 @@ function RealEstateFinanceContent() {
               </TabsList>
             </Tabs>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <FormField
-                control={form.control}
-                name="valorFinanciado"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Valor a financiar (R$)</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <span className="absolute inset-y-0 left-3 flex items-center text-neutral-500">R$</span>
-                        <Input
-                          type="number"
-                          placeholder="300000"
-                          className="pl-10 pr-4 py-3 bg-neutral-100 border-neutral-300"
-                          min="50000"
-                          max="10000000"
-                          step="10000"
-                          pattern="[0-9]*"
-                          inputMode="numeric"
-                          aria-describedby="valorFinanciado-description"
-                          {...field}
-                        />
-                      </div>
-                    </FormControl>
-                    <p className="text-xs text-neutral-500">Valor mínimo: R$ 50.000,00</p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            {/* Dados do Financiamento Imobiliário */}
+            <div className="bg-green-50 p-4 rounded-lg mb-6">
+              <h3 className="font-semibold text-green-800 mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                </svg>
+                Dados do Financiamento Imobiliário
+              </h3>
               
-              <FormField
-                control={form.control}
-                name="taxaJuros"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Taxa de juros (% ao mês)</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Input
-                          type="number"
-                          step="0.01"
-                          min="0.1"
-                          max="2.0"
-                          placeholder="0.8"
-                          className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300"
-                          pattern="[0-9]*\.?[0-9]*"
-                          inputMode="decimal"
-                          aria-describedby="taxaJuros-description"
-                          {...field}
-                        />
-                        <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
-                      </div>
-                    </FormControl>
-                    <p className="text-xs text-neutral-500">Taxa média para imóveis: 0,8% a.m.</p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="numParcelas"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Prazo (em meses)</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value.toString()}
-                    >
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <FormField
+                  control={form.control}
+                  name="valorFinanciado"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-green-700">Valor a financiar (R$)</FormLabel>
                       <FormControl>
-                        <SelectTrigger className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300">
-                          <SelectValue placeholder="Selecione o prazo" />
-                        </SelectTrigger>
+                        <div className="relative">
+                          <span className="absolute inset-y-0 left-3 flex items-center text-neutral-500">R$</span>
+                          <Input
+                            type="number"
+                            placeholder="300000"
+                            className="pl-10 pr-4 py-3 bg-white border-green-200"
+                            min="50000"
+                            max="10000000"
+                            step="10000"
+                            pattern="[0-9]*"
+                            inputMode="numeric"
+                            aria-describedby="valorFinanciado-description"
+                            {...field}
+                          />
+                        </div>
                       </FormControl>
-                      <SelectContent>
-                        <SelectItem value="120">120 meses (10 anos)</SelectItem>
-                        <SelectItem value="180">180 meses (15 anos)</SelectItem>
-                        <SelectItem value="240">240 meses (20 anos)</SelectItem>
-                        <SelectItem value="300">300 meses (25 anos)</SelectItem>
-                        <SelectItem value="360">360 meses (30 anos)</SelectItem>
-                        <SelectItem value="420">420 meses (35 anos)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <p className="text-xs text-neutral-500">Prazo comum: 20 a 30 anos</p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      <p className="text-xs text-green-600">Valor mínimo: R$ 50.000,00</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="taxaJuros"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-green-700">Taxa de juros (% ao mês)</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Input
+                            type="number"
+                            step="0.01"
+                            min="0.1"
+                            max="2.0"
+                            placeholder="0.8"
+                            className="pl-4 pr-10 py-3 bg-white border-green-200"
+                            pattern="[0-9]*\.?[0-9]*"
+                            inputMode="decimal"
+                            aria-describedby="taxaJuros-description"
+                            {...field}
+                          />
+                          <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
+                        </div>
+                      </FormControl>
+                      <p className="text-xs text-green-600">Taxa média para imóveis: 0,8% a.m.</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="numParcelas"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-green-700">Prazo (em meses)</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value.toString()}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="pl-4 pr-10 py-3 bg-white border-green-200">
+                            <SelectValue placeholder="Selecione o prazo" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="120">120 meses (10 anos)</SelectItem>
+                          <SelectItem value="180">180 meses (15 anos)</SelectItem>
+                          <SelectItem value="240">240 meses (20 anos)</SelectItem>
+                          <SelectItem value="300">300 meses (25 anos)</SelectItem>
+                          <SelectItem value="360">360 meses (30 anos)</SelectItem>
+                          <SelectItem value="420">420 meses (35 anos)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <p className="text-xs text-green-600">Prazo comum: 20 a 30 anos</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
             
             <div className="mt-6">

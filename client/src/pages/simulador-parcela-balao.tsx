@@ -380,136 +380,34 @@ export default function SimuladorParcelaBalao() {
                 </div>
               )}
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <FormField
-                  control={form.control}
-                  name="valorFinanciado"
-                  render={({ field }) => (
-                    <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700">Valor a financiar (R$)</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <span className="absolute inset-y-0 left-3 flex items-center text-neutral-500">R$</span>
-                          <Input
-                            type="number"
-                            placeholder="80000"
-                            className="pl-10 pr-4 py-3 bg-neutral-100 border-neutral-300"
-                            {...field}
-                          />
-                        </div>
-                      </FormControl>
-                      <p className="text-xs text-neutral-500">Valor mínimo: R$ 20.000,00</p>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+              {/* Dados do Financiamento com Parcela Balão */}
+              <div className="bg-yellow-50 p-4 rounded-lg mb-6">
+                <h3 className="font-semibold text-yellow-800 mb-4 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                  </svg>
+                  Dados do Financiamento com Parcela Balão
+                </h3>
                 
-                <FormField
-                  control={form.control}
-                  name="taxaJuros"
-                  render={({ field }) => (
-                    <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700">Taxa de juros (% ao mês)</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Input
-                            type="number"
-                            step="0.01"
-                            placeholder="1.59"
-                            className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300"
-                            {...field}
-                          />
-                          <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
-                        </div>
-                      </FormControl>
-                      <p className="text-xs text-neutral-500">Taxa média para parcela balão: {taxaAjustada}% a.m.</p>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="numParcelas"
-                  render={({ field }) => (
-                    <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700">Número de parcelas mensais</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300">
-                            <SelectValue placeholder="Selecione o número de parcelas" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="24">24 meses (2 anos)</SelectItem>
-                          <SelectItem value="36">36 meses (3 anos)</SelectItem>
-                          <SelectItem value="48">48 meses (4 anos)</SelectItem>
-                          <SelectItem value="60">60 meses (5 anos)</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <p className="text-xs text-neutral-500">Prazo comum para parcela balão: 36 a 48 meses</p>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              
-              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <FormField
-                  control={form.control}
-                  name="percentualBalao"
-                  render={({ field }) => (
-                    <FormItem className="space-y-2">
-                      <FormLabel className="text-sm font-medium text-neutral-700">Percentual da parcela balão (%)</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Input
-                            type="number"
-                            min="10"
-                            max="50"
-                            step="5"
-                            placeholder="30"
-                            className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300"
-                            {...field}
-                          />
-                          <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
-                        </div>
-                      </FormControl>
-                      <div className="space-y-2">
-                        <p className="text-xs text-neutral-500">Percentual do valor financiado a ser pago na parcela final</p>
-                        <div className="w-full">
-                          <Progress value={field.value || 30} max={50} className="h-2" />
-                          <div className="flex justify-between text-xs text-gray-500 mt-1">
-                            <span>10%</span>
-                            <span>30%</span>
-                            <span>50%</span>
-                          </div>
-                        </div>
-                      </div>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                   <FormField
                     control={form.control}
-                    name="tipoVeiculo"
+                    name="valorFinanciado"
                     render={({ field }) => (
                       <FormItem className="space-y-2">
-                        <FormLabel className="text-sm font-medium text-neutral-700">Tipo de veículo</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300">
-                              <SelectValue placeholder="Selecione o tipo de veículo" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="carro">Automóvel</SelectItem>
-                            <SelectItem value="moto">Motocicleta</SelectItem>
-                            <SelectItem value="caminhao">Caminhão</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <FormLabel className="text-sm font-medium text-yellow-700">Valor a financiar (R$)</FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <span className="absolute inset-y-0 left-3 flex items-center text-neutral-500">R$</span>
+                            <Input
+                              type="number"
+                              placeholder="80000"
+                              className="pl-10 pr-4 py-3 bg-white border-yellow-200"
+                              {...field}
+                            />
+                          </div>
+                        </FormControl>
+                        <p className="text-xs text-yellow-600">Valor mínimo: R$ 20.000,00</p>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -517,19 +415,138 @@ export default function SimuladorParcelaBalao() {
                   
                   <FormField
                     control={form.control}
-                    name="incluirIOF"
+                    name="taxaJuros"
                     render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                      <FormItem className="space-y-2">
+                        <FormLabel className="text-sm font-medium text-yellow-700">Taxa de juros (% ao mês)</FormLabel>
                         <FormControl>
-                          <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                          <div className="relative">
+                            <Input
+                              type="number"
+                              step="0.01"
+                              placeholder="1.59"
+                              className="pl-4 pr-10 py-3 bg-white border-yellow-200"
+                              {...field}
+                            />
+                            <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
+                          </div>
                         </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel className="text-sm font-medium text-neutral-700">Incluir IOF no cálculo</FormLabel>
-                          <p className="text-xs text-neutral-500">IOF para financiamento de veículos: 0,0082% ao dia (até 365 dias) + 0,38% fixo</p>
-                        </div>
+                        <p className="text-xs text-yellow-600">Taxa média para parcela balão: {taxaAjustada}% a.m.</p>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
+                  
+                  <FormField
+                    control={form.control}
+                    name="numParcelas"
+                    render={({ field }) => (
+                      <FormItem className="space-y-2">
+                        <FormLabel className="text-sm font-medium text-yellow-700">Número de parcelas mensais</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="pl-4 pr-10 py-3 bg-white border-yellow-200">
+                              <SelectValue placeholder="Selecione o número de parcelas" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="24">24 meses (2 anos)</SelectItem>
+                            <SelectItem value="36">36 meses (3 anos)</SelectItem>
+                            <SelectItem value="48">48 meses (4 anos)</SelectItem>
+                            <SelectItem value="60">60 meses (5 anos)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <p className="text-xs text-yellow-600">Prazo comum para parcela balão: 36 a 48 meses</p>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                
+                <h4 className="font-semibold text-yellow-800 mb-3 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+                  </svg>
+                  Configurações Adicionais
+                </h4>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="percentualBalao"
+                    render={({ field }) => (
+                      <FormItem className="space-y-2">
+                        <FormLabel className="text-sm font-medium text-yellow-700">Percentual da parcela balão (%)</FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Input
+                              type="number"
+                              min="10"
+                              max="50"
+                              step="5"
+                              placeholder="30"
+                              className="pl-4 pr-10 py-3 bg-white border-yellow-200"
+                              {...field}
+                            />
+                            <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
+                          </div>
+                        </FormControl>
+                        <div className="space-y-2">
+                          <p className="text-xs text-yellow-600">Percentual do valor financiado a ser pago na parcela final</p>
+                          <div className="w-full">
+                            <Progress value={field.value || 30} max={50} className="h-2" />
+                            <div className="flex justify-between text-xs text-gray-500 mt-1">
+                              <span>10%</span>
+                              <span>30%</span>
+                              <span>50%</span>
+                            </div>
+                          </div>
+                        </div>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <div className="space-y-4">
+                    <FormField
+                      control={form.control}
+                      name="tipoVeiculo"
+                      render={({ field }) => (
+                        <FormItem className="space-y-2">
+                          <FormLabel className="text-sm font-medium text-yellow-700">Tipo de veículo</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger className="pl-4 pr-10 py-3 bg-white border-yellow-200">
+                                <SelectValue placeholder="Selecione o tipo de veículo" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="carro">Automóvel</SelectItem>
+                              <SelectItem value="moto">Motocicleta</SelectItem>
+                              <SelectItem value="caminhao">Caminhão</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="incluirIOF"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-white rounded-md border border-yellow-200 p-4">
+                          <FormControl>
+                            <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                          </FormControl>
+                          <div className="space-y-1 leading-none">
+                            <FormLabel className="text-sm font-medium text-yellow-700">Incluir IOF no cálculo</FormLabel>
+                            <p className="text-xs text-yellow-600">IOF para financiamento de veículos: 0,0082% ao dia (até 365 dias) + 0,38% fixo</p>
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </div>
               </div>
               

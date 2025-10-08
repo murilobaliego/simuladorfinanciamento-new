@@ -387,102 +387,112 @@ function PayrollLoanContent() {
               />
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <FormField
-                control={form.control}
-                name="valorFinanciado"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Valor do empréstimo (R$)</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <span className="absolute inset-y-0 left-3 flex items-center text-neutral-500">R$</span>
-                        <Input
-                          type="number"
-                          placeholder="10000"
-                          className="pl-10 pr-4 py-3 bg-neutral-100 border-neutral-300"
-                          {...field}
-                        />
-                      </div>
-                    </FormControl>
-                    <p className="text-xs text-neutral-500">De R$ 1.000,00 até R$ 150.000,00</p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            {/* Dados do Crédito Consignado */}
+            <div className="bg-orange-50 p-4 rounded-lg mb-6">
+              <h3 className="font-semibold text-orange-800 mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                </svg>
+                Dados do Crédito Consignado
+              </h3>
               
-              <FormField
-                control={form.control}
-                name="taxaJuros"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Taxa de juros (% ao mês)</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Input
-                          type="number"
-                          step="0.1"
-                          placeholder="1.7"
-                          className={`pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300 transition-all duration-300 ${taxaChanged ? 'bg-primary/10 border-primary' : ''}`}
-                          {...field}
-                        />
-                        <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
-                      </div>
-                    </FormControl>
-                    <div>
-                      <p className="text-xs text-neutral-500">
-                        Taxa média para {tipoConsignado === "inss" ? "INSS" : tipoConsignado === "servidor" ? "servidores" : "militares"}: {
-                          tipoConsignado === "inss" ? "1,7%" : tipoConsignado === "servidor" ? "1,5%" : "1,3%"
-                        } a.m.
-                      </p>
-                      {taxaChanged && (
-                        <p className="text-xs text-primary animate-pulse mt-1">
-                          * Taxa ajustada automaticamente para este tipo de consignado
-                        </p>
-                      )}
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="numParcelas"
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel className="text-sm font-medium text-neutral-700">Número de parcelas</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value.toString()}
-                    >
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <FormField
+                  control={form.control}
+                  name="valorFinanciado"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-orange-700">Valor do empréstimo (R$)</FormLabel>
                       <FormControl>
-                        <SelectTrigger className="pl-4 pr-10 py-3 bg-neutral-100 border-neutral-300">
-                          <SelectValue placeholder="Selecione o número de parcelas" />
-                        </SelectTrigger>
+                        <div className="relative">
+                          <span className="absolute inset-y-0 left-3 flex items-center text-neutral-500">R$</span>
+                          <Input
+                            type="number"
+                            placeholder="10000"
+                            className="pl-10 pr-4 py-3 bg-white border-orange-200"
+                            {...field}
+                          />
+                        </div>
                       </FormControl>
-                      <SelectContent>
-                        <SelectItem value="12">12 meses (1 ano)</SelectItem>
-                        <SelectItem value="24">24 meses (2 anos)</SelectItem>
-                        <SelectItem value="36">36 meses (3 anos)</SelectItem>
-                        <SelectItem value="48">48 meses (4 anos)</SelectItem>
-                        <SelectItem value="60">60 meses (5 anos)</SelectItem>
-                        <SelectItem value="72">72 meses (6 anos)</SelectItem>
-                        <SelectItem value="84">84 meses (7 anos)</SelectItem>
-                        {tipoConsignado === "servidor" && (
-                          <SelectItem value="96">96 meses (8 anos)</SelectItem>
+                      <p className="text-xs text-orange-600">De R$ 1.000,00 até R$ 150.000,00</p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="taxaJuros"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-orange-700">Taxa de juros (% ao mês)</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Input
+                            type="number"
+                            step="0.1"
+                            placeholder="1.7"
+                            className={`pl-4 pr-10 py-3 bg-white border-orange-200 transition-all duration-300 ${taxaChanged ? 'bg-primary/10 border-primary' : ''}`}
+                            {...field}
+                          />
+                          <span className="absolute inset-y-0 right-3 flex items-center text-neutral-500">%</span>
+                        </div>
+                      </FormControl>
+                      <div>
+                        <p className="text-xs text-orange-600">
+                          Taxa média para {tipoConsignado === "inss" ? "INSS" : tipoConsignado === "servidor" ? "servidores" : "militares"}: {
+                            tipoConsignado === "inss" ? "1,7%" : tipoConsignado === "servidor" ? "1,5%" : "1,3%"
+                          } a.m.
+                        </p>
+                        {taxaChanged && (
+                          <p className="text-xs text-primary animate-pulse mt-1">
+                            * Taxa ajustada automaticamente para este tipo de consignado
+                          </p>
                         )}
-                      </SelectContent>
-                    </Select>
-                    <p className="text-xs text-neutral-500">
-                      Prazo comum para {tipoConsignado === "inss" ? "INSS" : tipoConsignado === "servidor" ? "servidores" : "militares"}: {
-                        tipoConsignado === "inss" ? "60 a 84" : tipoConsignado === "servidor" ? "60 a 96" : "60 a 84"
-                      } meses
-                    </p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="numParcelas"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-sm font-medium text-orange-700">Número de parcelas</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value.toString()}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="pl-4 pr-10 py-3 bg-white border-orange-200">
+                            <SelectValue placeholder="Selecione o número de parcelas" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="12">12 meses (1 ano)</SelectItem>
+                          <SelectItem value="24">24 meses (2 anos)</SelectItem>
+                          <SelectItem value="36">36 meses (3 anos)</SelectItem>
+                          <SelectItem value="48">48 meses (4 anos)</SelectItem>
+                          <SelectItem value="60">60 meses (5 anos)</SelectItem>
+                          <SelectItem value="72">72 meses (6 anos)</SelectItem>
+                          <SelectItem value="84">84 meses (7 anos)</SelectItem>
+                          {tipoConsignado === "servidor" && (
+                            <SelectItem value="96">96 meses (8 anos)</SelectItem>
+                          )}
+                        </SelectContent>
+                      </Select>
+                      <p className="text-xs text-orange-600">
+                        Prazo comum para {tipoConsignado === "inss" ? "INSS" : tipoConsignado === "servidor" ? "servidores" : "militares"}: {
+                          tipoConsignado === "inss" ? "60 a 84" : tipoConsignado === "servidor" ? "60 a 96" : "60 a 84"
+                        } meses
+                      </p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
             
             <div className="mt-6">
