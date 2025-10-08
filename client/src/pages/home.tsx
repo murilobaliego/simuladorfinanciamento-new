@@ -136,6 +136,54 @@ export default function Home() {
           />
         </div>
       </section>
+      
+      {/* Banco do Brasil Section */}
+      <section id="simulador-bb" className="mb-12 bg-yellow-50 rounded-lg shadow-md p-6">
+        <div className="flex items-center mb-4">
+          <div className="w-10 h-10 bg-yellow-500 rounded-lg flex items-center justify-center mr-3">
+            <span className="text-white font-bold text-lg">BB</span>
+          </div>
+          <h2 className="font-heading text-2xl font-bold text-primary">Simulador Banco do Brasil</h2>
+        </div>
+        
+        <div className="flex flex-col md:flex-row gap-6">
+          <div className="md:w-2/3 space-y-4">
+            <p className="text-neutral-700">Simule seu financiamento com as <strong>taxas reais do Banco do Brasil</strong>, um dos maiores bancos do país. Condições especiais para correntistas e funcionários públicos.</p>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-white p-3 rounded border">
+                <p className="text-sm text-gray-600">Veículos Novos</p>
+                <p className="font-bold text-green-600">0,99% a.m.</p>
+              </div>
+              <div className="bg-white p-3 rounded border">
+                <p className="text-sm text-gray-600">Imóveis SBPE</p>
+                <p className="font-bold text-green-600">9,5% a.a.</p>
+              </div>
+            </div>
+            
+            <div className="flex gap-3 mt-4">
+              <Link href="/simulador-banco-do-brasil" className="inline-block bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-4 rounded-md shadow-sm transition-colors text-sm">
+                Simular no BB
+              </Link>
+            </div>
+          </div>
+          
+          <div className="md:w-1/3 bg-white p-4 rounded-lg shadow-sm">
+            <h3 className="font-medium text-lg text-primary mb-3">Vantagens BB</h3>
+            <ul className="text-sm space-y-2">
+              <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Taxas a partir de 0,99%</li>
+              <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Desconto para correntistas</li>
+              <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Condições especiais funcionários públicos</li>
+              <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Atendimento nacional</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <section id="outros-simuladores-2" className="mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        </div>
+      </section>
 
       {/* Advanced Tools Section */}
       <section id="ferramentas-avancadas" className="mb-12">

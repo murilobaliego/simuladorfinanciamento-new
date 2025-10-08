@@ -11,9 +11,9 @@
   <!-- Páginas Principais de Financiamento -->
   <url>
     <loc>https://simuladorfinanciamento.com/simulador-financiamento-veiculos</loc>
-    <lastmod>2024-05-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://simuladorfinanciamento.com/financiamento-imobiliario</loc>
@@ -56,6 +56,14 @@
     <lastmod>2024-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
+  </url>
+  
+  <!-- Simulador Banco do Brasil -->
+  <url>
+    <loc>https://simuladorfinanciamento.com/simulador-banco-do-brasil</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   
   <!-- Simuladores de Veículos Específicos -->
@@ -153,6 +161,26 @@
   </url>
   <url>
     <loc>https://simuladorfinanciamento.com/simulador-gratis</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- URLs alternativas de SEO para Banco do Brasil -->
+  <url>
+    <loc>https://simuladorfinanciamento.com/simulador-bb</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/financiamento-banco-do-brasil</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/simulador-bb-financiamento</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

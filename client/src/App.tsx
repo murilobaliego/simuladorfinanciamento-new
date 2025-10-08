@@ -24,6 +24,7 @@ import BalloonPaymentFinance from "@/pages/balloon-payment-finance";
 import SimuladorCaixa from "@/pages/simulador-caixa";
 import SimuladorFinanciamento from "@/pages/simulador-de-financiamento";
 import SimuladorFinanciamentoOnlineGratis from "@/pages/simulador-financiamento-online-gratis";
+import SimuladorBancoDoBrasil from "@/pages/simulador-banco-do-brasil";
 import PaineisSolares from "@/pages/paineis-solares";
 import FinanciamentoFIES from "@/pages/fies";
 import Navbar from "@/components/ui/navbar";
@@ -94,6 +95,12 @@ function Router() {
         <Route path="/simulador-financiamento-gratis" component={SimuladorFinanciamentoOnlineGratis}/>
         <Route path="/calculadora-financiamento-gratis" component={SimuladorFinanciamentoOnlineGratis}/>
         <Route path="/simulador-gratis" component={SimuladorFinanciamentoOnlineGratis}/>
+        
+        {/* Simulador Banco do Brasil - Rotas otimizadas para SEO */}
+        <Route path="/simulador-banco-do-brasil" component={SimuladorBancoDoBrasil}/>
+        <Route path="/simulador-bb" component={SimuladorBancoDoBrasil}/>
+        <Route path="/financiamento-banco-do-brasil" component={SimuladorBancoDoBrasil}/>
+        <Route path="/simulador-bb-financiamento" component={SimuladorBancoDoBrasil}/>
         
         {/* Simulador de Painéis Solares - Rotas otimizadas para SEO */}
         <Route path="/financiamento-paineis-solares" component={PaineisSolares}/>

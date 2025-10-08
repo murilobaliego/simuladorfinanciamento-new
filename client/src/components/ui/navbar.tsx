@@ -59,6 +59,11 @@ export default function Navbar() {
                      location === '/simulador-da-caixa' ||
                      location === '/caixa-simulador-financiamento';
                      
+  const isBBPage = location === '/simulador-banco-do-brasil' ||
+                   location === '/simulador-bb' ||
+                   location === '/financiamento-banco-do-brasil' ||
+                   location === '/simulador-bb-financiamento';
+                     
   const isPaineisSolaresPage = location === '/financiamento-paineis-solares' ||
                      location === '/simulador-energia-solar' ||
                      location === '/calculadora-painel-solar' ||
@@ -78,6 +83,7 @@ export default function Navbar() {
                     location === '/financiamento-parcela-balao' ||
                     location === '/financiamento-vfg' ||
                     isCaixaPage ||
+                    isBBPage ||
                     isPaineisSolaresPage ||
                     isFIESPage;
 
@@ -277,6 +283,15 @@ export default function Navbar() {
                       <BadgeDollarSign className="h-4 w-4 mr-2 text-primary" />
                       <span>Simulador Caixa de Financiamento</span>
                     </Link>
+                    
+                    <Link
+                      href="/simulador-banco-do-brasil"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <BadgeDollarSign className="h-4 w-4 mr-2 text-yellow-600" />
+                      <span>Simulador Banco do Brasil</span>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -313,6 +328,7 @@ export default function Navbar() {
                   {location === '/termos-de-uso' && <span className="text-white">Termos de Uso</span>}
                   {location === '/politica-privacidade' && <span className="text-white">Política de Privacidade</span>}
                   {isCaixaPage && <span className="text-white">Simulador Caixa de Financiamento</span>}
+                  {isBBPage && <span className="text-white">Simulador Banco do Brasil</span>}
                   {isPaineisSolaresPage && <span className="text-white">Financiamento de Painéis Solares</span>}
                   {isFIESPage && <span className="text-white">Financiamento Estudantil (FIES)</span>}
                   {isGratisPage && <span className="text-white">Simulador de Financiamento Online Grátis</span>}
