@@ -43,6 +43,11 @@ export default function Navbar() {
   const isVehiclePage = location === '/simulador-financiamento-veiculos' || 
                         location === '/financiamento-veiculo' || 
                         location === '/vehicle-finance';
+                        
+  const isGratisPage = location === '/simulador-financiamento-online-gratis' ||
+                       location === '/simulador-financiamento-gratis' ||
+                       location === '/calculadora-financiamento-gratis' ||
+                       location === '/simulador-gratis';
   
   const isTruckPage = location === '/financiamento-caminhao' ||
                       location === '/financiamento-caminhoes';
@@ -103,6 +108,18 @@ export default function Navbar() {
               >
                 <Home className="h-4 w-4 mr-1" aria-hidden="true" />
                 <span>Início</span>
+              </Link>
+            </li>
+            <li>
+              <Link 
+                href="/simulador-financiamento-online-gratis" 
+                onClick={closeMenu}
+                className={`block px-3 py-2 rounded-md ${isGratisPage ? 'bg-primary-dark' : 'hover:bg-primary-dark'} transition-colors flex items-center relative`}
+                aria-current={isGratisPage ? "page" : undefined}
+              >
+                <Calculator className="h-4 w-4 mr-1" aria-hidden="true" />
+                <span>Simulador Grátis</span>
+                <span className="ml-1 bg-green-500 text-white text-xs px-1 rounded font-bold">FREE</span>
               </Link>
             </li>
             <li>
@@ -298,6 +315,7 @@ export default function Navbar() {
                   {isCaixaPage && <span className="text-white">Simulador Caixa de Financiamento</span>}
                   {isPaineisSolaresPage && <span className="text-white">Financiamento de Painéis Solares</span>}
                   {isFIESPage && <span className="text-white">Financiamento Estudantil (FIES)</span>}
+                  {isGratisPage && <span className="text-white">Simulador de Financiamento Online Grátis</span>}
                 </li>
               </ol>
             </nav>

@@ -23,6 +23,7 @@ import MotorcycleFinance from "@/pages/motorcycle-finance";
 import BalloonPaymentFinance from "@/pages/balloon-payment-finance";
 import SimuladorCaixa from "@/pages/simulador-caixa";
 import SimuladorFinanciamento from "@/pages/simulador-de-financiamento";
+import SimuladorFinanciamentoOnlineGratis from "@/pages/simulador-financiamento-online-gratis";
 import PaineisSolares from "@/pages/paineis-solares";
 import FinanciamentoFIES from "@/pages/fies";
 import Navbar from "@/components/ui/navbar";
@@ -87,6 +88,12 @@ function Router() {
         <Route path="/simulador-de-financiamento" component={SimuladorFinanciamento}/>
         <Route path="/simulador-financiamento" component={SimuladorFinanciamento}/>
         <Route path="/calculadora-financiamento" component={SimuladorFinanciamento}/>
+        
+        {/* Simulador de Financiamento Online Grátis - Rotas otimizadas para SEO */}
+        <Route path="/simulador-financiamento-online-gratis" component={SimuladorFinanciamentoOnlineGratis}/>
+        <Route path="/simulador-financiamento-gratis" component={SimuladorFinanciamentoOnlineGratis}/>
+        <Route path="/calculadora-financiamento-gratis" component={SimuladorFinanciamentoOnlineGratis}/>
+        <Route path="/simulador-gratis" component={SimuladorFinanciamentoOnlineGratis}/>
         
         {/* Simulador de Painéis Solares - Rotas otimizadas para SEO */}
         <Route path="/financiamento-paineis-solares" component={PaineisSolares}/>

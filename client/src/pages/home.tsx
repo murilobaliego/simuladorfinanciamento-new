@@ -69,6 +69,10 @@ export default function Home() {
             <p className="text-neutral-700 mb-4">Com o melhor <strong>simulador de financiamento</strong> online, você calcula quanto vai pagar por mês no financiamento do seu veículo ou imóvel. Compare condições semelhantes às da <Link href="/simulador-caixa-financiamento" className="text-primary hover:underline">Caixa</Link> e outros bancos.</p>
             <p className="text-neutral-700 mb-6">Nosso <strong>simulador de financiamento de veículos</strong> inclui cálculo de IOF, tabela price completa e sistema de amortização detalhado.</p>
             <div className="flex flex-wrap gap-3">
+              <Link href="/simulador-financiamento-online-gratis" className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md shadow-sm transition-colors relative">
+                Simulador Grátis
+                <span className="ml-1 bg-yellow-400 text-green-800 text-xs px-1 rounded font-bold">FREE</span>
+              </Link>
               <Link href="/simulador-de-financiamento" className="inline-block bg-primary hover:bg-primary-dark text-white font-medium py-3 px-6 rounded-md shadow-sm transition-colors">Simulador de Financiamento</Link>
               <Link href="/simulador-financiamento-veiculos" className="inline-block bg-white border border-primary hover:bg-primary/10 text-primary font-medium py-3 px-6 rounded-md shadow-sm transition-colors">Financiamento de Veículos</Link>
               <Link href="/simulador-caixa-financiamento" className="inline-block bg-white border border-primary hover:bg-primary/10 text-primary font-medium py-3 px-6 rounded-md shadow-sm transition-colors">Simulador Caixa</Link>
@@ -76,7 +80,8 @@ export default function Home() {
           </div>
           <div className="md:w-2/5 bg-neutral-200 h-40 md:h-auto">
             <img 
-              src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+             /* src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" */
+             src="https://simuladorfinanciamento.com/img/woman-loan.png"
               alt="Pessoa usando simulador de financiamento" 
               className="w-full h-full object-cover"
             />
@@ -89,6 +94,15 @@ export default function Home() {
         <h2 className="font-heading text-2xl font-bold text-primary mb-6">Nossos Simuladores de Financiamento</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <SimulatorCard
+            title="Simulador Grátis"
+            description="Simulador de financiamento online 100% gratuito. Sem cadastro, sem limites, com exportação em PDF."
+            path="/simulador-financiamento-online-gratis"
+            imageSrc="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageAlt="Calculadora gratuita"
+            badge="FREE"
+          />
+          
           <SimulatorCard
             title="Financiamento de Veículos"
             description="Simule o financiamento do seu carro ou moto com prestações fixas pela Tabela Price."
