@@ -16,6 +16,7 @@ import { simularFinanciamento } from "@/utils/finance";
 import ExportButtons from "@/components/simulators/export-buttons";
 import { useSecureForm } from "@/hooks/use-secure-form";
 import { validateNumberRange } from "@/utils/security";
+import { Helmet } from 'react-helmet-async';
 
 const formSchema = calculatorSchema.extend({
   valorFinanciado: z.coerce
@@ -33,6 +34,134 @@ const formSchema = calculatorSchema.extend({
 });
 
 export default function RealEstateFinance() {
+  return (
+    <>
+      <Helmet>
+        <title>Financiamento Imobiliário | Simulador Price e SAC, MCMV 2025</title>
+        <meta name="description" content="Simulador de financiamento imobiliário completo com Price e SAC. Calcule parcelas, juros e amortização para casa própria, apartamento e MCMV. Compare taxas dos principais bancos." />
+        <meta name="keywords" content="financiamento imobiliário, simulador financiamento casa, tabela price imóveis, sistema sac, mcmv, casa própria, simulador habitação" />
+        <link rel="canonical" href="https://simuladorfinanciamento.com/financiamento-imobiliario" />
+        <meta property="og:title" content="Financiamento Imobiliário | Simulador Price e SAC 2025" />
+        <meta property="og:description" content="Simulador de financiamento imobiliário completo com Price e SAC. Calcule parcelas, juros e amortização para casa própria, apartamento e MCMV." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://simuladorfinanciamento.com/financiamento-imobiliario" />
+        <meta property="og:image" content="https://simuladorfinanciamento.com/images/financiamento-imobiliario-og.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Financiamento Imobiliário | Simulador Price e SAC" />
+        <meta name="twitter:description" content="Simulador de financiamento imobiliário completo com Price e SAC. Calcule parcelas, juros e amortização para casa própria, apartamento e MCMV." />
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "Simulador de Financiamento Imobiliário",
+              "alternateName": "Calculadora de Financiamento de Imóveis",
+              "url": "https://simuladorfinanciamento.com/financiamento-imobiliario",
+              "description": "Simulador completo para financiamento imobiliário com sistemas Price e SAC, incluindo MCMV e programas habitacionais.",
+              "applicationCategory": "FinanceApplication",
+              "operatingSystem": "Web",
+              "isAccessibleForFree": true,
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "BRL"
+              },
+              "featureList": [
+                "Sistema Tabela Price",
+                "Sistema SAC (Amortização Constante)",
+                "Simulação MCMV",
+                "Cálculo de parcelas até 35 anos",
+                "Tabela de amortização completa",
+                "Comparação Price vs SAC",
+                "Exportação em PDF e Excel"
+              ],
+              "audience": {
+                "@type": "Audience",
+                "audienceType": "Pessoas interessadas em financiamento imobiliário"
+              },
+              "provider": {
+                "@type": "Organization",
+                "name": "Simulador de Financiamento",
+                "url": "https://simuladorfinanciamento.com"
+              }
+            }
+          `}
+        </script>
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Qual a diferença entre Price e SAC no financiamento imobiliário?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No sistema Price, as parcelas são fixas durante todo o financiamento. No SAC, a amortização é constante e os juros decrescem, resultando em parcelas maiores no início que diminuem ao longo do tempo."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Qual o prazo máximo para financiamento imobiliário?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O prazo máximo para financiamento imobiliário no Brasil é de 35 anos (420 meses), mas pode variar conforme a idade do mutuário e políticas do banco."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Qual a taxa de juros média para financiamento imobiliário?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "As taxas de financiamento imobiliário variam de 0,7% a 1,2% ao mês, dependendo do banco, relacionamento, valor da entrada e programa utilizado (SBPE, MCMV, etc.)."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Como funciona o MCMV no financiamento imobiliário?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O MCMV (Minha Casa Minha Vida) oferece taxas subsidiadas pelo governo, com juros mais baixos para famílias de baixa renda, facilitando o acesso ao financiamento imobiliário."
+                  }
+                }
+              ]
+            }
+          `}
+        </script>
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Início",
+                  "item": "https://simuladorfinanciamento.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Financiamento Imobiliário",
+                  "item": "https://simuladorfinanciamento.com/financiamento-imobiliario"
+                }
+              ]
+            }
+          `}
+        </script>
+      </Helmet>
+      
+      <RealEstateFinanceContent />
+    </>
+  );
+}
+
+function RealEstateFinanceContent() {
   const [result, setResult] = useState<SimulationResult | null>(null);
   const [isTableExpanded, setIsTableExpanded] = useState(false);
   const { toast } = useToast();
@@ -136,13 +265,69 @@ export default function RealEstateFinance() {
             <li><strong>Sistema SAC:</strong> Amortização constante e juros decrescentes, resultando em parcelas maiores no início que vão diminuindo com o tempo.</li>
           </ul>
           
-          <p className="mb-4">Ao financiar um imóvel, é importante considerar diversos fatores como a entrada (quanto maior, melhor), o prazo (que pode chegar a 35 anos), a taxa de juros, o Custo Efetivo Total (CET) e os seguros obrigatórios.</p>
+          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 my-8">
+            <h3 className="text-lg font-semibold text-yellow-800 mb-3">🏠 Tipos de Imóveis para Financiamento</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="text-center">
+                <div className="text-3xl mb-2">🏠</div>
+                <h4 className="font-semibold text-yellow-800">Casas</h4>
+                <p className="text-yellow-700 text-sm">Novas e usadas</p>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl mb-2">🏢</div>
+                <h4 className="font-semibold text-yellow-800">Apartamentos</h4>
+                <p className="text-yellow-700 text-sm">Na planta ou prontos</p>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl mb-2">🏗️</div>
+                <h4 className="font-semibold text-yellow-800">Terrenos</h4>
+                <p className="text-yellow-700 text-sm">Para construção</p>
+              </div>
+            </div>
+          </div>
           
-          <p className="mb-4">Também é fundamental avaliar se o valor da parcela se enquadra no seu orçamento, não comprometendo mais de 30% da sua renda familiar. Lembre-se que, além da parcela do financiamento, você terá outros custos como IPTU, condomínio, manutenção e seguro.</p>
+          <h2 id="taxas-financiamento-2025" className="text-2xl font-semibold text-primary mt-8 mb-4">Taxas de Financiamento Imobiliário 2025</h2>
           
-          <p className="mb-4">As taxas de juros para financiamento imobiliário são geralmente mais baixas que outros tipos de crédito, ficando em torno de 0,8% a 1,2% ao mês, dependendo do seu relacionamento com o banco, do valor de entrada e de outros fatores.</p>
+          <div className="overflow-x-auto mb-6">
+            <table className="min-w-full border border-gray-300 bg-white">
+              <thead>
+                <tr className="bg-primary/10">
+                  <th className="px-4 py-3 border text-left font-semibold">Modalidade</th>
+                  <th className="px-4 py-3 border text-center font-semibold">Taxa Mínima</th>
+                  <th className="px-4 py-3 border text-center font-semibold">Taxa Máxima</th>
+                  <th className="px-4 py-3 border text-center font-semibold">Entrada Mínima</th>
+                  <th className="px-4 py-3 border text-center font-semibold">Prazo Máximo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="px-4 py-3 border font-medium">SBPE (Tradicional)</td>
+                  <td className="px-4 py-3 border text-center text-green-600 font-bold">0,70% a.m.</td>
+                  <td className="px-4 py-3 border text-center">1,20% a.m.</td>
+                  <td className="px-4 py-3 border text-center">20%</td>
+                  <td className="px-4 py-3 border text-center">35 anos</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-4 py-3 border font-medium">MCMV (Minha Casa Minha Vida)</td>
+                  <td className="px-4 py-3 border text-center text-green-600 font-bold">0,50% a.m.</td>
+                  <td className="px-4 py-3 border text-center">0,70% a.m.</td>
+                  <td className="px-4 py-3 border text-center">5%</td>
+                  <td className="px-4 py-3 border text-center">30 anos</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 border font-medium">Casa Verde Amarela</td>
+                  <td className="px-4 py-3 border text-center text-green-600 font-bold">0,50% a.m.</td>
+                  <td className="px-4 py-3 border text-center">0,68% a.m.</td>
+                  <td className="px-4 py-3 border text-center">5%</td>
+                  <td className="px-4 py-3 border text-center">30 anos</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           
-          <p>Use nosso simulador para calcular as parcelas e a evolução do seu financiamento imobiliário, permitindo uma melhor visualização do compromisso financeiro ao longo dos anos.</p>
+          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+            <p className="text-sm italic">Use nosso <strong>simulador de financiamento imobiliário</strong> com as taxas acima para obter cálculos precisos. Lembre-se: não comprometa mais de 30% da sua renda familiar com a parcela do financiamento.</p>
+          </div>
         </div>
         
         <Form {...form}>
@@ -370,9 +555,72 @@ export default function RealEstateFinance() {
           </div>
         )}
         
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold text-primary mb-6">Perguntas Frequentes - Financiamento Imobiliário</h2>
+          
+          <div className="space-y-6">
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Qual a diferença entre Price e SAC no financiamento imobiliário?</h3>
+              <p className="text-neutral-700">No sistema <strong>Price</strong>, as parcelas são fixas durante todo o financiamento. No <strong>SAC</strong>, a amortização é constante e os juros decrescem, resultando em parcelas maiores no início que diminuem ao longo do tempo.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Qual o prazo máximo para financiamento imobiliário?</h3>
+              <p className="text-neutral-700">O prazo máximo para <strong>financiamento imobiliário</strong> no Brasil é de 35 anos (420 meses), mas pode variar conforme a idade do mutuário e políticas do banco.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Qual a taxa de juros média para financiamento imobiliário?</h3>
+              <p className="text-neutral-700">As taxas de <strong>financiamento imobiliário</strong> variam de 0,7% a 1,2% ao mês, dependendo do banco, relacionamento, valor da entrada e programa utilizado (SBPE, MCMV, etc.).</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Como funciona o MCMV no financiamento imobiliário?</h3>
+              <p className="text-neutral-700">O <strong>MCMV</strong> (Minha Casa Minha Vida) oferece taxas subsidiadas pelo governo, com juros mais baixos para famílias de baixa renda, facilitando o acesso ao financiamento imobiliário.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Qual a entrada mínima para financiar um imóvel?</h3>
+              <p className="text-neutral-700">A entrada mínima varia: SBPE tradicional exige 20%, enquanto programas como MCMV podem aceitar apenas 5% de entrada, facilitando o acesso à casa própria.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Posso usar FGTS no financiamento imobiliário?</h3>
+              <p className="text-neutral-700">Sim, o FGTS pode ser usado como entrada, para amortização de parcelas ou quitação do <strong>financiamento imobiliário</strong>, desde que atenda aos requisitos legais.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-12 bg-gradient-to-r from-gray-50 to-green-50 rounded-lg p-6">
+          <h2 className="text-2xl font-semibold text-primary mb-4">Vantagens do Nosso Simulador de Financiamento Imobiliário</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="text-center">
+              <div className="text-3xl mb-2">🔄</div>
+              <h3 className="font-semibold mb-1">Price e SAC</h3>
+              <p className="text-sm text-gray-600">Compare os dois sistemas de amortização</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">📅</div>
+              <h3 className="font-semibold mb-1">Até 35 Anos</h3>
+              <p className="text-sm text-gray-600">Simule prazos longos para menor parcela</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">🏠</div>
+              <h3 className="font-semibold mb-1">MCMV</h3>
+              <p className="text-sm text-gray-600">Inclui programas habitacionais</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">📊</div>
+              <h3 className="font-semibold mb-1">Detalhado</h3>
+              <p className="text-sm text-gray-600">Tabela completa de amortização</p>
+            </div>
+          </div>
+        </div>
+        
         <div className="bg-neutral-100 border-l-4 border-secondary p-4 mt-6">
           <p className="text-sm font-medium">AVISO IMPORTANTE:</p>
-          <p className="text-sm">Não somos uma instituição financeira e não oferecemos empréstimos ou financiamentos. Este site fornece apenas ferramentas de simulação para cálculos e pesquisa. Os resultados são aproximados e podem variar conforme as condições reais oferecidas pelas instituições financeiras. Recomendamos sempre consultar um banco ou financeira para obter condições oficiais antes de tomar qualquer decisão.</p>
+          <p className="text-sm">Este <strong>simulador de financiamento imobiliário</strong> é uma ferramenta educativa. Os valores são aproximações para planejamento. Para condições oficiais, consulte bancos e financeiras autorizadas.</p>
         </div>
       </section>
     </div>

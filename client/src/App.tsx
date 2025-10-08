@@ -20,7 +20,9 @@ import IdealDownpayment from "@/pages/ideal-downpayment";
 import LeasingVsFinancing from "@/pages/leasing-vs-financing";
 import TruckFinance from "@/pages/truck-finance";
 import MotorcycleFinance from "@/pages/motorcycle-finance";
+import SimuladorFinanciamentoMoto from "@/pages/simulador-financiamento-moto";
 import BalloonPaymentFinance from "@/pages/balloon-payment-finance";
+import SimuladorParcelaBalao from "@/pages/simulador-parcela-balao";
 import SimuladorCaixa from "@/pages/simulador-caixa";
 import SimuladorFinanciamento from "@/pages/simulador-de-financiamento";
 import SimuladorFinanciamentoOnlineGratis from "@/pages/simulador-financiamento-online-gratis";
@@ -72,11 +74,11 @@ function Router() {
         {/* Novos simuladores de veículos específicos */}
         <Route path="/financiamento-caminhao" component={TruckFinance}/>
         <Route path="/financiamento-caminhoes" component={TruckFinance}/>
-        <Route path="/financiamento-moto" component={MotorcycleFinance}/>
-        <Route path="/financiamento-motos" component={MotorcycleFinance}/>
+        <Route path="/financiamento-moto" component={SimuladorFinanciamentoMoto}/>
+        <Route path="/financiamento-motos" component={SimuladorFinanciamentoMoto}/>
         
         {/* Simulador de financiamento com parcela balão */}
-        <Route path="/simulador-parcela-balao" component={BalloonPaymentFinance}/>
+        <Route path="/simulador-parcela-balao" component={SimuladorParcelaBalao}/>
         <Route path="/financiamento-parcela-balao" component={BalloonPaymentFinance}/>
         <Route path="/financiamento-vfg" component={BalloonPaymentFinance}/>
         

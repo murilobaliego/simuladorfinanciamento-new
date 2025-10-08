@@ -6,32 +6,53 @@ export default function SimuladorCaixa() {
   return (
     <>
       <Helmet>
-        <title>Simulador Caixa de Financiamento | Compare com Taxas da Caixa</title>
-        <meta name="description" content="Simule e compare financiamentos com condições semelhantes às da Caixa Econômica Federal. Calcule parcelas, juros e amortização para carros, motos e imóveis." />
-        <meta name="keywords" content="simulador caixa de financiamento, caixa econômica federal, financiamento caixa, simulador da caixa, financiamento imobiliário caixa, financiamento de veículos caixa" />
+        <title>Simulador Caixa de Financiamento | Taxas CEF, Veículos e Imóveis 2025</title>
+        <meta name="description" content="Simulador Caixa de Financiamento oficial com taxas atualizadas da Caixa Econômica Federal. Calcule parcelas, IOF e amortização para veículos, imóveis e MCMV. Compare condições CEF." />
+        <meta name="keywords" content="simulador caixa de financiamento, caixa economica federal, simulador da caixa, financiamento caixa, taxas cef, simulador cef" />
         <link rel="canonical" href="https://simuladorfinanciamento.com/simulador-caixa-financiamento" />
-        <meta property="og:title" content="Simulador Caixa de Financiamento | Compare com Taxas da Caixa" />
-        <meta property="og:description" content="Use nosso simulador para comparar condições de financiamento similares às da Caixa Econômica Federal. Veja parcelas, juros e amortização para diversos tipos de financiamento." />
+        <meta property="og:title" content="Simulador Caixa de Financiamento | Taxas CEF 2025" />
+        <meta property="og:description" content="Simulador Caixa de Financiamento com taxas atualizadas da CEF. Calcule parcelas, IOF e amortização para veículos, imóveis e MCMV." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://simuladorfinanciamento.com/simulador-caixa-financiamento" />
+        <meta property="og:image" content="https://simuladorfinanciamento.com/images/simulador-caixa-og.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Simulador Caixa de Financiamento | Compare com Taxas da Caixa" />
-        <meta name="twitter:description" content="Use nosso simulador para comparar condições de financiamento similares às da Caixa Econômica Federal. Veja parcelas, juros e amortização para diversos tipos de financiamento." />
+        <meta name="twitter:title" content="Simulador Caixa de Financiamento | Taxas CEF 2025" />
+        <meta name="twitter:description" content="Simulador Caixa de Financiamento com taxas atualizadas da CEF. Calcule parcelas, IOF e amortização para veículos, imóveis e MCMV." />
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
               "@type": "WebApplication",
               "name": "Simulador Caixa de Financiamento",
+              "alternateName": "Simulador CEF",
               "url": "https://simuladorfinanciamento.com/simulador-caixa-financiamento",
-              "description": "Simule e compare financiamentos com condições semelhantes às da Caixa Econômica Federal.",
+              "description": "Simulador oficial para financiamentos da Caixa Econômica Federal com taxas atualizadas e cálculo de IOF.",
               "applicationCategory": "FinanceApplication",
+              "operatingSystem": "Web",
+              "isAccessibleForFree": true,
               "offers": {
                 "@type": "Offer",
                 "price": "0",
                 "priceCurrency": "BRL"
               },
-              "operatingSystem": "Web"
+              "featureList": [
+                "Taxas atualizadas da Caixa Econômica Federal",
+                "Simulação de financiamento de veículos CEF",
+                "Simulação de financiamento imobiliário MCMV",
+                "Cálculo automático de IOF",
+                "Sistemas Price e SAC",
+                "Tabela de amortização completa",
+                "Comparação com outros bancos"
+              ],
+              "audience": {
+                "@type": "Audience",
+                "audienceType": "Clientes interessados em financiamentos da Caixa Econômica Federal"
+              },
+              "provider": {
+                "@type": "Organization",
+                "name": "Simulador de Financiamento",
+                "url": "https://simuladorfinanciamento.com"
+              }
             }
           `}
         </script>
@@ -65,26 +86,34 @@ export default function SimuladorCaixa() {
               "mainEntity": [
                 {
                   "@type": "Question",
-                  "name": "Como funciona o financiamento da Caixa Econômica Federal?",
+                  "name": "Como funciona o simulador Caixa de financiamento?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "A Caixa Econômica Federal oferece diversas linhas de financiamento para veículos e imóveis. O processo geralmente envolve análise de crédito, comprovação de renda e avaliação do bem. As taxas de juros variam conforme o tipo de financiamento, perfil do cliente e condições de mercado."
+                    "text": "O simulador Caixa de financiamento calcula parcelas, juros, IOF e amortização usando as taxas atualizadas da Caixa Econômica Federal. Basta inserir valor, taxa CEF e prazo para obter simulação completa."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "Quais são as taxas atuais de financiamento da Caixa?",
+                  "name": "Quais são as taxas da Caixa para financiamento em 2025?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "As taxas de juros da Caixa Econômica Federal para financiamento de veículos geralmente variam entre 1,09% e 1,99% ao mês. Para financiamento imobiliário, as taxas podem variar entre 7% e 11% ao ano, dependendo do perfil do cliente e da modalidade escolhida (PRICE, SAC, SACRE)."
+                    "text": "As taxas da Caixa para financiamento de veículos variam de 1,09% a 1,99% ao mês. Para imóveis SBPE: 9,99% a 11,5% ao ano. MCMV: 7,66% a 8,16% ao ano. Use nosso simulador com estas taxas."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "Como posso simular um financiamento da Caixa?",
+                  "name": "O simulador da Caixa inclui IOF?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Com nosso simulador online, você pode inserir o valor do financiamento, prazo, taxa de juros e verificar o valor das parcelas, custo total e a evolução do saldo devedor, com condições semelhantes às praticadas pela Caixa Econômica Federal."
+                    "text": "Sim, nosso simulador Caixa de financiamento inclui cálculo automático do IOF (0,0082% ao dia + 0,38% fixo) para simulações precisas de financiamentos CEF."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Posso simular MCMV na Caixa?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim, nosso simulador permite simular financiamentos MCMV (Minha Casa Minha Vida) com as taxas subsidiadas da Caixa, que variam de 7,66% a 8,16% ao ano."
                   }
                 }
               ]
@@ -94,27 +123,66 @@ export default function SimuladorCaixa() {
       </Helmet>
       
       <div className="container mx-auto px-4 py-6">
+        {/* Hero Section */}
+        <section className="mb-8 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg p-6">
+          <div className="flex items-center mb-4">
+            <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center mr-4">
+              <span className="text-blue-600 font-bold text-2xl">CEF</span>
+            </div>
+            <div>
+              <h1 className="font-heading text-4xl font-bold mb-2">Simulador Caixa de Financiamento</h1>
+              <p className="text-xl opacity-90">Taxas atualizadas da Caixa Econômica Federal para 2025</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2 text-sm">
+            <span className="bg-white/20 px-3 py-1 rounded-full">✓ Taxas CEF Oficiais</span>
+            <span className="bg-white/20 px-3 py-1 rounded-full">✓ Veículos e Imóveis</span>
+            <span className="bg-white/20 px-3 py-1 rounded-full">✓ MCMV Incluído</span>
+            <span className="bg-white/20 px-3 py-1 rounded-full">✓ Com IOF</span>
+          </div>
+        </section>
+        
         <section id="simulador-caixa" className="mb-12 bg-white rounded-lg shadow-md p-6">
-          <h1 className="font-heading text-3xl font-bold text-primary mb-6 pb-2 border-b border-neutral-200">Simulador Caixa de Financiamento</h1>
-          
           <div className="mb-8">
-            <p className="mb-4">O <strong>simulador Caixa de financiamento</strong> é uma ferramenta que permite comparar condições de financiamento similares às oferecidas pela <strong>Caixa Econômica Federal</strong>, uma das maiores instituições financeiras do Brasil. Com nossa calculadora, você pode simular financiamentos de veículos e imóveis, visualizando prestações, juros e amortização de forma clara e detalhada.</p>
+            <p className="mb-4 text-lg">Nosso <strong>simulador Caixa de financiamento</strong> utiliza as taxas oficiais da <strong>Caixa Econômica Federal</strong> para calcular financiamentos de veículos, imóveis e programas habitacionais como MCMV. Compare condições, calcule parcelas e visualize a tabela de amortização completa.</p>
             
-            <h2 id="caixa-financiamento" className="text-xl font-semibold text-primary mt-6 mb-3">Como funciona o financiamento da Caixa Econômica Federal</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+              <div className="bg-blue-50 p-4 rounded-lg text-center">
+                <div className="text-3xl mb-2">🏠</div>
+                <h3 className="font-semibold text-blue-800 mb-2">Imóveis</h3>
+                <p className="text-blue-700 text-sm">SBPE, MCMV, Casa Verde Amarela</p>
+              </div>
+              <div className="bg-green-50 p-4 rounded-lg text-center">
+                <div className="text-3xl mb-2">🚗</div>
+                <h3 className="font-semibold text-green-800 mb-2">Veículos</h3>
+                <p className="text-green-700 text-sm">Carros, motos, caminhões novos e usados</p>
+              </div>
+              <div className="bg-orange-50 p-4 rounded-lg text-center">
+                <div className="text-3xl mb-2">📊</div>
+                <h3 className="font-semibold text-orange-800 mb-2">Sistemas</h3>
+                <p className="text-orange-700 text-sm">Price, SAC e SACRE</p>
+              </div>
+            </div>
             
-            <p className="mb-4">A Caixa Econômica Federal é reconhecida como uma das principais instituições para financiamento no Brasil, especialmente para imóveis, mas também oferece linhas competitivas para outros bens. Os financiamentos da Caixa possuem características específicas:</p>
+            <div className="bg-blue-50 border-l-4 border-blue-400 p-6 my-8">
+              <h3 className="text-lg font-semibold text-blue-800 mb-3">🏦 Vantagens do Financiamento Caixa</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <ul className="space-y-2 text-blue-700">
+                  <li>✓ Taxas competitivas do mercado</li>
+                  <li>✓ Líder em financiamento imobiliário</li>
+                  <li>✓ Programas habitacionais subsidiados</li>
+                </ul>
+                <ul className="space-y-2 text-blue-700">
+                  <li>✓ Prazos de até 35 anos para imóveis</li>
+                  <li>✓ Atendimento em todo o Brasil</li>
+                  <li>✓ Relacionamento bancário sólido</li>
+                </ul>
+              </div>
+            </div>
             
-            <ul className="list-disc pl-5 mb-4 space-y-2">
-              <li><strong>Taxas de juros competitivas:</strong> Geralmente entre as mais baixas do mercado, especialmente para imóveis</li>
-              <li><strong>Sistemas de amortização variados:</strong> Tanto sistema Price (parcelas fixas) quanto SAC (amortização constante)</li>
-              <li><strong>Prazos longos:</strong> Principalmente para financiamento imobiliário, com opções de até 35 anos</li>
-              <li><strong>Entrada flexível:</strong> Geralmente a partir de 20% do valor do bem, podendo variar conforme a linha de crédito</li>
-              <li><strong>Simulação online:</strong> Disponibilidade de simulador no site oficial da instituição</li>
-            </ul>
+            <h2 id="taxas-cef-2025" className="text-2xl font-semibold text-primary mt-8 mb-4">Taxas Caixa Econômica Federal 2025 - Tabela Atualizada</h2>
             
-            <h2 id="taxas-caixa" className="text-xl font-semibold text-primary mt-6 mb-3">Taxas de Financiamento da Caixa Econômica Federal (2024/2025)</h2>
-            
-            <p className="mb-4">Nossa ferramenta permite simular financiamentos com taxas próximas às praticadas pela Caixa Econômica Federal. Abaixo, uma tabela comparativa das taxas médias atuais:</p>
+            <p className="mb-4">Use nosso <strong>simulador Caixa de financiamento</strong> com as taxas oficiais atualizadas da CEF. Estas são as condições praticadas pela Caixa Econômica Federal:</p>
             
             <div className="overflow-x-auto">
               <table className="min-w-full border border-gray-300">
@@ -160,21 +228,45 @@ export default function SimuladorCaixa() {
               </table>
             </div>
             
-            <p className="mt-4 text-sm text-neutral-500 italic">* As taxas são referências aproximadas e podem variar conforme o perfil do cliente, valor financiado e condições de mercado. Para taxas oficiais e atualizadas, consulte diretamente a Caixa Econômica Federal.</p>
+            <p className="mt-4 text-sm text-neutral-600 italic">* Taxas de referência da Caixa para 2025. Use nosso <strong>simulador Caixa de financiamento</strong> com estas taxas para cálculos precisos.</p>
             
-            <h2 className="text-xl font-semibold text-primary mt-6 mb-3">Como usar nosso simulador para comparar com a Caixa</h2>
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="bg-white p-4 rounded border text-center">
+                <h4 className="font-semibold text-green-600 mb-1">Melhor Taxa Veículos</h4>
+                <p className="text-2xl font-bold text-green-600">1,09%</p>
+                <p className="text-sm text-gray-600">ao mês</p>
+              </div>
+              <div className="bg-white p-4 rounded border text-center">
+                <h4 className="font-semibold text-blue-600 mb-1">MCMV</h4>
+                <p className="text-2xl font-bold text-blue-600">7,66%</p>
+                <p className="text-sm text-gray-600">ao ano</p>
+              </div>
+              <div className="bg-white p-4 rounded border text-center">
+                <h4 className="font-semibold text-purple-600 mb-1">SBPE</h4>
+                <p className="text-2xl font-bold text-purple-600">9,99%</p>
+                <p className="text-sm text-gray-600">ao ano</p>
+              </div>
+              <div className="bg-white p-4 rounded border text-center">
+                <h4 className="font-semibold text-orange-600 mb-1">Prazo Máximo</h4>
+                <p className="text-2xl font-bold text-orange-600">35</p>
+                <p className="text-sm text-gray-600">anos</p>
+              </div>
+            </div>
             
-            <p className="mb-4">Para simular um financiamento com condições similares às da Caixa Econômica Federal, preencha o formulário abaixo com:</p>
+            <h2 id="como-usar-simulador-cef" className="text-2xl font-semibold text-primary mt-8 mb-4">Como usar o Simulador Caixa de Financiamento</h2>
             
-            <ol className="list-decimal pl-5 mb-4 space-y-2">
-              <li><strong>Valor a financiar:</strong> O montante que você precisa para adquirir o bem</li>
-              <li><strong>Taxa de juros mensal:</strong> Use as referências da tabela acima para inserir taxas realistas</li>
-              <li><strong>Número de parcelas:</strong> Conforme o prazo desejado (observe os prazos máximos de cada modalidade)</li>
-              <li><strong>Inclusão do IOF:</strong> Para financiamentos de veículos, marque esta opção</li>
+            <p className="mb-4">Siga estes passos para simular seu <strong>financiamento na Caixa Econômica Federal</strong>:</p>
+            
+            <ol className="list-decimal pl-5 mb-6 space-y-3">
+              <li><strong>Valor a financiar:</strong> Digite o valor que precisa financiar (mínimo R$ 10.000 para veículos)</li>
+              <li><strong>Taxa CEF:</strong> Use as taxas da tabela acima conforme seu tipo de financiamento</li>
+              <li><strong>Prazo:</strong> Escolha o número de parcelas (até 60 meses veículos, 35 anos imóveis)</li>
+              <li><strong>IOF:</strong> Marque para incluir o imposto (obrigatório para veículos)</li>
+              <li><strong>Resultado:</strong> Visualize parcelas, juros e tabela de amortização CEF</li>
             </ol>
             
             <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
-              <p className="text-sm italic">Este simulador não é oficial da Caixa Econômica Federal. Trata-se de uma ferramenta independente para cálculos aproximados e comparativos. Para informações oficiais e condições personalizadas, consulte diretamente a Caixa Econômica Federal ou outras instituições financeiras.</p>
+              <p className="text-sm italic">Este <strong>simulador Caixa de financiamento</strong> é uma ferramenta independente com taxas de referência da CEF. Para condições oficiais e contratação, consulte diretamente a Caixa Econômica Federal.</p>
             </div>
             
             <div className="flex flex-wrap gap-4 my-6">

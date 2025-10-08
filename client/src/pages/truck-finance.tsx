@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Loader2 } from "lucide-react";
+import { Helmet } from 'react-helmet-async';
 
 import {
   Form,
@@ -27,7 +28,6 @@ import { simularFinanciamento } from "@/utils/finance";
 import PriceTable from "@/components/simulators/price-table";
 import ExportButtons from "@/components/simulators/export-buttons";
 import DebtChart from "@/components/simulators/debt-chart";
-import HeadSEO from "@/components/seo/head-seo";
 
 // Esquema de validação do formulário
 const formSchema = z.object({
@@ -45,6 +45,134 @@ const formSchema = z.object({
 });
 
 export default function TruckFinance() {
+  return (
+    <>
+      <Helmet>
+        <title>Financiamento de Caminhões | Simulador Veículos Pesados 2025</title>
+        <meta name="description" content="Simulador de financiamento de caminhões, carretas e veículos pesados. Calcule parcelas com taxas especiais, IOF e tabela de amortização. Compare condições FINAME e bancos comerciais." />
+        <meta name="keywords" content="financiamento caminhão, simulador caminhão, financiar veículo pesado, finame caminhão, financiamento carreta, simulador veículos comerciais" />
+        <link rel="canonical" href="https://simuladorfinanciamento.com/financiamento-caminhao" />
+        <meta property="og:title" content="Financiamento de Caminhões | Simulador Veículos Pesados 2025" />
+        <meta property="og:description" content="Simulador de financiamento de caminhões, carretas e veículos pesados. Calcule parcelas com taxas especiais, IOF e tabela de amortização." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://simuladorfinanciamento.com/financiamento-caminhao" />
+        <meta property="og:image" content="https://simuladorfinanciamento.com/images/financiamento-caminhao-og.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Financiamento de Caminhões | Simulador Veículos Pesados" />
+        <meta name="twitter:description" content="Simulador de financiamento de caminhões, carretas e veículos pesados. Calcule parcelas com taxas especiais." />
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "Simulador de Financiamento de Caminhões",
+              "alternateName": "Calculadora de Financiamento de Veículos Pesados",
+              "url": "https://simuladorfinanciamento.com/financiamento-caminhao",
+              "description": "Simulador especializado para financiamento de caminhões, carretas e veículos comerciais pesados com taxas diferenciadas.",
+              "applicationCategory": "FinanceApplication",
+              "operatingSystem": "Web",
+              "isAccessibleForFree": true,
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "BRL"
+              },
+              "featureList": [
+                "Taxas diferenciadas por tipo de caminhão",
+                "Simulação FINAME",
+                "Cálculo de IOF para veículos",
+                "Prazos de até 120 meses",
+                "Tabela de amortização completa",
+                "Exportação em PDF e Excel",
+                "Gráfico de evolução do saldo"
+              ],
+              "audience": {
+                "@type": "Audience",
+                "audienceType": "Transportadores, empresas de logística e caminhoneiros autônomos"
+              },
+              "provider": {
+                "@type": "Organization",
+                "name": "Simulador de Financiamento",
+                "url": "https://simuladorfinanciamento.com"
+              }
+            }
+          `}
+        </script>
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Qual a taxa de juros para financiamento de caminhão?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "As taxas para financiamento de caminhão variam de 1,3% a 2,0% ao mês, dependendo do tipo de veículo, banco e programa utilizado (FINAME, CDC comercial, etc.)."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Qual o prazo máximo para financiar um caminhão?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O prazo máximo para financiamento de caminhão pode chegar a 120 meses (10 anos) em programas especiais como FINAME, e até 72 meses em financiamentos convencionais."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "O que é o FINAME para caminhões?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O FINAME é uma linha de crédito do BNDES para financiamento de máquinas e equipamentos, incluindo caminhões, com taxas subsidiadas a partir de 0,85% a.m. + TLP."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Qual a entrada mínima para financiar um caminhão?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A entrada mínima para financiamento de caminhão varia de 10% (FINAME) a 30% (bancos comerciais), dependendo do programa e perfil do cliente."
+                  }
+                }
+              ]
+            }
+          `}
+        </script>
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Início",
+                  "item": "https://simuladorfinanciamento.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Financiamento de Caminhões",
+                  "item": "https://simuladorfinanciamento.com/financiamento-caminhao"
+                }
+              ]
+            }
+          `}
+        </script>
+      </Helmet>
+      
+      <TruckFinanceContent />
+    </>
+  );
+}
+
+function TruckFinanceContent() {
   const [result, setResult] = useState<any | null>(null);
   const [isTableExpanded, setIsTableExpanded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -186,60 +314,88 @@ export default function TruckFinance() {
   }
 
   return (
-    <>
-      <HeadSEO 
-        title="Simulador de Financiamento de Caminhões | Taxas e Parcelas"
-        description="Simule o financiamento de caminhões, carretas e veículos pesados com taxas atualizadas. Calcule parcelas, juros e gere sua tabela Price personalizada."
-        keywords={["financiamento caminhão", "simulador caminhão", "financiar veículo pesado", "tabela price caminhão", "financiar caminhão", "parcelas caminhão", "simulação financiamento caminhão"]}
-      />
-    
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-heading font-bold text-primary mb-4">
-          Simulador de Financiamento de Caminhões e Veículos Pesados
-        </h1>
+    <div className="container mx-auto px-4 py-6">
+      {/* Hero Section */}
+      <section className="mb-8 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-6">
+        <div className="text-center mb-6">
+          <h1 className="font-heading text-4xl font-bold text-primary mb-4">Financiamento de Caminhões</h1>
+          <p className="text-xl text-gray-700 mb-4">Simule veículos pesados com taxas especiais e prazos longos</p>
+          <div className="flex flex-wrap justify-center gap-2 text-sm">
+            <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full">✓ FINAME</span>
+            <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">✓ Até 120 meses</span>
+            <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full">✓ Taxas Especiais</span>
+            <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full">✓ Com IOF</span>
+          </div>
+        </div>
+      </section>
         
-        <section className="mb-8">
-          <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-lg border border-gray-200 shadow-sm">
-            <h2 className="text-xl font-semibold text-gray-800 mb-3">
-              Calcule as parcelas do seu caminhão ou veículo pesado
-            </h2>
-            <p className="text-lg text-neutral-600 mb-4">
-              Simule as condições para financiar seu caminhão, carreta, ônibus, semirreboque ou implemento rodoviário. 
-              Nosso simulador utiliza taxas atualizadas do mercado e considera condições específicas para diferentes tipos de veículos pesados.
-            </p>
+      <section className="mb-12 bg-white rounded-lg shadow-md p-6">
+        <div className="mb-8">
+          <p className="mb-4 text-lg">O <strong>financiamento de caminhões</strong> oferece condições especiais para veículos comerciais pesados. Com programas como FINAME e linhas específicas para transportadores, você pode financiar seu caminhão com prazos de até 120 meses e taxas diferenciadas.</p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-              <div className="bg-white p-4 rounded-lg border border-gray-100">
-                <h3 className="font-bold text-primary mb-2">Taxas Personalizadas</h3>
-                <p className="text-sm text-gray-600">
-                  Ajustamos automaticamente as taxas de juros com base no tipo de caminhão que você está financiando.
-                </p>
-              </div>
-              
-              <div className="bg-white p-4 rounded-lg border border-gray-100">
-                <h3 className="font-bold text-primary mb-2">Tabela Price Completa</h3>
-                <p className="text-sm text-gray-600">
-                  Visualize a evolução do seu saldo devedor e a composição de juros e amortização em cada parcela.
-                </p>
-              </div>
-              
-              <div className="bg-white p-4 rounded-lg border border-gray-100">
-                <h3 className="font-bold text-primary mb-2">Exportação em PDF/Excel</h3>
-                <p className="text-sm text-gray-600">
-                  Exporte os resultados da simulação em PDF ou Excel para análise posterior ou envio a instituições financeiras.
-                </p>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+            <div className="bg-orange-50 p-4 rounded-lg text-center">
+              <div className="text-3xl mb-2">🚛</div>
+              <h3 className="font-semibold text-orange-800 mb-2">Veículos Pesados</h3>
+              <p className="text-orange-700 text-sm">Caminhões, carretas, implementos</p>
             </div>
-            
-            <div className="text-sm text-gray-600 mt-4">
-              <p><strong>Tipos de veículos disponíveis para simulação:</strong> Caminhões leves (VUC), médios (toco), pesados (truck), extrapesados (carretas), implementos rodoviários, cavalos mecânicos, semirreboques e outros veículos comerciais pesados.</p>
+            <div className="bg-green-50 p-4 rounded-lg text-center">
+              <div className="text-3xl mb-2">🏦</div>
+              <h3 className="font-semibold text-green-800 mb-2">FINAME</h3>
+              <p className="text-green-700 text-sm">Taxas subsidiadas BNDES</p>
+            </div>
+            <div className="bg-blue-50 p-4 rounded-lg text-center">
+              <div className="text-3xl mb-2">📅</div>
+              <h3 className="font-semibold text-blue-800 mb-2">Até 120 Meses</h3>
+              <p className="text-blue-700 text-sm">Prazos longos para menor parcela</p>
             </div>
           </div>
-        </section>
+          
+          <h2 id="taxas-caminhao-2025" className="text-2xl font-semibold text-primary mt-8 mb-4">Taxas de Financiamento de Caminhões 2025</h2>
+          
+          <div className="overflow-x-auto mb-6">
+            <table className="min-w-full border border-gray-300 bg-white">
+              <thead>
+                <tr className="bg-primary/10">
+                  <th className="px-4 py-3 border text-left font-semibold">Programa</th>
+                  <th className="px-4 py-3 border text-center font-semibold">Taxa Mínima</th>
+                  <th className="px-4 py-3 border text-center font-semibold">Taxa Máxima</th>
+                  <th className="px-4 py-3 border text-center font-semibold">Entrada Mínima</th>
+                  <th className="px-4 py-3 border text-center font-semibold">Prazo Máximo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="px-4 py-3 border font-medium">FINAME (BNDES)</td>
+                  <td className="px-4 py-3 border text-center text-green-600 font-bold">0,85% a.m.</td>
+                  <td className="px-4 py-3 border text-center">1,20% a.m.</td>
+                  <td className="px-4 py-3 border text-center">10%</td>
+                  <td className="px-4 py-3 border text-center">120 meses</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-4 py-3 border font-medium">CDC Bancos Comerciais</td>
+                  <td className="px-4 py-3 border text-center text-green-600 font-bold">1,30% a.m.</td>
+                  <td className="px-4 py-3 border text-center">2,00% a.m.</td>
+                  <td className="px-4 py-3 border text-center">20%</td>
+                  <td className="px-4 py-3 border text-center">72 meses</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 border font-medium">Financeiras Especializadas</td>
+                  <td className="px-4 py-3 border text-center text-green-600 font-bold">1,50% a.m.</td>
+                  <td className="px-4 py-3 border text-center">2,50% a.m.</td>
+                  <td className="px-4 py-3 border text-center">30%</td>
+                  <td className="px-4 py-3 border text-center">60 meses</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            
+          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+            <p className="text-sm italic">Use nosso <strong>simulador de financiamento de caminhões</strong> com as taxas acima para obter cálculos precisos. Considere programas especiais como FINAME para melhores condições.</p>
+          </div>
+        </div>
         
-        <p className="text-lg text-neutral-600 mb-8">
-          Preencha os dados abaixo para obter sua simulação personalizada de financiamento para caminhões:
-        </p>
+
         
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="mb-8">
@@ -521,11 +677,74 @@ export default function TruckFinance() {
           </div>
         )}
         
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold text-primary mb-6">Perguntas Frequentes - Financiamento de Caminhões</h2>
+          
+          <div className="space-y-6">
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Qual a taxa de juros para financiamento de caminhão?</h3>
+              <p className="text-neutral-700">As taxas para <strong>financiamento de caminhão</strong> variam de 1,3% a 2,0% ao mês, dependendo do tipo de veículo, banco e programa utilizado (FINAME, CDC comercial, etc.).</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Qual o prazo máximo para financiar um caminhão?</h3>
+              <p className="text-neutral-700">O prazo máximo para <strong>financiamento de caminhão</strong> pode chegar a 120 meses (10 anos) em programas especiais como FINAME, e até 72 meses em financiamentos convencionais.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">O que é o FINAME para caminhões?</h3>
+              <p className="text-neutral-700">O <strong>FINAME</strong> é uma linha de crédito do BNDES para financiamento de máquinas e equipamentos, incluindo caminhões, com taxas subsidiadas a partir de 0,85% a.m. + TLP.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Qual a entrada mínima para financiar um caminhão?</h3>
+              <p className="text-neutral-700">A entrada mínima para <strong>financiamento de caminhão</strong> varia de 10% (FINAME) a 30% (bancos comerciais), dependendo do programa e perfil do cliente.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Posso financiar caminhão usado?</h3>
+              <p className="text-neutral-700">Sim, é possível financiar caminhões usados, mas com restrições de idade (geralmente até 10 anos) e condições diferentes dos veículos novos.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Quais documentos preciso para financiar um caminhão?</h3>
+              <p className="text-neutral-700">Além dos documentos pessoais, é necessário: comprovação de renda, experiência no setor de transportes, contrato de prestação de serviços e documentação da empresa (se PJ).</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-12 bg-gradient-to-r from-gray-50 to-orange-50 rounded-lg p-6">
+          <h2 className="text-2xl font-semibold text-primary mb-4">Vantagens do Financiamento de Caminhões</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="text-center">
+              <div className="text-3xl mb-2">💰</div>
+              <h3 className="font-semibold mb-1">Taxas Especiais</h3>
+              <p className="text-sm text-gray-600">Menores que carros de passeio</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">📅</div>
+              <h3 className="font-semibold mb-1">Prazos Longos</h3>
+              <p className="text-sm text-gray-600">Até 120 meses no FINAME</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">🏦</div>
+              <h3 className="font-semibold mb-1">FINAME</h3>
+              <p className="text-sm text-gray-600">Crédito subsidiado BNDES</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">🚛</div>
+              <h3 className="font-semibold mb-1">Investimento</h3>
+              <p className="text-sm text-gray-600">Veículo para gerar renda</p>
+            </div>
+          </div>
+        </div>
+        
         {/* Seção informativa sobre financiamento de caminhões */}
         <section className="mt-12 bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-bold text-primary mb-4">
-              Informações sobre Financiamento de Caminhões
+              Programas Especiais para Financiamento de Caminhões
             </h2>
             
             <div className="prose prose-neutral max-w-none">
@@ -607,7 +826,7 @@ export default function TruckFinance() {
             </div>
           </div>
         </section>
-      </div>
-    </>
+      </section>
+    </div>
   );
 }

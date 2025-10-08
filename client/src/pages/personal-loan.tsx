@@ -13,6 +13,7 @@ import PriceTable from "@/components/simulators/price-table";
 import { SimulationResult } from "@/components/simulators/vehicle-form";
 import { simularFinanciamento } from "@/utils/finance";
 import ExportButtons from "@/components/simulators/export-buttons";
+import { Helmet } from 'react-helmet-async';
 
 const formSchema = calculatorSchema.extend({
   valorFinanciado: z.coerce
@@ -30,6 +31,134 @@ const formSchema = calculatorSchema.extend({
 });
 
 export default function PersonalLoan() {
+  return (
+    <>
+      <Helmet>
+        <title>Empréstimo Pessoal | Simulador com Melhores Taxas 2025</title>
+        <meta name="description" content="Simulador de empréstimo pessoal gratuito com as melhores taxas do mercado. Calcule parcelas, juros e compare condições dos principais bancos. Crédito rápido e sem garantia." />
+        <meta name="keywords" content="empréstimo pessoal, simulador empréstimo, crédito pessoal, empréstimo sem garantia, simulador crédito, melhores taxas empréstimo" />
+        <link rel="canonical" href="https://simuladorfinanciamento.com/emprestimo-pessoal" />
+        <meta property="og:title" content="Empréstimo Pessoal | Simulador com Melhores Taxas 2025" />
+        <meta property="og:description" content="Simulador de empréstimo pessoal gratuito com as melhores taxas do mercado. Calcule parcelas, juros e compare condições dos principais bancos." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://simuladorfinanciamento.com/emprestimo-pessoal" />
+        <meta property="og:image" content="https://simuladorfinanciamento.com/images/emprestimo-pessoal-og.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Empréstimo Pessoal | Simulador com Melhores Taxas" />
+        <meta name="twitter:description" content="Simulador de empréstimo pessoal gratuito com as melhores taxas do mercado. Calcule parcelas, juros e compare condições." />
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "Simulador de Empréstimo Pessoal",
+              "alternateName": "Calculadora de Crédito Pessoal",
+              "url": "https://simuladorfinanciamento.com/emprestimo-pessoal",
+              "description": "Simulador completo para empréstimo pessoal com cálculo de parcelas, juros e comparação de taxas bancárias.",
+              "applicationCategory": "FinanceApplication",
+              "operatingSystem": "Web",
+              "isAccessibleForFree": true,
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "BRL"
+              },
+              "featureList": [
+                "Cálculo de parcelas mensais",
+                "Simulação sem garantia",
+                "Comparação de taxas bancárias",
+                "Tabela de amortização completa",
+                "Exportação em PDF e Excel",
+                "Prazos de 3 a 48 meses",
+                "Valores de R$ 1.000 a R$ 50.000"
+              ],
+              "audience": {
+                "@type": "Audience",
+                "audienceType": "Pessoas interessadas em empréstimo pessoal"
+              },
+              "provider": {
+                "@type": "Organization",
+                "name": "Simulador de Financiamento",
+                "url": "https://simuladorfinanciamento.com"
+              }
+            }
+          `}
+        </script>
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Como funciona o simulador de empréstimo pessoal?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O simulador de empréstimo pessoal calcula automaticamente o valor das parcelas, juros totais e tabela de amortização. Basta inserir o valor desejado, taxa de juros e prazo para obter uma simulação completa."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Qual a diferença entre empréstimo pessoal e financiamento?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O empréstimo pessoal não exige garantia e pode ser usado para qualquer finalidade, mas tem taxas mais altas. O financiamento é vinculado a um bem específico (carro, casa) que serve como garantia."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Quais são as melhores taxas para empréstimo pessoal em 2025?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "As melhores taxas para empréstimo pessoal em 2025 variam de 2,5% a 6% ao mês, dependendo do banco, relacionamento bancário e perfil de crédito do cliente."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Qual o valor máximo para empréstimo pessoal?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O valor máximo para empréstimo pessoal varia por banco, mas geralmente fica entre R$ 30.000 e R$ 100.000, dependendo da renda e relacionamento bancário do cliente."
+                  }
+                }
+              ]
+            }
+          `}
+        </script>
+        
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Início",
+                  "item": "https://simuladorfinanciamento.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Empréstimo Pessoal",
+                  "item": "https://simuladorfinanciamento.com/emprestimo-pessoal"
+                }
+              ]
+            }
+          `}
+        </script>
+      </Helmet>
+      
+      <PersonalLoanContent />
+    </>
+  );
+}
+
+function PersonalLoanContent() {
   const [result, setResult] = useState<SimulationResult | null>(null);
   const [isTableExpanded, setIsTableExpanded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -78,23 +207,91 @@ export default function PersonalLoan() {
 
   return (
     <div className="container mx-auto px-4 py-6">
+      {/* Hero Section */}
+      <section className="mb-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6">
+        <div className="text-center mb-6">
+          <h1 className="font-heading text-4xl font-bold text-primary mb-4">Empréstimo Pessoal</h1>
+          <p className="text-xl text-gray-700 mb-4">Simule seu crédito pessoal com as melhores taxas do mercado</p>
+          <div className="flex flex-wrap justify-center gap-2 text-sm">
+            <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full">✓ Sem Garantia</span>
+            <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">✓ Rápido</span>
+            <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full">✓ Livre Uso</span>
+            <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full">✓ Até 48x</span>
+          </div>
+        </div>
+      </section>
+      
       <section className="mb-12 bg-white rounded-lg shadow-md p-6">
-        <h2 className="font-heading text-2xl font-bold text-primary mb-6 pb-2 border-b border-neutral-200">Simulador de Empréstimo Pessoal</h2>
-        
         <div className="mb-8">
-          <p className="mb-4">O empréstimo pessoal é uma modalidade de crédito versátil que pode ajudar em diferentes situações financeiras. Seja para quitar dívidas com juros mais altos, realizar uma viagem, reformar a casa ou cobrir despesas inesperadas, esse tipo de empréstimo oferece uma solução rápida e sem necessidade de garantias como um bem ou imóvel.</p>
+          <p className="mb-4 text-lg">O <strong>empréstimo pessoal</strong> é a modalidade de crédito mais versátil do mercado. Sem necessidade de garantias, você pode usar o dinheiro para qualquer finalidade: quitar dívidas, viajar, reformar ou cobrir emergências financeiras.</p>
           
-          <p className="mb-4">Ao contrário de financiamentos específicos, como de veículos ou imóveis, o empréstimo pessoal não tem uma finalidade definida. Isso significa que você pode usar o dinheiro como preferir. Mas essa flexibilidade tem um preço: as taxas de juros são geralmente mais altas que outras modalidades de crédito.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+            <div className="bg-green-50 p-4 rounded-lg text-center">
+              <div className="text-3xl mb-2">💰</div>
+              <h3 className="font-semibold text-green-800 mb-2">Livre Uso</h3>
+              <p className="text-green-700 text-sm">Use para qualquer finalidade</p>
+            </div>
+            <div className="bg-blue-50 p-4 rounded-lg text-center">
+              <div className="text-3xl mb-2">⚡</div>
+              <h3 className="font-semibold text-blue-800 mb-2">Rápido</h3>
+              <p className="text-blue-700 text-sm">Aprovação em até 24h</p>
+            </div>
+            <div className="bg-purple-50 p-4 rounded-lg text-center">
+              <div className="text-3xl mb-2">🔓</div>
+              <h3 className="font-semibold text-purple-800 mb-2">Sem Garantia</h3>
+              <p className="text-purple-700 text-sm">Não precisa de bens como garantia</p>
+            </div>
+          </div>
           
-          <p className="mb-4">No Brasil, os empréstimos pessoais são oferecidos por bancos tradicionais, financeiras e fintechs, com taxas que podem variar significativamente entre 2% e 8% ao mês, dependendo do seu perfil de crédito, relacionamento com a instituição financeira e outros fatores.</p>
+          <h2 id="melhores-taxas-2025" className="text-2xl font-semibold text-primary mt-8 mb-4">Melhores Taxas de Empréstimo Pessoal 2025</h2>
           
-          <p className="mb-4">Antes de contratar um empréstimo pessoal, é fundamental comparar as opções disponíveis no mercado. Além da taxa de juros, verifique o Custo Efetivo Total (CET), que inclui todos os encargos e despesas do empréstimo. Algumas instituições podem cobrar tarifas de abertura de crédito, seguros e outros serviços que aumentam o custo final.</p>
+          <div className="overflow-x-auto mb-6">
+            <table className="min-w-full border border-gray-300 bg-white">
+              <thead>
+                <tr className="bg-primary/10">
+                  <th className="px-4 py-3 border text-left font-semibold">Banco/Instituição</th>
+                  <th className="px-4 py-3 border text-center font-semibold">Taxa Mínima</th>
+                  <th className="px-4 py-3 border text-center font-semibold">Taxa Máxima</th>
+                  <th className="px-4 py-3 border text-center font-semibold">Valor Máximo</th>
+                  <th className="px-4 py-3 border text-center font-semibold">Prazo Máximo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="px-4 py-3 border font-medium">Nubank</td>
+                  <td className="px-4 py-3 border text-center text-green-600 font-bold">2,5% a.m.</td>
+                  <td className="px-4 py-3 border text-center">6,0% a.m.</td>
+                  <td className="px-4 py-3 border text-center">R$ 50.000</td>
+                  <td className="px-4 py-3 border text-center">36 meses</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-4 py-3 border font-medium">Inter</td>
+                  <td className="px-4 py-3 border text-center text-green-600 font-bold">2,8% a.m.</td>
+                  <td className="px-4 py-3 border text-center">6,5% a.m.</td>
+                  <td className="px-4 py-3 border text-center">R$ 80.000</td>
+                  <td className="px-4 py-3 border text-center">48 meses</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 border font-medium">C6 Bank</td>
+                  <td className="px-4 py-3 border text-center text-green-600 font-bold">3,0% a.m.</td>
+                  <td className="px-4 py-3 border text-center">7,0% a.m.</td>
+                  <td className="px-4 py-3 border text-center">R$ 30.000</td>
+                  <td className="px-4 py-3 border text-center">36 meses</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-4 py-3 border font-medium">Itaú</td>
+                  <td className="px-4 py-3 border text-center text-green-600 font-bold">3,5% a.m.</td>
+                  <td className="px-4 py-3 border text-center">8,0% a.m.</td>
+                  <td className="px-4 py-3 border text-center">R$ 100.000</td>
+                  <td className="px-4 py-3 border text-center">48 meses</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           
-          <p className="mb-4">O prazo de pagamento do empréstimo pessoal geralmente varia de 3 a 48 meses. Prazos mais longos resultam em parcelas menores, mas o valor total de juros pagos será maior. Por isso, é importante encontrar um equilíbrio entre parcelas que caibam no seu orçamento e um prazo que não resulte em juros excessivos.</p>
-          
-          <p className="mb-4">Certifique-se também de que o valor da parcela não comprometa mais de 30% da sua renda mensal, para evitar problemas financeiros durante o pagamento do empréstimo.</p>
-          
-          <p>Use nosso simulador para calcular as parcelas e entender quanto custará seu empréstimo pessoal. Isso ajudará você a tomar uma decisão financeira mais consciente e adequada às suas necessidades.</p>
+          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+            <p className="text-sm italic">Use nosso <strong>simulador de empréstimo pessoal</strong> com as taxas acima para obter cálculos precisos. Lembre-se: não comprometa mais de 30% da sua renda mensal com empréstimos.</p>
+          </div>
         </div>
         
         <Form {...form}>
@@ -273,9 +470,72 @@ export default function PersonalLoan() {
           </div>
         )}
         
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold text-primary mb-6">Perguntas Frequentes - Empréstimo Pessoal</h2>
+          
+          <div className="space-y-6">
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Como funciona o simulador de empréstimo pessoal?</h3>
+              <p className="text-neutral-700">Nosso <strong>simulador de empréstimo pessoal</strong> calcula automaticamente o valor das parcelas, juros totais e tabela de amortização. Basta inserir o valor desejado, taxa de juros e prazo para obter uma simulação completa.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Qual a diferença entre empréstimo pessoal e financiamento?</h3>
+              <p className="text-neutral-700">O <strong>empréstimo pessoal</strong> não exige garantia e pode ser usado para qualquer finalidade, mas tem taxas mais altas. O financiamento é vinculado a um bem específico (carro, casa) que serve como garantia.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Quais são as melhores taxas para empréstimo pessoal em 2025?</h3>
+              <p className="text-neutral-700">As <strong>melhores taxas para empréstimo pessoal</strong> em 2025 variam de 2,5% a 6% ao mês, dependendo do banco, relacionamento bancário e perfil de crédito do cliente.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Qual o valor máximo para empréstimo pessoal?</h3>
+              <p className="text-neutral-700">O valor máximo para <strong>empréstimo pessoal</strong> varia por banco, mas geralmente fica entre R$ 30.000 e R$ 100.000, dependendo da renda e relacionamento bancário do cliente.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Como conseguir as melhores condições?</h3>
+              <p className="text-neutral-700">Para conseguir as melhores condições: mantenha o CPF limpo, tenha relacionamento bancário, comprove renda estável e compare ofertas de diferentes instituições.</p>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-5">
+              <h3 className="font-semibold text-lg text-primary mb-2">Posso quitar antecipadamente?</h3>
+              <p className="text-neutral-700">Sim, a quitação antecipada de <strong>empréstimo pessoal</strong> é permitida por lei, com desconto proporcional nos juros. Algumas instituições podem cobrar taxa de até 2% sobre o valor quitado.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-12 bg-gradient-to-r from-gray-50 to-purple-50 rounded-lg p-6">
+          <h2 className="text-2xl font-semibold text-primary mb-4">Vantagens do Nosso Simulador de Empréstimo Pessoal</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="text-center">
+              <div className="text-3xl mb-2">🎯</div>
+              <h3 className="font-semibold mb-1">Preciso</h3>
+              <p className="text-sm text-gray-600">Cálculos exatos com juros compostos</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">🆓</div>
+              <h3 className="font-semibold mb-1">Gratuito</h3>
+              <p className="text-sm text-gray-600">100% gratuito, sem cadastro</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">📈</div>
+              <h3 className="font-semibold mb-1">Completo</h3>
+              <p className="text-sm text-gray-600">Tabela de amortização detalhada</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">⚡</div>
+              <h3 className="font-semibold mb-1">Rápido</h3>
+              <p className="text-sm text-gray-600">Resultado instantâneo</p>
+            </div>
+          </div>
+        </div>
+        
         <div className="bg-neutral-100 border-l-4 border-secondary p-4 mt-6">
           <p className="text-sm font-medium">AVISO IMPORTANTE:</p>
-          <p className="text-sm">Não somos uma instituição financeira e não oferecemos empréstimos ou financiamentos. Este site fornece apenas ferramentas de simulação para cálculos e pesquisa. Os resultados são aproximados e podem variar conforme as condições reais oferecidas pelas instituições financeiras. Recomendamos sempre consultar um banco ou financeira para obter condições oficiais antes de tomar qualquer decisão.</p>
+          <p className="text-sm">Este <strong>simulador de empréstimo pessoal</strong> é uma ferramenta educativa. Os valores são aproximações para planejamento. Para condições oficiais, consulte bancos e financeiras autorizadas.</p>
         </div>
       </section>
     </div>

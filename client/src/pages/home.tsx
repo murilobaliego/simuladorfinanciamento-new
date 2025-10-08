@@ -229,6 +229,14 @@ export default function Home() {
             imageSrc="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
             imageAlt="Pessoa assinando contrato"
           />
+          
+          <SimulatorCard
+            title="Financiamento com Parcela Balão"
+            description="Simule financiamento com VFG para parcelas menores e flexibilidade no final do contrato."
+            path="/simulador-parcela-balao"
+            imageSrc="https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            imageAlt="Carro com chaves"
+          />
         </div>
       </section>
       
