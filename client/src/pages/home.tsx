@@ -180,8 +180,47 @@ export default function Home() {
         </div>
       </section>
       
-      <section id="outros-simuladores-2" className="mb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Simulador de Seguro Section */}
+      <section id="simulador-seguro" className="mb-12 bg-green-50 rounded-lg shadow-md p-6">
+        <div className="flex items-center mb-4">
+          <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center mr-3">
+            <span className="text-white font-bold text-lg">🛡️</span>
+          </div>
+          <h2 className="font-heading text-2xl font-bold text-primary">Simulador de Seguro de Automóvel</h2>
+        </div>
+        
+        <div className="flex flex-col md:flex-row gap-6">
+          <div className="md:w-2/3 space-y-4">
+            <p className="text-neutral-700">Calcule o <strong>preço do seguro do seu carro</strong> com nosso simulador completo. Baseado em fatores reais de risco como perfil do condutor, características do veículo e região.</p>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-white p-3 rounded border">
+                <p className="text-sm text-gray-600">Cálculo Preciso</p>
+                <p className="font-bold text-green-600">Fatores Reais</p>
+              </div>
+              <div className="bg-white p-3 rounded border">
+                <p className="text-sm text-gray-600">Múltiplas Coberturas</p>
+                <p className="font-bold text-green-600">Personalizado</p>
+              </div>
+            </div>
+            
+            <div className="flex gap-3 mt-4">
+              <Link href="/simulador-seguro-automovel" className="inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md shadow-sm transition-colors text-sm">
+                Calcular Seguro
+              </Link>
+            </div>
+          </div>
+          
+          <div className="md:w-1/3 bg-white p-4 rounded-lg shadow-sm">
+            <h3 className="font-medium text-lg text-primary mb-3">Fatores Considerados</h3>
+            <ul className="text-sm space-y-2">
+              <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Perfil do condutor</li>
+              <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Valor e tipo do veículo</li>
+              <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Região (CEP)</li>
+              <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Itens de segurança</li>
+              <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Coberturas desejadas</li>
+            </ul>
+          </div>
         </div>
       </section>
 

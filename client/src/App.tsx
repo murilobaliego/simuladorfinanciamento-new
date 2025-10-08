@@ -29,6 +29,7 @@ import SimuladorFinanciamentoOnlineGratis from "@/pages/simulador-financiamento-
 import SimuladorBancoDoBrasil from "@/pages/simulador-banco-do-brasil";
 import PaineisSolares from "@/pages/paineis-solares";
 import FinanciamentoFIES from "@/pages/fies";
+import SimuladorSeguroAutomovel from "@/pages/simulador-seguro-automovel";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -115,6 +116,12 @@ function Router() {
         <Route path="/financiamento-estudantil" component={FinanciamentoFIES}/>
         <Route path="/como-funciona-fies" component={FinanciamentoFIES}/>
         <Route path="/financiamento-faculdade" component={FinanciamentoFIES}/>
+        
+        {/* Simulador de Seguro de Automóvel - Rotas otimizadas para SEO */}
+        <Route path="/simulador-seguro-automovel" component={SimuladorSeguroAutomovel}/>
+        <Route path="/seguro-de-carro" component={SimuladorSeguroAutomovel}/>
+        <Route path="/calculadora-seguro-auto" component={SimuladorSeguroAutomovel}/>
+        <Route path="/preco-seguro-carro" component={SimuladorSeguroAutomovel}/>
         
         <Route component={NotFound} />
       </Switch>

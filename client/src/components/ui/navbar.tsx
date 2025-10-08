@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, Calculator, Car, Home, CreditCard, BadgeDollarSign, ChevronDown, Settings, RefreshCw, BarChart2, PiggyBank, DollarSign, Truck, Bike, Banknote, Sun, GraduationCap } from "lucide-react";
+import { Menu, X, Calculator, Car, Home, CreditCard, BadgeDollarSign, ChevronDown, Settings, RefreshCw, BarChart2, PiggyBank, DollarSign, Truck, Bike, Banknote, Sun, GraduationCap, Shield } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,6 +73,11 @@ export default function Navbar() {
                      location === '/financiamento-estudantil' ||
                      location === '/como-funciona-fies' ||
                      location === '/financiamento-faculdade';
+                     
+  const isSeguroPage = location === '/simulador-seguro-automovel' ||
+                       location === '/seguro-de-carro' ||
+                       location === '/calculadora-seguro-auto' ||
+                       location === '/preco-seguro-carro';
   
   const isToolPage = location === '/simulador-refinanciamento' || 
                     location === '/capacidade-pagamento' || 
@@ -85,7 +90,8 @@ export default function Navbar() {
                     isCaixaPage ||
                     isBBPage ||
                     isPaineisSolaresPage ||
-                    isFIESPage;
+                    isFIESPage ||
+                    isSeguroPage;
 
   return (
     <header className="bg-primary text-white shadow-md">
@@ -292,6 +298,17 @@ export default function Navbar() {
                       <BadgeDollarSign className="h-4 w-4 mr-2 text-yellow-600" />
                       <span>Simulador Banco do Brasil</span>
                     </Link>
+                    
+                    <div className="border-t border-gray-200 my-2"></div>
+                    
+                    <Link
+                      href="/simulador-seguro-automovel"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <Shield className="h-4 w-4 mr-2 text-green-600" />
+                      <span>Simulador de Seguro Auto</span>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -332,6 +349,7 @@ export default function Navbar() {
                   {isPaineisSolaresPage && <span className="text-white">Financiamento de Painéis Solares</span>}
                   {isFIESPage && <span className="text-white">Financiamento Estudantil (FIES)</span>}
                   {isGratisPage && <span className="text-white">Simulador de Financiamento Online Grátis</span>}
+                  {isSeguroPage && <span className="text-white">Simulador de Seguro de Automóvel</span>}
                 </li>
               </ol>
             </nav>
