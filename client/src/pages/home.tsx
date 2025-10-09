@@ -80,8 +80,9 @@ export default function Home() {
           </div>
           <div className="md:w-2/5 bg-neutral-200 h-40 md:h-auto">
             <img 
-             /* src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" */
-             src="https://simuladorfinanciamento.com/img/woman-loan.png"
+              fetchpriority="high" 
+              /* src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" */
+              src="https://simuladorfinanciamento.com/img/woman-loan.avif"
               alt="Pessoa usando simulador de financiamento" 
               className="w-full h-full object-cover"
             />
