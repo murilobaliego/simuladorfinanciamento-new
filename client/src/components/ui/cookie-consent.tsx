@@ -22,7 +22,12 @@ export default function CookieConsent() {
   }, []);
 
   const acceptCookies = () => {
-    localStorage.setItem("cookieConsent", "true");
+    localStorage.setItem("cookieConsent", "accepted");
+    setIsVisible(false);
+  };
+
+  const rejectCookies = () => {
+    localStorage.setItem("cookieConsent", "rejected");
     setIsVisible(false);
   };
 
@@ -48,11 +53,10 @@ export default function CookieConsent() {
           <Button 
             variant="outline" 
             size="sm"
-            className="text-white border-white hover:bg-neutral-700"
-            onClick={() => setIsVisible(false)}
+            className="bg-transparent text-white border-white hover:bg-neutral-700"
+            onClick={rejectCookies}
           >
-            <X className="h-4 w-4 mr-1" />
-            Fechar
+            Rejeitar
           </Button>
           <Button 
             variant="default"
