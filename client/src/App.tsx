@@ -30,6 +30,7 @@ import SimuladorBancoDoBrasil from "@/pages/simulador-banco-do-brasil";
 import PaineisSolares from "@/pages/paineis-solares";
 import FinanciamentoFIES from "@/pages/fies";
 import SimuladorSeguroAutomovel from "@/pages/simulador-seguro-automovel";
+import EmprestimoNegativado from "@/pages/emprestimo-negativado";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -122,6 +123,11 @@ function Router() {
         <Route path="/seguro-de-carro" component={SimuladorSeguroAutomovel}/>
         <Route path="/calculadora-seguro-auto" component={SimuladorSeguroAutomovel}/>
         <Route path="/preco-seguro-carro" component={SimuladorSeguroAutomovel}/>
+        
+        {/* Empréstimo para Negativado - Rotas otimizadas para SEO */}
+        <Route path="/emprestimo-negativado" component={EmprestimoNegativado}/>
+        <Route path="/emprestimo-nome-sujo" component={EmprestimoNegativado}/>
+        <Route path="/credito-negativado" component={EmprestimoNegativado}/>
         
         <Route component={NotFound} />
       </Switch>

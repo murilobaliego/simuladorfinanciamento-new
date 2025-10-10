@@ -14,4 +14,6 @@
 /simulador-bb               /simulador-banco-do-brasil              301
 /financiamento-banco-do-brasil  /simulador-banco-do-brasil          301
 /simulador-bb-financiamento /simulador-banco-do-brasil              301
+/emprestimo-nome-sujo       /emprestimo-negativado                  301
+/credito-negativado         /emprestimo-negativado                  301
 /* /index.html 200

@@ -79,6 +79,10 @@ export default function Navbar() {
                        location === '/calculadora-seguro-auto' ||
                        location === '/preco-seguro-carro';
   
+  const isNegativadoPage = location === '/emprestimo-negativado' ||
+                           location === '/emprestimo-nome-sujo' ||
+                           location === '/credito-negativado';
+  
   const isToolPage = location === '/simulador-refinanciamento' || 
                     location === '/capacidade-pagamento' || 
                     location === '/comparativo-amortizacao' ||
@@ -91,7 +95,8 @@ export default function Navbar() {
                     isBBPage ||
                     isPaineisSolaresPage ||
                     isFIESPage ||
-                    isSeguroPage;
+                    isSeguroPage ||
+                    isNegativadoPage;
 
   return (
     <header className="bg-primary text-white shadow-md">
@@ -309,6 +314,15 @@ export default function Navbar() {
                       <Shield className="h-4 w-4 mr-2 text-green-600" />
                       <span>Simulador de Seguro Auto</span>
                     </Link>
+                    
+                    <Link
+                      href="/emprestimo-negativado"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <CreditCard className="h-4 w-4 mr-2 text-red-600" />
+                      <span>Empréstimo para Negativado</span>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -350,6 +364,7 @@ export default function Navbar() {
                   {isFIESPage && <span className="text-white">Financiamento Estudantil (FIES)</span>}
                   {isGratisPage && <span className="text-white">Simulador de Financiamento Online Grátis</span>}
                   {isSeguroPage && <span className="text-white">Simulador de Seguro de Automóvel</span>}
+                  {isNegativadoPage && <span className="text-white">Empréstimo para Negativado</span>}
                 </li>
               </ol>
             </nav>
