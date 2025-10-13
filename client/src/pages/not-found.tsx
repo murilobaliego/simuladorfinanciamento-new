@@ -27,7 +27,7 @@ export default function NotFound() {
   return (
     <>
       <HeadSEO 
-        title="Página não encontrada | Simulador de Financiamento"
+        title="Simulador de Financiamento | Simulador de Financiamento de Veículos com cálculo do IOF"
         description="A página que você está procurando não foi encontrada. Acesse nossos simuladores de financiamento para carros, motos, imóveis e outros tipos de empréstimos."
         keywords={["página não encontrada", "erro 404", "simulador de financiamento"]}
       />
