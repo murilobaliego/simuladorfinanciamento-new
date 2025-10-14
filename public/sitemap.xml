@@ -234,6 +234,50 @@
     <priority>0.7</priority>
   </url>
   
+  <!-- Blog sobre Financiamentos -->
+  <url>
+    <loc>https://simuladorfinanciamento.com/blog</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/blog/como-quitar-financiamento-antecipadamente</loc>
+    <lastmod>2025-01-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/blog/simulacao-financiamento-interpretar-resultados</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/blog/tabela-price-vs-sac</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/blog/calcular-taxa-juros-real-financiamento</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/blog/erros-financiamento-carros</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/blog/documentacao-financiamento-veiculos-2025</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <!-- Páginas Legais -->
   <url>
     <loc>https://simuladorfinanciamento.com/termos-de-uso</loc>

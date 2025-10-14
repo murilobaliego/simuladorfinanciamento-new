@@ -31,6 +31,13 @@ import PaineisSolares from "@/pages/paineis-solares";
 import FinanciamentoFIES from "@/pages/fies";
 import SimuladorSeguroAutomovel from "@/pages/simulador-seguro-automovel";
 import EmprestimoNegativado from "@/pages/emprestimo-negativado";
+import Blog from "@/pages/blog";
+import BlogPost1 from "@/pages/blog-post-1";
+import BlogPost2 from "@/pages/blog-post-2";
+import BlogPost3 from "@/pages/blog-post-3";
+import BlogPost4 from "@/pages/blog-post-4";
+import BlogPost5 from "@/pages/blog-post-5";
+import BlogPost6 from "@/pages/blog-post-6";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -128,6 +135,15 @@ function Router() {
         <Route path="/emprestimo-negativado" component={EmprestimoNegativado}/>
         <Route path="/emprestimo-nome-sujo" component={EmprestimoNegativado}/>
         <Route path="/credito-negativado" component={EmprestimoNegativado}/>
+        
+        {/* Blog sobre Financiamentos */}
+        <Route path="/blog" component={Blog}/>
+        <Route path="/blog/calcular-taxa-juros-real-financiamento" component={BlogPost1}/>
+        <Route path="/blog/tabela-price-vs-sac" component={BlogPost2}/>
+        <Route path="/blog/erros-financiamento-carros" component={BlogPost3}/>
+        <Route path="/blog/documentacao-financiamento-veiculos-2025" component={BlogPost4}/>
+        <Route path="/blog/simulacao-financiamento-interpretar-resultados" component={BlogPost5}/>
+        <Route path="/blog/como-quitar-financiamento-antecipadamente" component={BlogPost6}/>
         
         <Route component={NotFound} />
       </Switch>

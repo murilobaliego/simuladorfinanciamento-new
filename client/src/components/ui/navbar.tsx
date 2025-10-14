@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, Calculator, Car, Home, CreditCard, BadgeDollarSign, ChevronDown, Settings, RefreshCw, BarChart2, PiggyBank, DollarSign, Truck, Bike, Banknote, Sun, GraduationCap, Shield } from "lucide-react";
+import { Menu, X, Calculator, Car, Home, CreditCard, BadgeDollarSign, ChevronDown, Settings, RefreshCw, BarChart2, PiggyBank, DollarSign, Truck, Bike, Banknote, Sun, GraduationCap, Shield, BookOpen } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -322,6 +322,17 @@ export default function Navbar() {
                     >
                       <CreditCard className="h-4 w-4 mr-2 text-red-600" />
                       <span>Empréstimo para Negativado</span>
+                    </Link>
+                    
+                    <div className="border-t border-gray-200 my-2"></div>
+                    
+                    <Link
+                      href="/blog"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <BookOpen className="h-4 w-4 mr-2 text-purple-600" />
+                      <span>Blog sobre Financiamentos</span>
                     </Link>
                   </div>
                 </div>
