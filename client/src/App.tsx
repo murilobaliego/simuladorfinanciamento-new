@@ -38,6 +38,7 @@ import BlogPost3 from "@/pages/blog-post-3";
 import BlogPost4 from "@/pages/blog-post-4";
 import BlogPost5 from "@/pages/blog-post-5";
 import BlogPost6 from "@/pages/blog-post-6";
+import TaxasBancos from "@/pages/taxas-bancos";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -144,6 +145,10 @@ function Router() {
         <Route path="/blog/documentacao-financiamento-veiculos-2025" component={BlogPost4}/>
         <Route path="/blog/simulacao-financiamento-interpretar-resultados" component={BlogPost5}/>
         <Route path="/blog/como-quitar-financiamento-antecipadamente" component={BlogPost6}/>
+        
+        {/* Taxas de Juros dos Bancos */}
+        <Route path="/taxas-bancos" component={TaxasBancos}/>
+        <Route path="/taxas-juros-bancos" component={TaxasBancos}/>
         
         <Route component={NotFound} />
       </Switch>
