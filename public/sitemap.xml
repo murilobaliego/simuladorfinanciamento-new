@@ -374,6 +374,20 @@
     <priority>0.8</priority>
   </url>
   
+  <!-- India - Car Loan Calculator -->
+  <url>
+    <loc>https://simuladorfinanciamento.com/india/car-loan-calculator</loc>
+    <lastmod>2025-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/india</loc>
+    <lastmod>2025-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
   <!-- Taxas de Juros dos Bancos -->
   <url>
     <loc>https://simuladorfinanciamento.com/taxas-bancos</loc>

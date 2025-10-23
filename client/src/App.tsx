@@ -49,6 +49,7 @@ import CalculadoraCreditoVehiculoColombia from "@/pages/colombia/calculadora-cre
 import CalculadoraFinanciacionCocheSpain from "@/pages/spain/calculadora-financiacion-coche";
 import CalculadoraCreditoAutomovelMocambique from "@/pages/mocambique/calculadora-credito-automovel";
 import CalculadoraCreditoAutomovelAngola from "@/pages/angola/calculadora-credito-automovel";
+import CarLoanCalculatorIndia from "@/pages/india/car-loan-calculator";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -200,6 +201,10 @@ function Router() {
         <Route path="/angola/calculadora-credito-automovel" component={CalculadoraCreditoAutomovelAngola}/>
         <Route path="/angola" component={CalculadoraCreditoAutomovelAngola}/>
         
+        {/* India - Car Loan Calculator */}
+        <Route path="/india/car-loan-calculator" component={CarLoanCalculatorIndia}/>
+        <Route path="/india" component={CarLoanCalculatorIndia}/>
+        
         <Route component={NotFound} />
       </Switch>
     </>
@@ -207,6 +212,10 @@ function Router() {
 }
 
 function App() {
+  const [location] = useLocation();
+  const hideNavFooter = location.startsWith('/india') || location.startsWith('/france') || 
+                        location.startsWith('/usa') || location.startsWith('/italy');
+  
   // Inicializar o Google Analytics
   useAnalytics();
   
@@ -214,11 +223,11 @@ function App() {
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <div className="flex flex-col min-h-screen">
-          <Navbar />
+          {!hideNavFooter && <Navbar />}
           <main className="flex-grow">
             <Router />
           </main>
-          <Footer />
+          {!hideNavFooter && <Footer />}
           <CookieConsent />
         </div>
         <Toaster />

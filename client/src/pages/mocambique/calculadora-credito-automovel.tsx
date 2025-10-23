@@ -103,13 +103,13 @@ export default function CalculadoraCreditoAutomovelMocambique() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-3">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-neutral-800 mb-4">
             Calculadora de Crédito Automóvel - Moçambique
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
             Simule o seu financiamento de viatura em Meticais (MZN)
           </p>
         </div>
