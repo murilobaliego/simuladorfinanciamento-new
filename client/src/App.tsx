@@ -39,6 +39,16 @@ import BlogPost4 from "@/pages/blog-post-4";
 import BlogPost5 from "@/pages/blog-post-5";
 import BlogPost6 from "@/pages/blog-post-6";
 import TaxasBancos from "@/pages/taxas-bancos";
+import CalculadoraPrestamoAutoMX from "@/pages/mx/calculadora-prestamo-auto";
+import AutoLoanCalculatorUSA from "@/pages/usa/auto-loan-calculator";
+import CalculateurCreditAutoFrance from "@/pages/france/calculateur-credit-auto";
+import CalcolatorePrestitoAutoItaly from "@/pages/italy/calcolatore-prestito-auto";
+import CalculadoraCreditoAutoChile from "@/pages/chile/calculadora-credito-auto";
+import CalculadoraPrestamoAutoArgentina from "@/pages/argentina/calculadora-prestamo-auto";
+import CalculadoraCreditoVehiculoColombia from "@/pages/colombia/calculadora-credito-vehiculo";
+import CalculadoraFinanciacionCocheSpain from "@/pages/spain/calculadora-financiacion-coche";
+import CalculadoraCreditoAutomovelMocambique from "@/pages/mocambique/calculadora-credito-automovel";
+import CalculadoraCreditoAutomovelAngola from "@/pages/angola/calculadora-credito-automovel";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -149,6 +159,46 @@ function Router() {
         {/* Taxas de Juros dos Bancos */}
         <Route path="/taxas-bancos" component={TaxasBancos}/>
         <Route path="/taxas-juros-bancos" component={TaxasBancos}/>
+        
+        {/* México - Calculadora de Préstamos */}
+        <Route path="/mx/calculadora-prestamo-auto" component={CalculadoraPrestamoAutoMX}/>
+        <Route path="/mx" component={CalculadoraPrestamoAutoMX}/>
+        
+        {/* USA - Auto Loan Calculator */}
+        <Route path="/usa/auto-loan-calculator" component={AutoLoanCalculatorUSA}/>
+        <Route path="/usa" component={AutoLoanCalculatorUSA}/>
+        
+        {/* France - Calculateur Crédit Auto */}
+        <Route path="/france/calculateur-credit-auto" component={CalculateurCreditAutoFrance}/>
+        <Route path="/france" component={CalculateurCreditAutoFrance}/>
+        
+        {/* Italy - Calcolatore Prestito Auto */}
+        <Route path="/italy/calcolatore-prestito-auto" component={CalcolatorePrestitoAutoItaly}/>
+        <Route path="/italy" component={CalcolatorePrestitoAutoItaly}/>
+        
+        {/* Chile - Calculadora Crédito Auto */}
+        <Route path="/chile/calculadora-credito-auto" component={CalculadoraCreditoAutoChile}/>
+        <Route path="/chile" component={CalculadoraCreditoAutoChile}/>
+        
+        {/* Argentina - Calculadora Préstamo Auto */}
+        <Route path="/argentina/calculadora-prestamo-auto" component={CalculadoraPrestamoAutoArgentina}/>
+        <Route path="/argentina" component={CalculadoraPrestamoAutoArgentina}/>
+        
+        {/* Colombia - Calculadora Crédito Vehículo */}
+        <Route path="/colombia/calculadora-credito-vehiculo" component={CalculadoraCreditoVehiculoColombia}/>
+        <Route path="/colombia" component={CalculadoraCreditoVehiculoColombia}/>
+        
+        {/* Spain - Calculadora Financiación Coche */}
+        <Route path="/spain/calculadora-financiacion-coche" component={CalculadoraFinanciacionCocheSpain}/>
+        <Route path="/spain" component={CalculadoraFinanciacionCocheSpain}/>
+        
+        {/* Moçambique - Calculadora Crédito Automóvel */}
+        <Route path="/mocambique/calculadora-credito-automovel" component={CalculadoraCreditoAutomovelMocambique}/>
+        <Route path="/mocambique" component={CalculadoraCreditoAutomovelMocambique}/>
+        
+        {/* Angola - Calculadora Crédito Automóvel */}
+        <Route path="/angola/calculadora-credito-automovel" component={CalculadoraCreditoAutomovelAngola}/>
+        <Route path="/angola" component={CalculadoraCreditoAutomovelAngola}/>
         
         <Route component={NotFound} />
       </Switch>
