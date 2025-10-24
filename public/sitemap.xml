@@ -388,6 +388,62 @@
     <priority>0.8</priority>
   </url>
   
+  <!-- Portugal - Simulador Financiamento Automóvel -->
+  <url>
+    <loc>https://simuladorfinanciamento.com/portugal/simulador-financiamento-automovel</loc>
+    <lastmod>2025-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/portugal</loc>
+    <lastmod>2025-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Deutschland - Autokredit Rechner -->
+  <url>
+    <loc>https://simuladorfinanciamento.com/deutschland/autokredit-rechner</loc>
+    <lastmod>2025-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/deutschland</loc>
+    <lastmod>2025-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Canada - Car Loan Calculator -->
+  <url>
+    <loc>https://simuladorfinanciamento.com/canada/car-loan-calculator</loc>
+    <lastmod>2025-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/canada</loc>
+    <lastmod>2025-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- UK - Car Finance Calculator -->
+  <url>
+    <loc>https://simuladorfinanciamento.com/uk/car-finance-calculator</loc>
+    <lastmod>2025-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://simuladorfinanciamento.com/uk</loc>
+    <lastmod>2025-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
   <!-- Taxas de Juros dos Bancos -->
   <url>
     <loc>https://simuladorfinanciamento.com/taxas-bancos</loc>

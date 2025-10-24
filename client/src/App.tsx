@@ -50,6 +50,10 @@ import CalculadoraFinanciacionCocheSpain from "@/pages/spain/calculadora-financi
 import CalculadoraCreditoAutomovelMocambique from "@/pages/mocambique/calculadora-credito-automovel";
 import CalculadoraCreditoAutomovelAngola from "@/pages/angola/calculadora-credito-automovel";
 import CarLoanCalculatorIndia from "@/pages/india/car-loan-calculator";
+import SimuladorFinanciamentoAutomovelPortugal from "@/pages/portugal/simulador-financiamento-automovel";
+import AutokreditRechnerDeutschland from "@/pages/deutschland/autokredit-rechner";
+import CarLoanCalculatorCanada from "@/pages/canada/car-loan-calculator";
+import CarFinanceCalculatorUK from "@/pages/uk/car-finance-calculator";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -205,6 +209,22 @@ function Router() {
         <Route path="/india/car-loan-calculator" component={CarLoanCalculatorIndia}/>
         <Route path="/india" component={CarLoanCalculatorIndia}/>
         
+        {/* Portugal - Simulador Financiamento Automóvel */}
+        <Route path="/portugal/simulador-financiamento-automovel" component={SimuladorFinanciamentoAutomovelPortugal}/>
+        <Route path="/portugal" component={SimuladorFinanciamentoAutomovelPortugal}/>
+        
+        {/* Deutschland - Autokredit Rechner */}
+        <Route path="/deutschland/autokredit-rechner" component={AutokreditRechnerDeutschland}/>
+        <Route path="/deutschland" component={AutokreditRechnerDeutschland}/>
+        
+        {/* Canada - Car Loan Calculator */}
+        <Route path="/canada/car-loan-calculator" component={CarLoanCalculatorCanada}/>
+        <Route path="/canada" component={CarLoanCalculatorCanada}/>
+        
+        {/* UK - Car Finance Calculator */}
+        <Route path="/uk/car-finance-calculator" component={CarFinanceCalculatorUK}/>
+        <Route path="/uk" component={CarFinanceCalculatorUK}/>
+        
         <Route component={NotFound} />
       </Switch>
     </>
@@ -214,7 +234,9 @@ function Router() {
 function App() {
   const [location] = useLocation();
   const hideNavFooter = location.startsWith('/india') || location.startsWith('/france') || 
-                        location.startsWith('/usa') || location.startsWith('/italy');
+                        location.startsWith('/usa') || location.startsWith('/italy') ||
+                        location.startsWith('/deutschland') || location.startsWith('/canada') ||
+                        location.startsWith('/uk');
   
   // Inicializar o Google Analytics
   useAnalytics();

@@ -114,115 +114,117 @@ export default function CalculadoraCreditoAutomovelMocambique() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Calculator className="h-5 w-5" />
-                Dados do Financiamento
-              </CardTitle>
-              <CardDescription>Preencha os dados para simular o seu crédito automóvel</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <Label htmlFor="vehicleValue">Valor da Viatura (MZN)</Label>
-                <Input
-                  id="vehicleValue"
-                  type="number"
-                  value={vehicleValue}
-                  onChange={(e) => setVehicleValue(e.target.value)}
-                  placeholder="1500000"
-                />
-              </div>
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-lg p-8 mb-8">
+          <h2 className="text-3xl font-bold text-neutral-800 mb-6 flex items-center">
+            <Calculator className="mr-3 h-8 w-8 text-blue-600" />
+            Calcule o Seu Crédito Automóvel
+          </h2>
 
-              <div>
-                <Label htmlFor="downPayment">Entrada Inicial (MZN)</Label>
-                <Input
-                  id="downPayment"
-                  type="number"
-                  value={downPayment}
-                  onChange={(e) => setDownPayment(e.target.value)}
-                  placeholder="300000"
-                />
-              </div>
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <Label htmlFor="vehicleValue" className="text-base font-semibold">Valor da Viatura (MZN)</Label>
+              <Input
+                id="vehicleValue"
+                type="number"
+                value={vehicleValue}
+                onChange={(e) => setVehicleValue(e.target.value)}
+                placeholder="1500000"
+                className="mt-2 text-lg"
+              />
+            </div>
 
-              <div>
-                <Label htmlFor="term">Prazo (meses)</Label>
-                <Input
-                  id="term"
-                  type="number"
-                  value={term}
-                  onChange={(e) => setTerm(e.target.value)}
-                  placeholder="60"
-                />
-              </div>
+            <div>
+              <Label htmlFor="downPayment" className="text-base font-semibold">Entrada Inicial (MZN)</Label>
+              <Input
+                id="downPayment"
+                type="number"
+                value={downPayment}
+                onChange={(e) => setDownPayment(e.target.value)}
+                placeholder="300000"
+                className="mt-2 text-lg"
+              />
+            </div>
 
-              <div>
-                <Label htmlFor="annualRate">Taxa de Juro Anual (%)</Label>
-                <Input
-                  id="annualRate"
-                  type="number"
-                  step="0.1"
-                  value={annualRate}
-                  onChange={(e) => setAnnualRate(e.target.value)}
-                  placeholder="18"
-                />
-              </div>
+            <div>
+              <Label htmlFor="term" className="text-base font-semibold">Prazo (meses)</Label>
+              <Input
+                id="term"
+                type="number"
+                value={term}
+                onChange={(e) => setTerm(e.target.value)}
+                placeholder="60"
+                className="mt-2 text-lg"
+              />
+            </div>
 
-              <div>
-                <Label htmlFor="system">Sistema de Amortização</Label>
-                <Select value={system} onValueChange={(value: "price" | "sac") => setSystem(value)}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="price">Tabela Price (Prestações Fixas)</SelectItem>
-                    <SelectItem value="sac">SAC (Amortização Constante)</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+            <div>
+              <Label htmlFor="annualRate" className="text-base font-semibold">Taxa de Juro Anual (%)</Label>
+              <Input
+                id="annualRate"
+                type="number"
+                step="0.1"
+                value={annualRate}
+                onChange={(e) => setAnnualRate(e.target.value)}
+                placeholder="18"
+                className="mt-2 text-lg"
+              />
+            </div>
 
-              <Button onClick={calculateLoan} className="w-full" size="lg">
-                <Calculator className="mr-2 h-4 w-4" />
-                Calcular Financiamento
-              </Button>
-            </CardContent>
-          </Card>
+            <div className="md:col-span-2">
+              <Label htmlFor="system" className="text-base font-semibold">Sistema de Amortização</Label>
+              <Select value={system} onValueChange={(value: "price" | "sac") => setSystem(value)}>
+                <SelectTrigger className="mt-2 text-lg">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="price">Tabela Price (Prestações Fixas)</SelectItem>
+                  <SelectItem value="sac">SAC (Amortização Constante)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <Button onClick={calculateLoan} className="w-full bg-blue-600 hover:bg-blue-700 text-white text-lg py-6">
+            <Calculator className="mr-2 h-5 w-5" />
+            Calcular Financiamento
+          </Button>
 
           {result && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <TrendingDown className="h-5 w-5" />
-                  Resultados da Simulação
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="text-sm text-gray-600 mb-1">Prestação Mensal {system === "sac" && "(Primeira)"}</p>
-                  <p className="text-3xl font-bold text-blue-600">{formatCurrency(result.monthlyPayment)}</p>
+            <div className="mt-8 space-y-4">
+              <div className="bg-white rounded-lg p-6 shadow-md">
+                <p className="text-sm text-neutral-600 mb-2">Valor Financiado</p>
+                <p className="text-3xl font-bold text-neutral-800">
+                  {formatCurrency(parseFloat(vehicleValue) - parseFloat(downPayment))}
+                </p>
+              </div>
+
+              <div className="bg-green-50 rounded-lg p-6 border-2 border-green-500">
+                <p className="text-sm text-green-700 mb-2">Sua Prestação Mensal {system === "sac" && "(Primeira)"}</p>
+                <p className="text-4xl font-bold text-green-700">{formatCurrency(result.monthlyPayment)}</p>
+                <p className="text-xs text-green-600 mt-1">Durante {term} meses</p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-white rounded-lg p-4 shadow">
+                  <p className="text-xs text-neutral-600 mb-1">Valor Total a Pagar</p>
+                  <p className="text-xl font-bold text-neutral-800">{formatCurrency(result.totalAmount)}</p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-600 mb-1">Valor Total a Pagar</p>
-                    <p className="text-xl font-semibold text-gray-900">{formatCurrency(result.totalAmount)}</p>
-                  </div>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-600 mb-1">Total de Juros</p>
-                    <p className="text-xl font-semibold text-gray-900">{formatCurrency(result.totalInterest)}</p>
-                  </div>
+                <div className="bg-white rounded-lg p-4 shadow">
+                  <p className="text-xs text-neutral-600 mb-1">Total de Juros</p>
+                  <p className="text-xl font-bold text-red-600">{formatCurrency(result.totalInterest)}</p>
                 </div>
+              </div>
 
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <p className="text-sm text-gray-600 mb-1">Valor Financiado</p>
-                  <p className="text-xl font-semibold text-gray-900">
-                    {formatCurrency(parseFloat(vehicleValue) - parseFloat(downPayment))}
+              <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
+                <div className="flex items-start">
+                  <AlertCircle className="h-5 w-5 text-yellow-600 mr-2 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-yellow-900">
+                    <strong>Nota:</strong> Este cálculo é uma estimativa. Os valores reais podem variar conforme as condições da instituição financeira.
                   </p>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           )}
         </div>
 
