@@ -1,4 +1,4 @@
-import VehicleForm from "@/components/simulators/vehicle-form";
+import VehicleForm2025 from "@/components/simulators/vehicle-form-2025";
 import { Helmet } from 'react-helmet-async';
 
 export default function VehicleFinance() {
@@ -230,7 +230,7 @@ export default function VehicleFinance() {
             </div>
           </div>
           
-          <VehicleForm />
+          <VehicleForm2025 />
           
           <div id="melhores-taxas" className="bg-gray-50 p-6 rounded-lg border border-gray-200 my-8">
             <h2 className="text-2xl font-semibold text-primary mb-4">Taxas de Financiamento de Veículos 2025 - Principais Bancos</h2>

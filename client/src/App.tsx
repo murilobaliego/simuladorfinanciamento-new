@@ -54,6 +54,7 @@ import SimuladorFinanciamentoAutomovelPortugal from "@/pages/portugal/simulador-
 import AutokreditRechnerDeutschland from "@/pages/deutschland/autokredit-rechner";
 import CarLoanCalculatorCanada from "@/pages/canada/car-loan-calculator";
 import CarFinanceCalculatorUK from "@/pages/uk/car-finance-calculator";
+import SimuladorFinanciamentoVeiculo2025 from "@/pages/simulador-financiamento-veiculo-2025";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -83,6 +84,7 @@ function Router() {
         <Route path="/simulador-financiamento-veiculos" component={VehicleFinance}/>
         <Route path="/financiamento-veiculo" component={VehicleFinance}/>
         <Route path="/vehicle-finance" component={VehicleFinance}/>
+        <Route path="/simulador-financiamento-veiculo-2025" component={SimuladorFinanciamentoVeiculo2025}/>
         <Route path="/financiamento-imobiliario" component={RealEstateFinance}/>
         <Route path="/emprestimo-pessoal" component={PersonalLoan}/>
         <Route path="/credito-consignado" component={PayrollLoan}/>

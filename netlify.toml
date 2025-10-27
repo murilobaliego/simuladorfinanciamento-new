@@ -2,6 +2,13 @@
   publish = "dist"
   command = "npm run build"
 
+# Prerender pages for SEO
+[[plugins]]
+  package = "@netlify/plugin-sitemap"
+
+[build.environment]
+  NETLIFY_USE_PRERENDER = "true"
+
 # Configurações para HTTP/2 e compressão
 [[headers]]
   for = "/*"

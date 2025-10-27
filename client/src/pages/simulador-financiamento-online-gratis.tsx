@@ -1,4 +1,4 @@
-import VehicleForm from "@/components/simulators/vehicle-form";
+import VehicleForm2025 from "@/components/simulators/vehicle-form-2025";
 import { Helmet } from 'react-helmet-async';
 
 export default function SimuladorFinanciamentoOnlineGratis() {
@@ -269,7 +269,7 @@ export default function SimuladorFinanciamentoOnlineGratis() {
             </div>
           </div>
           
-          <VehicleForm />
+          <VehicleForm2025 />
           
           <div className="mt-12">
             <h2 className="text-xl font-semibold text-primary mt-6 mb-3">Perguntas Frequentes - Simulador Grátis</h2>
