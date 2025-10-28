@@ -146,3 +146,4 @@ netlify deploy --prod
 3. Adicionar calculo de CET e IOF nas outras calculadoras de financiamento pessoal por exemplo.
 4. Buscar dados do banco central e gravar em algum banco de dados local
 5. reenderizar no servidor as paginas (grande mudança) mas deixaria mais seguro. Fazer prototipo antes
+6. Adicionar compartilhamento do resultado via whatsapp

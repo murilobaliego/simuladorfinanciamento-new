@@ -66,7 +66,12 @@ import CarLoanCalculatorSouthAfrica from "@/pages/south-africa/car-loan-calculat
 import CarLoanCalculatorJapan from "@/pages/japan/car-loan-calculator";
 import CarLoanCalculatorSouthKorea from "@/pages/south-korea/car-loan-calculator";
 import CarLoanCalculatorChina from "@/pages/china/car-loan-calculator";
+import CarLoanCalculatorSweden from "@/pages/sweden/car-loan-calculator";
+import CarLoanCalculatorNorway from "@/pages/norway/car-loan-calculator";
+import CarLoanCalculatorDenmark from "@/pages/denmark/car-loan-calculator";
+import CarLoanCalculatorFinland from "@/pages/finland/car-loan-calculator";
 import SimuladorFinanciamentoVeiculo2025 from "@/pages/simulador-financiamento-veiculo-2025";
+import SimuladorFinanciamentoCompleto from "@/pages/simulador-financiamento-completo";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import CookieConsent from "@/components/ui/cookie-consent";
@@ -97,6 +102,7 @@ function Router() {
         <Route path="/financiamento-veiculo" component={VehicleFinance}/>
         <Route path="/vehicle-finance" component={VehicleFinance}/>
         <Route path="/simulador-financiamento-veiculo-2025" component={SimuladorFinanciamentoVeiculo2025}/>
+        <Route path="/simulador-financiamento-completo" component={SimuladorFinanciamentoCompleto}/>
         <Route path="/financiamento-imobiliario" component={RealEstateFinance}/>
         <Route path="/emprestimo-pessoal" component={PersonalLoan}/>
         <Route path="/credito-consignado" component={PayrollLoan}/>
@@ -284,6 +290,22 @@ function Router() {
         <Route path="/china/car-loan-calculator" component={CarLoanCalculatorChina}/>
         <Route path="/china" component={CarLoanCalculatorChina}/>
         
+        {/* Sweden - Car Loan Calculator */}
+        <Route path="/sweden/car-loan-calculator" component={CarLoanCalculatorSweden}/>
+        <Route path="/sweden" component={CarLoanCalculatorSweden}/>
+        
+        {/* Norway - Car Loan Calculator */}
+        <Route path="/norway/car-loan-calculator" component={CarLoanCalculatorNorway}/>
+        <Route path="/norway" component={CarLoanCalculatorNorway}/>
+        
+        {/* Denmark - Car Loan Calculator */}
+        <Route path="/denmark/car-loan-calculator" component={CarLoanCalculatorDenmark}/>
+        <Route path="/denmark" component={CarLoanCalculatorDenmark}/>
+        
+        {/* Finland - Car Loan Calculator */}
+        <Route path="/finland/car-loan-calculator" component={CarLoanCalculatorFinland}/>
+        <Route path="/finland" component={CarLoanCalculatorFinland}/>
+        
         <Route component={NotFound} />
       </Switch>
     </>
@@ -297,7 +319,9 @@ function App() {
                         location.startsWith('/deutschland') || location.startsWith('/canada') ||
                         location.startsWith('/uk') || location.startsWith('/australia') ||
                         location.startsWith('/south-africa') || location.startsWith('/japan') ||
-                        location.startsWith('/south-korea') || location.startsWith('/china');
+                        location.startsWith('/south-korea') || location.startsWith('/china') ||
+                        location.startsWith('/sweden') || location.startsWith('/norway') ||
+                        location.startsWith('/denmark') || location.startsWith('/finland');
   
   // Inicializar o Google Analytics
   useAnalytics();

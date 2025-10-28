@@ -343,6 +343,15 @@ export default function Navbar() {
                       <TrendingDown className="h-4 w-4 mr-2 text-green-600" />
                       <span>Taxas de Juros dos Bancos</span>
                     </Link>
+                    
+                    <Link
+                      href="/simulador-financiamento-completo"
+                      className="block px-4 py-2 text-sm hover:bg-neutral-100 flex items-center"
+                      onClick={closeMenu}
+                    >
+                      <Calculator className="h-4 w-4 mr-2 text-blue-600" />
+                      <span>Simulador Completo com Bancos</span>
+                    </Link>
                   </div>
                 </div>
               )}

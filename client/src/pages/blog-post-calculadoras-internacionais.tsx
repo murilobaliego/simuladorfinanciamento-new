@@ -164,12 +164,28 @@ export default function BlogPostCalculadorasInternacionais() {
               <p className="text-sm text-neutral-600">Taxas: 2-8% | Moeda: Euro (EUR)</p>
             </Link>
 
+            <Link href="/denmark/car-loan-calculator" className="block p-4 border rounded-lg hover:border-blue-500 hover:shadow-md transition-all">
+              <div className="flex items-center gap-3 mb-2">
+                <Calculator className="h-5 w-5 text-blue-600" />
+                <h4 className="font-bold text-neutral-800">Dinamarca 🇩🇰</h4>
+              </div>
+              <p className="text-sm text-neutral-600">Taxas: 3-8% | Moeda: Coroa Dinamarquesa (DKK)</p>
+            </Link>
+
             <Link href="/spain/calculadora-financiacion-coche" className="block p-4 border rounded-lg hover:border-blue-500 hover:shadow-md transition-all">
               <div className="flex items-center gap-3 mb-2">
                 <Calculator className="h-5 w-5 text-blue-600" />
                 <h4 className="font-bold text-neutral-800">Espanha 🇪🇸</h4>
               </div>
               <p className="text-sm text-neutral-600">Taxas: 5-12% | Moeda: Euro (EUR)</p>
+            </Link>
+
+            <Link href="/finland/car-loan-calculator" className="block p-4 border rounded-lg hover:border-blue-500 hover:shadow-md transition-all">
+              <div className="flex items-center gap-3 mb-2">
+                <Calculator className="h-5 w-5 text-blue-600" />
+                <h4 className="font-bold text-neutral-800">Finlândia 🇫🇮</h4>
+              </div>
+              <p className="text-sm text-neutral-600">Taxas: 3.5-9% | Moeda: Euro (EUR)</p>
             </Link>
 
             <Link href="/france/calculateur-credit-auto" className="block p-4 border rounded-lg hover:border-blue-500 hover:shadow-md transition-all">
@@ -188,6 +204,14 @@ export default function BlogPostCalculadorasInternacionais() {
               <p className="text-sm text-neutral-600">Taxas: 4-10% | Moeda: Euro (EUR)</p>
             </Link>
 
+            <Link href="/norway/car-loan-calculator" className="block p-4 border rounded-lg hover:border-blue-500 hover:shadow-md transition-all">
+              <div className="flex items-center gap-3 mb-2">
+                <Calculator className="h-5 w-5 text-blue-600" />
+                <h4 className="font-bold text-neutral-800">Noruega 🇳🇴</h4>
+              </div>
+              <p className="text-sm text-neutral-600">Taxas: 4.5-10% | Moeda: Coroa Norueguesa (NOK)</p>
+            </Link>
+
             <Link href="/portugal/simulador-financiamento-automovel" className="block p-4 border rounded-lg hover:border-blue-500 hover:shadow-md transition-all">
               <div className="flex items-center gap-3 mb-2">
                 <Calculator className="h-5 w-5 text-blue-600" />
@@ -202,6 +226,14 @@ export default function BlogPostCalculadorasInternacionais() {
                 <h4 className="font-bold text-neutral-800">Reino Unido 🇬🇧</h4>
               </div>
               <p className="text-sm text-neutral-600">Taxas: 4-12% | Moeda: Libra (GBP)</p>
+            </Link>
+
+            <Link href="/sweden/car-loan-calculator" className="block p-4 border rounded-lg hover:border-blue-500 hover:shadow-md transition-all">
+              <div className="flex items-center gap-3 mb-2">
+                <Calculator className="h-5 w-5 text-blue-600" />
+                <h4 className="font-bold text-neutral-800">Suécia 🇸🇪</h4>
+              </div>
+              <p className="text-sm text-neutral-600">Taxas: 3.5-9% | Moeda: Coroa Sueca (SEK)</p>
             </Link>
           </div>
 
@@ -299,9 +331,9 @@ export default function BlogPostCalculadorasInternacionais() {
               <ol className="space-y-2 text-sm text-green-900">
                 <li><strong>1. Japão:</strong> 1.5-8%</li>
                 <li><strong>2. Alemanha:</strong> 2-8%</li>
-                <li><strong>3. França:</strong> 3-9%</li>
-                <li><strong>4. China:</strong> 3.5-9%</li>
-                <li><strong>5. Coreia do Sul:</strong> 3.5-10%</li>
+                <li><strong>3. Dinamarca:</strong> 3-8%</li>
+                <li><strong>4. França:</strong> 3-9%</li>
+                <li><strong>5. China:</strong> 3.5-9%</li>
               </ol>
             </div>
 
