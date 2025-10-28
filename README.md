@@ -139,3 +139,10 @@ Para fazer deploy:
 npm run build
 netlify deploy --prod
 ```
+
+## Ideas to implement ##
+1. Adicionar no resultado da simulação o CET anual
+2. Adicionar informações de CET no arquivo pdf gerado.
+3. Adicionar calculo de CET e IOF nas outras calculadoras de financiamento pessoal por exemplo.
+4. Buscar dados do banco central e gravar em algum banco de dados local
+5. reenderizar no servidor as paginas (grande mudança) mas deixaria mais seguro. Fazer prototipo antes

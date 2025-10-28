@@ -38,6 +38,7 @@ import BlogPost3 from "@/pages/blog-post-3";
 import BlogPost4 from "@/pages/blog-post-4";
 import BlogPost5 from "@/pages/blog-post-5";
 import BlogPost6 from "@/pages/blog-post-6";
+import BlogPostCalculadorasInternacionais from "@/pages/blog-post-calculadoras-internacionais";
 import TaxasBancos from "@/pages/taxas-bancos";
 import CalculadoraPrestamoAutoMX from "@/pages/mx/calculadora-prestamo-auto";
 import AutoLoanCalculatorUSA from "@/pages/usa/auto-loan-calculator";
@@ -54,6 +55,17 @@ import SimuladorFinanciamentoAutomovelPortugal from "@/pages/portugal/simulador-
 import AutokreditRechnerDeutschland from "@/pages/deutschland/autokredit-rechner";
 import CarLoanCalculatorCanada from "@/pages/canada/car-loan-calculator";
 import CarFinanceCalculatorUK from "@/pages/uk/car-finance-calculator";
+import CarLoanCalculatorAustralia from "@/pages/australia/car-loan-calculator";
+import CalculadoraPrestamoAutoParaguay from "@/pages/paraguay/calculadora-prestamo-auto";
+import CalculadoraPrestamoAutoUruguay from "@/pages/uruguay/calculadora-prestamo-auto";
+import CalculadoraPrestamoAutoPeru from "@/pages/peru/calculadora-prestamo-auto";
+import CalculadoraPrestamoAutoBolivia from "@/pages/bolivia/calculadora-prestamo-auto";
+import CalculadoraPrestamoAutoEcuador from "@/pages/ecuador/calculadora-prestamo-auto";
+import CalculadoraPrestamoAutoVenezuela from "@/pages/venezuela/calculadora-prestamo-auto";
+import CarLoanCalculatorSouthAfrica from "@/pages/south-africa/car-loan-calculator";
+import CarLoanCalculatorJapan from "@/pages/japan/car-loan-calculator";
+import CarLoanCalculatorSouthKorea from "@/pages/south-korea/car-loan-calculator";
+import CarLoanCalculatorChina from "@/pages/china/car-loan-calculator";
 import SimuladorFinanciamentoVeiculo2025 from "@/pages/simulador-financiamento-veiculo-2025";
 import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
@@ -162,6 +174,7 @@ function Router() {
         <Route path="/blog/documentacao-financiamento-veiculos-2025" component={BlogPost4}/>
         <Route path="/blog/simulacao-financiamento-interpretar-resultados" component={BlogPost5}/>
         <Route path="/blog/como-quitar-financiamento-antecipadamente" component={BlogPost6}/>
+        <Route path="/blog/calculadoras-financiamento-veiculos-mundo" component={BlogPostCalculadorasInternacionais}/>
         
         {/* Taxas de Juros dos Bancos */}
         <Route path="/taxas-bancos" component={TaxasBancos}/>
@@ -227,6 +240,50 @@ function Router() {
         <Route path="/uk/car-finance-calculator" component={CarFinanceCalculatorUK}/>
         <Route path="/uk" component={CarFinanceCalculatorUK}/>
         
+        {/* Australia - Car Loan Calculator */}
+        <Route path="/australia/car-loan-calculator" component={CarLoanCalculatorAustralia}/>
+        <Route path="/australia" component={CarLoanCalculatorAustralia}/>
+        
+        {/* Paraguay - Calculadora Préstamo Auto */}
+        <Route path="/paraguay/calculadora-prestamo-auto" component={CalculadoraPrestamoAutoParaguay}/>
+        <Route path="/paraguay" component={CalculadoraPrestamoAutoParaguay}/>
+        
+        {/* Uruguay - Calculadora Préstamo Auto */}
+        <Route path="/uruguay/calculadora-prestamo-auto" component={CalculadoraPrestamoAutoUruguay}/>
+        <Route path="/uruguay" component={CalculadoraPrestamoAutoUruguay}/>
+        
+        {/* Peru - Calculadora Préstamo Auto */}
+        <Route path="/peru/calculadora-prestamo-auto" component={CalculadoraPrestamoAutoPeru}/>
+        <Route path="/peru" component={CalculadoraPrestamoAutoPeru}/>
+        
+        {/* Bolivia - Calculadora Préstamo Auto */}
+        <Route path="/bolivia/calculadora-prestamo-auto" component={CalculadoraPrestamoAutoBolivia}/>
+        <Route path="/bolivia" component={CalculadoraPrestamoAutoBolivia}/>
+        
+        {/* Ecuador - Calculadora Préstamo Auto */}
+        <Route path="/ecuador/calculadora-prestamo-auto" component={CalculadoraPrestamoAutoEcuador}/>
+        <Route path="/ecuador" component={CalculadoraPrestamoAutoEcuador}/>
+        
+        {/* Venezuela - Calculadora Préstamo Auto */}
+        <Route path="/venezuela/calculadora-prestamo-auto" component={CalculadoraPrestamoAutoVenezuela}/>
+        <Route path="/venezuela" component={CalculadoraPrestamoAutoVenezuela}/>
+        
+        {/* South Africa - Car Loan Calculator */}
+        <Route path="/south-africa/car-loan-calculator" component={CarLoanCalculatorSouthAfrica}/>
+        <Route path="/south-africa" component={CarLoanCalculatorSouthAfrica}/>
+        
+        {/* Japan - Car Loan Calculator */}
+        <Route path="/japan/car-loan-calculator" component={CarLoanCalculatorJapan}/>
+        <Route path="/japan" component={CarLoanCalculatorJapan}/>
+        
+        {/* South Korea - Car Loan Calculator */}
+        <Route path="/south-korea/car-loan-calculator" component={CarLoanCalculatorSouthKorea}/>
+        <Route path="/south-korea" component={CarLoanCalculatorSouthKorea}/>
+        
+        {/* China - Car Loan Calculator */}
+        <Route path="/china/car-loan-calculator" component={CarLoanCalculatorChina}/>
+        <Route path="/china" component={CarLoanCalculatorChina}/>
+        
         <Route component={NotFound} />
       </Switch>
     </>
@@ -238,7 +295,9 @@ function App() {
   const hideNavFooter = location.startsWith('/india') || location.startsWith('/france') || 
                         location.startsWith('/usa') || location.startsWith('/italy') ||
                         location.startsWith('/deutschland') || location.startsWith('/canada') ||
-                        location.startsWith('/uk');
+                        location.startsWith('/uk') || location.startsWith('/australia') ||
+                        location.startsWith('/south-africa') || location.startsWith('/japan') ||
+                        location.startsWith('/south-korea') || location.startsWith('/china');
   
   // Inicializar o Google Analytics
   useAnalytics();

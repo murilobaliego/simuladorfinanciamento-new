@@ -4,6 +4,14 @@ import { BookOpen, Calendar, ArrowRight } from "lucide-react";
 
 const blogPosts = [
   {
+    id: 7,
+    slug: "calculadoras-financiamento-veiculos-mundo",
+    title: "Calculadoras de Financiamento de Veículos ao Redor do Mundo",
+    excerpt: "Descubra como funcionam as calculadoras de financiamento em mais de 30 países, com taxas, moedas e particularidades de cada mercado.",
+    date: "2025-01-18",
+    readTime: "15 min"
+  },
+  {
     id: 6,
     slug: "como-quitar-financiamento-antecipadamente",
     title: "Como Quitar Financiamento Antecipadamente: Guia Completo 2025",
