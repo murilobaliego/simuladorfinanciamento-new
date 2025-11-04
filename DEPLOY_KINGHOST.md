@@ -1,150 +1,152 @@
 # Deploy na KingHost com Node.js
 
-## Passo 1: Build do Projeto
+## Informações do Servidor
 
-No seu computador local:
+- **Host SSH**: ftp.simuladorfinanciamento.com
+- **Usuário**: simuladorfinanciamento
+- **Diretório Apps**: `~/apps_nodejs/`
+- **Diretório Logs**: `~/.pm2/logs/`
+- **Node.js**: v22.1.0
+- **Gerenciador**: PM2
+
+## Passo 1: Build Local
+
 ```bash
 cd c:\temp\FinanciamentoFacil\FinanciamentoFacil
 npm run build
 ```
 
-## Passo 2: Preparar Arquivos para Upload
+Isso gera:
+- `dist/index.js` (servidor)
+- `dist/public/` (frontend)
 
-Você precisa enviar:
-- Pasta `dist/` (arquivos compilados)
-- Arquivo `package.json`
-- Arquivo `package-lock.json`
+## Passo 2: Parar Aplicação Atual
 
-## Passo 3: Acessar Painel KingHost
-
-1. Acesse o Painel de Controle da KingHost
-2. Selecione seu domínio
-3. Clique no ícone **NODE.JS**
-4. Clique em **Nova Aplicação**
-
-## Passo 4: Configurar Aplicação
-
-Preencha os campos:
-
-- **Nome da Aplicação**: financiamento
-- **Script de Inicialização**: `index.js`
-- **Diretório da Aplicação**: `/dist`
-- **Versão do Node.js**: Selecione a mais recente (18.x ou superior)
-
-## Passo 5: Upload dos Arquivos via FTP
-
-1. Conecte via FTP ao servidor KingHost
-2. Navegue até a pasta da aplicação (geralmente `/public_html/`)
-3. Crie a estrutura:
-   ```
-   /public_html/
-   ├── dist/
-   │   ├── index.js
-   │   └── public/
-   │       ├── index.html
-   │       ├── assets/
-   │       └── ...
-   ├── package.json
-   └── package-lock.json
-   ```
-
-## Passo 6: Instalar Dependências
-
-Via SSH ou Terminal do Painel:
+Via SSH:
 ```bash
-cd /public_html
+ssh simuladorfinanciamento@ftp.simuladorfinanciamento.com
+pm2 stop simuladorfinanciamento
+pm2 delete simuladorfinanciamento
+```
+
+## Passo 3: Upload via FTP/SCP
+
+Opção A - SCP (recomendado):
+```bash
+# Da sua máquina local
+scp -r dist/* simuladorfinanciamento@ftp.simuladorfinanciamento.com:~/apps_nodejs/
+scp package.json simuladorfinanciamento@ftp.simuladorfinanciamento.com:~/apps_nodejs/
+scp package-lock.json simuladorfinanciamento@ftp.simuladorfinanciamento.com:~/apps_nodejs/
+```
+
+Opção B - FTP:
+1. Conecte via FileZilla/WinSCP
+2. Navegue até `/home/simuladorfinanciamento/apps_nodejs/`
+3. Envie:
+   - `dist/index.js`
+   - `dist/public/` (pasta completa)
+   - `package.json`
+   - `package-lock.json`
+
+## Passo 4: Instalar Dependências
+
+Via SSH:
+```bash
+cd ~/apps_nodejs
+nvm use 22.1.0
 npm install --production
 ```
 
-## Passo 7: Iniciar Aplicação
+## Passo 5: Iniciar com PM2
 
-No Painel de Controle KingHost:
-1. Vá em **NODE.JS**
-2. Clique em **Iniciar** na sua aplicação
-3. Anote a **porta** que foi atribuída (ex: 21220)
-
-## Passo 8: Configurar Domínio
-
-A KingHost configura automaticamente o proxy reverso. Sua aplicação estará acessível em:
-- `http://seudominio.com` (porta 80)
-- `https://seudominio.com` (porta 443)
-
-## Importante: Variável de Ambiente da Porta
-
-A KingHost define automaticamente a variável `PORT_INDEX` (onde INDEX é o nome do seu script).
-
-Se seu script é `index.js`, a variável será `PORT_INDEX`.
-
-O código já está adaptado para usar:
-```javascript
-const port = process.env.PORT_INDEX || process.env.PORT || 5000;
+```bash
+cd ~/apps_nodejs
+NODE_ENV=production pm2 start dist/index.js --name simuladorfinanciamento
+pm2 save
 ```
 
-## Verificar se Está Funcionando
+## Passo 6: Verificar Status
 
-1. No Painel KingHost, verifique se o status está "Rodando"
-2. Acesse seu domínio no navegador
-3. Verifique os logs no Painel de Controle
+```bash
+pm2 list
+pm2 logs simuladorfinanciamento --lines 50
+```
 
-## Atualizar a Aplicação
+## Verificar Logs de Erro
 
-Quando fizer mudanças:
+Se houver problemas:
+```bash
+cat ~/.pm2/logs/simuladorfinanciamento-error.log
+cat ~/.pm2/logs/simuladorfinanciamento-out.log
+```
 
-1. Build local:
-   ```bash
-   npm run build
-   ```
+## Script de Deploy Completo
 
-2. Upload da pasta `dist/` via FTP
-
-3. No Painel KingHost:
-   - Clique em **Parar**
-   - Clique em **Iniciar**
-
-## Script de Deploy Automático
-
-Crie `deploy-kinghost.sh`:
+Crie `deploy.sh` no Windows:
 ```bash
 #!/bin/bash
-echo "Building..."
+echo "=== Building ==="
 npm run build
 
-echo "Uploading to KingHost..."
-# Substitua com suas credenciais FTP
-lftp -u usuario,senha ftp.seudominio.com.br <<EOF
-mirror -R dist/ /public_html/dist/
-put package.json -o /public_html/package.json
-bye
+echo "=== Uploading ==="
+scp -r dist/* simuladorfinanciamento@ftp.simuladorfinanciamento.com:~/apps_nodejs/
+scp package.json simuladorfinanciamento@ftp.simuladorfinanciamento.com:~/apps_nodejs/
+
+echo "=== Restarting ==="
+ssh simuladorfinanciamento@ftp.simuladorfinanciamento.com << 'EOF'
+cd ~/apps_nodejs
+nvm use 22.1.0
+npm install --production
+pm2 restart simuladorfinanciamento || NODE_ENV=production pm2 start dist/index.js --name simuladorfinanciamento
+pm2 save
 EOF
 
-echo "Deploy completed! Restart the app in KingHost panel."
+echo "=== Deploy Complete ==="
+```
+
+Execute:
+```bash
+bash deploy.sh
 ```
 
 ## Troubleshooting
 
-**Aplicação não inicia:**
-- Verifique os logs no Painel de Controle
-- Confirme que `package.json` tem todas as dependências
-- Verifique se o script de inicialização está correto (`index.js`)
+**Erro: 471 restarts**
+```bash
+# Ver erro específico
+pm2 logs simuladorfinanciamento --err --lines 100
 
-**Erro de porta:**
-- A aplicação deve usar `process.env.PORT_INDEX`
-- Não tente usar porta fixa como 5000 em produção
+# Possíveis causas:
+# 1. Falta NODE_ENV=production
+# 2. Porta em uso
+# 3. Dependências faltando
+```
 
-**Erro 502 Bad Gateway:**
-- Aplicação não está rodando
-- Verifique logs e reinicie no painel
+**Reinstalar do zero:**
+```bash
+cd ~/apps_nodejs
+pm2 delete simuladorfinanciamento
+rm -rf node_modules package-lock.json
+npm install --production
+NODE_ENV=production pm2 start dist/index.js --name simuladorfinanciamento
+pm2 save
+```
 
-## Monitoramento
+**Verificar porta:**
+```bash
+# A aplicação usa porta dinâmica do PM2
+# Não precisa configurar PORT_INDEX manualmente
+netstat -tulpn | grep node
+```
 
-A KingHost usa PM2 internamente. Você pode ver:
-- Status da aplicação no Painel
-- Logs em tempo real
-- Uso de recursos (CPU/RAM)
+## Comandos Úteis PM2
 
-## Suporte
-
-Se tiver problemas, contate o suporte da KingHost com:
-- Nome da aplicação
-- Mensagens de erro dos logs
-- Passos que você seguiu
+```bash
+pm2 list                    # Listar apps
+pm2 logs simuladorfinanciamento  # Ver logs em tempo real
+pm2 monit                   # Monitor de recursos
+pm2 restart simuladorfinanciamento  # Reiniciar
+pm2 stop simuladorfinanciamento     # Parar
+pm2 delete simuladorfinanciamento   # Remover
+pm2 save                    # Salvar configuração
+```
