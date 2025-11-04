@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { TabelaItem, calcularPrestacao, calcularTotalJuros, calcularTotalPagar, gerarTabelaPrice, gerarTabelaSAC } from "../client/src/utils/finance";
 import { calculatorSchema } from "@shared/schema";
 import { z } from "zod";
+import { registerSimuladorTestRoutes } from "./routes/simulador-test";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API para cálculo de financiamentos usando Tabela Price
@@ -188,6 +189,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
     }
   });
+
+  registerSimuladorTestRoutes(app);
 
   const httpServer = createServer(app);
   return httpServer;

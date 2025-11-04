@@ -147,3 +147,5 @@ netlify deploy --prod
 4. Buscar dados do banco central e gravar em algum banco de dados local
 5. reenderizar no servidor as paginas (grande mudança) mas deixaria mais seguro. Fazer prototipo antes
 6. Adicionar compartilhamento do resultado via whatsapp
+7. Reposicionar algumas calculadoras para a parte superior das paginas, gerar mais engajamento.
+8. Criar canal no youtube com audio via elevenlabs e mostrando o simulador, com links na descrição, criar em portugues e ingles, alemão, chines, hindi.
