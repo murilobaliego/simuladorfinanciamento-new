@@ -56,15 +56,12 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
+  // Port configuration for KingHost or local development
+  // KingHost uses environment variable PORT_INDEX (where index is your script name)
+  // For local development, use port 5000
+  const port = process.env.PORT_INDEX || process.env.PORT || 5000;
+  
+  server.listen(port, "0.0.0.0", () => {
     log(`serving on port ${port}`);
   });
 })();
