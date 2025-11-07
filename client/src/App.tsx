@@ -121,8 +121,8 @@ function Router() {
         {/* Novos simuladores de veículos específicos */}
         <Route path="/financiamento-caminhao" component={TruckFinance}/>
         <Route path="/financiamento-caminhoes" component={TruckFinance}/>
-        <Route path="/financiamento-moto" component={SimuladorFinanciamentoMoto}/>
-        <Route path="/financiamento-motos" component={SimuladorFinanciamentoMoto}/>
+        <Route path="/financiamento-moto" component={MotorcycleFinance}/>
+        <Route path="/financiamento-motos" component={MotorcycleFinance}/>
         
         {/* Simulador de financiamento com parcela balão */}
         <Route path="/simulador-parcela-balao" component={SimuladorParcelaBalao}/>

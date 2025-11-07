@@ -4,6 +4,9 @@ import { TabelaItem, calcularPrestacao, calcularTotalJuros, calcularTotalPagar, 
 import { calculatorSchema } from "@shared/schema";
 import { z } from "zod";
 import { registerSimuladorTestRoutes } from "./routes/simulador-test";
+import { registerSimuladorCaminhaoRoutes } from "./routes/simulador-caminhao";
+import { registerSimuladorMotoRoutes } from "./routes/simulador-moto";
+import { registerSimuladorGratisRoutes } from "./routes/simulador-gratis";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API para cálculo de financiamentos usando Tabela Price
@@ -191,6 +194,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   registerSimuladorTestRoutes(app);
+  registerSimuladorCaminhaoRoutes(app);
+  registerSimuladorMotoRoutes(app);
+  registerSimuladorGratisRoutes(app);
 
   const httpServer = createServer(app);
   return httpServer;

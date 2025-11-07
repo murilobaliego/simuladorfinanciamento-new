@@ -44,8 +44,9 @@ export type SimulationResult = {
   totalPagar: number;
   totalJuros: number;
   tabelaAmortizacao: TableData[];
-  valorIOF?: number; // Opcional, só existe quando o IOF é incluído no cálculo
-  taxaCET?: number; // Custo Efetivo Total (taxa mensal em percentual)
+  valorIOF?: number;
+  taxaCET?: number;
+  taxaCETAnual?: number;
 };
 
 export default function VehicleForm() {

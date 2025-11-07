@@ -129,8 +129,8 @@ export default function VehicleForm2025() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    secureSubmit((secureValues) => {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    secureSubmit(async (secureValues) => {
       try {
         const valorVeiculo = validateNumberRange(Number(secureValues.valorVeiculo), 5000, 10000000, 50000);
         const valorEntrada = validateNumberRange(Number(secureValues.valorEntrada), 0, valorVeiculo, 0);
@@ -147,15 +147,25 @@ export default function VehicleForm2025() {
           return;
         }
         
-        const resultado = calcularFinanciamento2025(
-          valorVeiculo,
-          valorEntrada,
-          taxaAbertura,
-          taxaJuros,
-          numParcelas,
-          Boolean(secureValues.incluirIOF)
-        );
+        const response = await fetch("/api/simulador-gratis/calcular", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            valorVeiculo,
+            valorEntrada,
+            taxaAbertura,
+            taxaJuros,
+            numParcelas,
+            incluirIOF: Boolean(secureValues.incluirIOF)
+          })
+        });
         
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || "Erro ao calcular");
+        }
+        
+        const resultado = await response.json();
         setResult(resultado);
         
         setTimeout(() => {
@@ -168,7 +178,7 @@ export default function VehicleForm2025() {
         console.error("Erro ao calcular simulação:", error);
         toast({
           title: "Erro ao calcular",
-          description: "Ocorreu um erro ao processar sua simulação. Tente novamente.",
+          description: error instanceof Error ? error.message : "Ocorreu um erro ao processar sua simulação. Tente novamente.",
           variant: "destructive",
         });
       }
@@ -408,6 +418,16 @@ export default function VehicleForm2025() {
                   {result.taxaCET.toFixed(2)}% a.m.
                 </p>
                 <p className="text-xs text-neutral-500 mt-1">Taxa efetiva considerando todas as taxas</p>
+              </div>
+            )}
+            
+            {result.taxaCETAnual !== undefined && (
+              <div className="bg-neutral-100 p-4 rounded-md border border-neutral-200">
+                <p className="text-sm text-neutral-600 mb-1">CET Anual</p>
+                <p className="text-2xl font-bold text-purple-600">
+                  {result.taxaCETAnual.toFixed(2)}% a.a.
+                </p>
+                <p className="text-xs text-neutral-500 mt-1">Custo efetivo total anualizado</p>
               </div>
             )}
           </div>

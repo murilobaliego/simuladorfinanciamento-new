@@ -144,8 +144,8 @@ export default function TruckForm2025() {
   const tipoVeiculo = form.watch("tipoVeiculo");
   const taxaAjustada = calcularTaxaPorTipo(tipoVeiculo);
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    secureSubmit((secureValues) => {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    secureSubmit(async (secureValues) => {
       try {
         const valorCaminhao = validateNumberRange(Number(secureValues.valorCaminhao), 50000, 10000000, 300000);
         const valorEntrada = validateNumberRange(Number(secureValues.valorEntrada), 0, valorCaminhao, 0);
@@ -160,14 +160,25 @@ export default function TruckForm2025() {
           return;
         }
         
-        const resultado = calcularFinanciamentoCaminhao(
-          valorCaminhao,
-          valorEntrada,
-          taxaAjustada,
-          numParcelas,
-          Boolean(secureValues.incluirIOF)
-        );
+        const response = await fetch("/api/simulador-caminhao/calcular", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            valorCaminhao,
+            valorEntrada,
+            taxaJuros: taxaAjustada,
+            numParcelas,
+            incluirIOF: Boolean(secureValues.incluirIOF),
+            tipoVeiculo: secureValues.tipoVeiculo
+          })
+        });
         
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || "Erro ao calcular");
+        }
+        
+        const resultado = await response.json();
         setResult(resultado);
         
         setTimeout(() => {
@@ -180,7 +191,7 @@ export default function TruckForm2025() {
         console.error("Erro ao calcular simulação:", error);
         toast({
           title: "Erro ao calcular",
-          description: "Ocorreu um erro ao processar sua simulação. Tente novamente.",
+          description: error instanceof Error ? error.message : "Ocorreu um erro ao processar sua simulação. Tente novamente.",
           variant: "destructive",
         });
       }
